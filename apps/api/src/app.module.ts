@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { envValidationSchema } from './config/env.validation';
+import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { GraphQLModule } from './graphql/graphql.module';
-import { HealthModule } from './health/health.module';
+import { envValidationSchema } from './libs/env.validation';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { HealthModule } from './health/health.module';
     }),
     DatabaseModule,
     GraphQLModule,
-    HealthModule,
+    ComponentsModule,
   ],
 })
 export class AppModule {}

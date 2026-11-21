@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection, ConnectionStates } from 'mongoose';
-import { Health } from './health.model';
+import { Health } from '../../libs/dto/health/health';
 
 @Resolver(() => Health)
 export class HealthResolver {

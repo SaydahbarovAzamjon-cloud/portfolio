@@ -5,12 +5,17 @@
 - [x] Project initialization (NestJS `apps/api`, pnpm workspace)
 - [x] Database configuration (Mongoose, env validation)
 - [x] GraphQL configuration (Apollo 5, code-first, `health` query)
+- [x] Data model (`docs/DATA_MODEL.md`, 15 Mongoose schemas + tests)
+- [x] Restructure API to nestar conventions (`components/`, `schemas/`, `libs/`)
 - [ ] Authentication
 - [ ] Visitor tracking
 - [ ] Analytics
 - [ ] Contact
 - [ ] Telegram notifications
 - [ ] Email integration
+- [ ] Profile (About, singleton) & Education
+- [ ] Skills & skill categories
+- [ ] Experience
 - [ ] Projects
 - [ ] Journal
 - [ ] Comments
