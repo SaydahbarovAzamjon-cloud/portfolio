@@ -1,61 +1,83 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { ContactMessageStatus } from '../libs/enums/contact.enum';
+import { Schema } from 'mongoose';
 import { Locale } from '../libs/enums/common.enum';
+import { ContactMessageStatus } from '../libs/enums/contact.enum';
 
-@Schema({ _id: false })
-export class DeliveryStatus {
-  /** Notification email sent through Resend. */
-  @Prop()
-  emailSentAt?: Date;
+const ContactMessageSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+      maxlength: 100,
+    },
 
-  /** Notification sent to the owner's Telegram. */
-  @Prop()
-  telegramSentAt?: Date;
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      maxlength: 254,
+    },
 
-  @Prop()
-  lastError?: string;
-}
-const DeliveryStatusSchema = SchemaFactory.createForClass(DeliveryStatus);
+    subject: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+      maxlength: 150,
+    },
 
-@Schema({ collection: 'contact_messages', timestamps: true })
-export class ContactMessage {
-  @Prop({ required: true, trim: true, minlength: 1, maxlength: 100 })
-  name: string;
+    message: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 10,
+      maxlength: 5000,
+    },
 
-  @Prop({ required: true, trim: true, lowercase: true, maxlength: 254 })
-  email: string;
+    locale: {
+      type: String,
+      enum: Locale,
+      default: Locale.EN,
+    },
 
-  @Prop({ required: true, trim: true, minlength: 1, maxlength: 150 })
-  subject: string;
+    status: {
+      type: String,
+      enum: ContactMessageStatus,
+      default: ContactMessageStatus.NEW,
+    },
 
-  @Prop({ required: true, trim: true, minlength: 10, maxlength: 5000 })
-  message: string;
+    visitorId: {
+      type: String,
+      index: true,
+    },
 
-  @Prop({ type: String, enum: Object.values(Locale), default: Locale.EN })
-  locale: Locale;
+    ipHash: {
+      type: String,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(ContactMessageStatus),
-    default: ContactMessageStatus.NEW,
-  })
-  status: ContactMessageStatus;
+    userAgent: {
+      type: String,
+    },
 
-  @Prop({ index: true })
-  visitorId?: string;
+    delivery: {
+      /** Notification email sent through Resend. */
+      emailSentAt: {
+        type: Date,
+      },
+      /** Notification sent to the owner's Telegram. */
+      telegramSentAt: {
+        type: Date,
+      },
+      lastError: {
+        type: String,
+      },
+    },
+  },
+  { timestamps: true, collection: 'contact_messages' },
+);
 
-  @Prop()
-  ipHash?: string;
-
-  @Prop()
-  userAgent?: string;
-
-  @Prop({ type: DeliveryStatusSchema, default: () => ({}) })
-  delivery: DeliveryStatus;
-}
-
-export type ContactMessageDocument = HydratedDocument<ContactMessage>;
-export const ContactMessageSchema =
-  SchemaFactory.createForClass(ContactMessage);
 ContactMessageSchema.index({ status: 1, createdAt: -1 });
+
+export default ContactMessageSchema;

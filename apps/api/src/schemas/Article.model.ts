@@ -1,128 +1,124 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import {
-  LocalizedText,
-  LocalizedTextSchema,
-  Media,
-  MediaSchema,
-} from './common';
-import { User } from './User.model';
+import { Schema } from 'mongoose';
 import {
   ArticleCategory,
   ArticleStatus,
   TranslationStatus,
 } from '../libs/enums/article.enum';
+import { readingMinutes } from '../libs/config';
+import { LocalizedTextSchema, MediaSchema } from './common';
 
-const WORDS_PER_MINUTE = 200;
+const ArticleSchema = new Schema(
+  {
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+      match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    },
 
-export function readingMinutes(text: string | undefined): number | undefined {
-  if (!text) return undefined;
-  const words = text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
-}
+    title: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-@Schema({ _id: false })
-export class ReadingTime {
-  @Prop({ required: true, min: 1 })
-  en: number;
+    excerpt: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ min: 1 })
-  ko?: number;
-}
-const ReadingTimeSchema = SchemaFactory.createForClass(ReadingTime);
+    /** Markdown. English is written now; Korean is filled later by AI translation. */
+    content: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-@Schema({ _id: false })
-export class TranslationInfo {
-  @Prop({
-    type: String,
-    enum: Object.values(TranslationStatus),
-    default: TranslationStatus.NONE,
-  })
-  status: TranslationStatus;
+    category: {
+      type: String,
+      enum: ArticleCategory,
+      required: true,
+    },
 
-  @Prop()
-  translatedAt?: Date;
+    tags: {
+      type: [String],
+      default: [],
+    },
 
-  /** AI model used for the translation, when status = AI. */
-  @Prop()
-  model?: string;
-}
-const TranslationInfoSchema = SchemaFactory.createForClass(TranslationInfo);
+    cover: {
+      type: MediaSchema,
+    },
 
-@Schema({ _id: false })
-export class ArticleTranslations {
-  @Prop({ type: TranslationInfoSchema, default: () => ({}) })
-  ko: TranslationInfo;
-}
-const ArticleTranslationsSchema =
-  SchemaFactory.createForClass(ArticleTranslations);
+    status: {
+      type: String,
+      enum: ArticleStatus,
+      default: ArticleStatus.DRAFT,
+    },
 
-@Schema({ collection: 'articles', timestamps: true })
-export class Article {
-  @Prop({
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-  })
-  slug: string;
+    publishedAt: {
+      type: Date,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  title: LocalizedText;
+    featured: {
+      type: Boolean,
+      default: false,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  excerpt: LocalizedText;
+    /** Minutes, computed on save from `content`. */
+    readingTime: {
+      en: {
+        type: Number,
+        min: 1,
+      },
+      ko: {
+        type: Number,
+        min: 1,
+      },
+    },
 
-  /** Markdown. English is written now; Korean is filled later by AI translation. */
-  @Prop({ type: LocalizedTextSchema, required: true })
-  content: LocalizedText;
+    translation: {
+      ko: {
+        status: {
+          type: String,
+          enum: TranslationStatus,
+          default: TranslationStatus.NONE,
+        },
+        translatedAt: {
+          type: Date,
+        },
+        /** AI model used for the translation, when status = AI. */
+        model: {
+          type: String,
+        },
+      },
+    },
 
-  @Prop({ type: String, enum: Object.values(ArticleCategory), required: true })
-  category: ArticleCategory;
+    viewCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
 
-  @Prop({ type: [String], default: [] })
-  tags: string[];
+    likeCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
 
-  @Prop({ type: MediaSchema })
-  cover?: Media;
+    /** Approved comments only. */
+    commentCount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(ArticleStatus),
-    default: ArticleStatus.DRAFT,
-  })
-  status: ArticleStatus;
-
-  @Prop()
-  publishedAt?: Date;
-
-  @Prop({ default: false })
-  featured: boolean;
-
-  /** Computed on save from `content`. */
-  @Prop({ type: ReadingTimeSchema })
-  readingTime: ReadingTime;
-
-  @Prop({ type: ArticleTranslationsSchema, default: () => ({}) })
-  translation: ArticleTranslations;
-
-  @Prop({ default: 0, min: 0 })
-  viewCount: number;
-
-  @Prop({ default: 0, min: 0 })
-  likeCount: number;
-
-  /** Approved comments only. */
-  @Prop({ default: 0, min: 0 })
-  commentCount: number;
-
-  @Prop({ type: Types.ObjectId, ref: User.name })
-  author?: Types.ObjectId;
-}
-
-export type ArticleDocument = HydratedDocument<Article>;
-export const ArticleSchema = SchemaFactory.createForClass(Article);
+    authorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  },
+  { timestamps: true, collection: 'articles' },
+);
 
 ArticleSchema.index({ status: 1, publishedAt: -1 });
 ArticleSchema.index({ status: 1, category: 1, publishedAt: -1 });
@@ -132,13 +128,15 @@ ArticleSchema.index(
 );
 
 ArticleSchema.pre('validate', function () {
-  if (this.isModified('content') || !this.readingTime) {
+  if (this.isModified('content') || !this.readingTime?.en) {
     this.readingTime = {
       en: readingMinutes(this.content?.en) ?? 1,
-      ko: readingMinutes(this.content?.ko),
+      ko: readingMinutes(this.content?.ko ?? undefined),
     };
   }
   if (this.status === ArticleStatus.PUBLISHED && !this.publishedAt) {
     this.publishedAt = new Date();
   }
 });
+
+export default ArticleSchema;

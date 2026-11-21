@@ -1,36 +1,53 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import { User } from './User.model';
+import { Schema } from 'mongoose';
 
 /** Metadata for a file saved on the VPS disk and served by Nginx under /uploads. */
-@Schema({ collection: 'uploads', timestamps: true })
-export class Upload {
-  /** Relative path inside the uploads directory, e.g. projects/2026/11/<uuid>.webp */
-  @Prop({ required: true, unique: true })
-  path: string;
+const UploadSchema = new Schema(
+  {
+    /** Relative path inside the uploads directory, e.g. projects/2026/11/<uuid>.webp */
+    path: {
+      type: String,
+      required: true,
+      unique: true,
+    },
 
-  @Prop({ required: true })
-  url: string;
+    url: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ required: true })
-  originalName: string;
+    originalName: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ required: true })
-  mimeType: string;
+    mimeType: {
+      type: String,
+      required: true,
+    },
 
-  /** Bytes. */
-  @Prop({ required: true, min: 0 })
-  size: number;
+    /** Bytes. */
+    size: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
 
-  @Prop({ min: 0 })
-  width?: number;
+    width: {
+      type: Number,
+      min: 0,
+    },
 
-  @Prop({ min: 0 })
-  height?: number;
+    height: {
+      type: Number,
+      min: 0,
+    },
 
-  @Prop({ type: Types.ObjectId, ref: User.name })
-  uploadedBy?: Types.ObjectId;
-}
+    uploadedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  },
+  { timestamps: true, collection: 'uploads' },
+);
 
-export type UploadDocument = HydratedDocument<Upload>;
-export const UploadSchema = SchemaFactory.createForClass(Upload);
+export default UploadSchema;

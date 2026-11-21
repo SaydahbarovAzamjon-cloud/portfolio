@@ -1,40 +1,59 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { Schema } from 'mongoose';
 import { PageType } from '../libs/enums/analytics.enum';
 import { Locale } from '../libs/enums/common.enum';
 
 /** One page view. Analytics are aggregation queries over this collection. */
-@Schema({
-  collection: 'page_views',
-  timestamps: { createdAt: true, updatedAt: false },
-})
-export class PageView {
-  @Prop({ required: true, index: true })
-  visitorId: string;
+const PageViewSchema = new Schema(
+  {
+    visitorId: {
+      type: String,
+      required: true,
+      index: true,
+    },
 
-  @Prop({ required: true })
-  sessionId: string;
+    sessionId: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ required: true, trim: true, maxlength: 500 })
-  path: string;
+    path: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 500,
+    },
 
-  @Prop({ type: String, enum: Object.values(Locale), default: Locale.EN })
-  locale: Locale;
+    locale: {
+      type: String,
+      enum: Locale,
+      default: Locale.EN,
+    },
 
-  @Prop({ type: String, enum: Object.values(PageType), required: true })
-  pageType: PageType;
+    pageType: {
+      type: String,
+      enum: PageType,
+      required: true,
+    },
 
-  /** The project or article being viewed, when applicable. */
-  @Prop({ type: Types.ObjectId })
-  entity?: Types.ObjectId;
+    /** The project or article being viewed, when applicable. */
+    entityId: {
+      type: Schema.Types.ObjectId,
+    },
 
-  @Prop({ maxlength: 500 })
-  referrer?: string;
-}
+    referrer: {
+      type: String,
+      maxlength: 500,
+    },
+  },
+  {
+    timestamps: { createdAt: true, updatedAt: false },
+    collection: 'page_views',
+  },
+);
 
-export type PageViewDocument = HydratedDocument<PageView>;
-export const PageViewSchema = SchemaFactory.createForClass(PageView);
 PageViewSchema.index({ createdAt: -1 });
 PageViewSchema.index({ pageType: 1, createdAt: -1 });
 PageViewSchema.index({ path: 1, createdAt: -1 });
-PageViewSchema.index({ entity: 1, createdAt: -1 }, { sparse: true });
+PageViewSchema.index({ entityId: 1, createdAt: -1 }, { sparse: true });
+
+export default PageViewSchema;

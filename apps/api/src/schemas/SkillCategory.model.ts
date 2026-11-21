@@ -1,25 +1,38 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import { LocalizedText, LocalizedTextSchema } from './common';
+import { Schema } from 'mongoose';
+import { LocalizedTextSchema } from './common';
 
-@Schema({ collection: 'skill_categories', timestamps: true })
-export class SkillCategory {
-  /** Stable key: frontend, backend, ai-ml, infrastructure. */
-  @Prop({ required: true, unique: true, lowercase: true, trim: true })
-  key: string;
+const SkillCategorySchema = new Schema(
+  {
+    /** Stable key: frontend, backend, ai-ml, infrastructure. */
+    key: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  title: LocalizedText;
+    title: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  description?: LocalizedText;
+    description: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ required: true })
-  icon: string;
+    icon: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ default: 0, index: true })
-  order: number;
-}
+    order: {
+      type: Number,
+      default: 0,
+      index: true,
+    },
+  },
+  { timestamps: true, collection: 'skill_categories' },
+);
 
-export type SkillCategoryDocument = HydratedDocument<SkillCategory>;
-export const SkillCategorySchema = SchemaFactory.createForClass(SkillCategory);
+export default SkillCategorySchema;

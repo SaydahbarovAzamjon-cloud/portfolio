@@ -1,50 +1,78 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import { Article } from './Article.model';
+import { Schema } from 'mongoose';
 import { CommentStatus } from '../libs/enums/comment.enum';
 
 /** New comments are PENDING and become public only after admin approval. */
-@Schema({ collection: 'comments', timestamps: true })
-export class Comment {
-  @Prop({ type: Types.ObjectId, ref: Article.name, required: true })
-  article: Types.ObjectId;
+const CommentSchema = new Schema(
+  {
+    articleId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'Article',
+    },
 
-  /** One level of replies. */
-  @Prop({ type: Types.ObjectId, ref: 'Comment', default: null })
-  parent: Types.ObjectId | null;
+    /** One level of replies. */
+    parentId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+      default: null,
+    },
 
-  @Prop({ required: true, trim: true, minlength: 1, maxlength: 80 })
-  authorName: string;
+    authorName: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+      maxlength: 80,
+    },
 
-  /** Optional and private: never exposed by the public API. */
-  @Prop({ trim: true, lowercase: true, maxlength: 254, select: false })
-  authorEmail?: string;
+    /** Optional and private: never exposed by the public API. */
+    authorEmail: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      maxlength: 254,
+      select: false,
+    },
 
-  @Prop({ required: true, trim: true, minlength: 1, maxlength: 2000 })
-  content: string;
+    content: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 1,
+      maxlength: 2000,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(CommentStatus),
-    default: CommentStatus.PENDING,
-  })
-  status: CommentStatus;
+    status: {
+      type: String,
+      enum: CommentStatus,
+      default: CommentStatus.PENDING,
+    },
 
-  /** Reply written by the site owner from the admin panel. */
-  @Prop({ default: false })
-  isOwnerReply: boolean;
+    /** Reply written by the site owner from the admin panel. */
+    isOwnerReply: {
+      type: Boolean,
+      default: false,
+    },
 
-  @Prop({ index: true })
-  visitorId?: string;
+    visitorId: {
+      type: String,
+      index: true,
+    },
 
-  @Prop({ select: false })
-  ipHash?: string;
+    ipHash: {
+      type: String,
+      select: false,
+    },
 
-  @Prop({ select: false })
-  userAgent?: string;
-}
+    userAgent: {
+      type: String,
+      select: false,
+    },
+  },
+  { timestamps: true, collection: 'comments' },
+);
 
-export type CommentDocument = HydratedDocument<Comment>;
-export const CommentSchema = SchemaFactory.createForClass(Comment);
-CommentSchema.index({ article: 1, status: 1, createdAt: 1 });
+CommentSchema.index({ articleId: 1, status: 1, createdAt: 1 });
 CommentSchema.index({ status: 1, createdAt: -1 });
+
+export default CommentSchema;

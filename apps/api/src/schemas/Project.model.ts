@@ -1,173 +1,185 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import {
-  LocalizedText,
-  LocalizedTextSchema,
-  Media,
-  MediaSchema,
-} from './common';
+import { Schema } from 'mongoose';
 import { ProjectCategory, ProjectStatus } from '../libs/enums/project.enum';
+import { LocalizedTextSchema, MediaSchema } from './common';
 
-@Schema({ _id: false })
-export class ProjectLinks {
-  @Prop({ trim: true })
-  live?: string;
+const ProjectHighlightSchema = new Schema(
+  {
+    icon: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ trim: true })
-  github?: string;
+    label: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
+  },
+  { _id: false },
+);
 
-  @Prop({ trim: true })
-  demo?: string;
-}
-const ProjectLinksSchema = SchemaFactory.createForClass(ProjectLinks);
+const ProjectSchema = new Schema(
+  {
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+      match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    },
 
-@Schema({ _id: false })
-export class ProjectMedia {
-  @Prop({ type: MediaSchema })
-  cover?: Media;
+    /** Brand name, not translated (Fixora, CarVia, ...). */
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: MediaSchema })
-  thumbnail?: Media;
+    subtitle: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  /** Device mockups (laptop / phone) used in galleries. */
-  @Prop({ type: [MediaSchema], default: [] })
-  mockups: Media[];
+    summary: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: [MediaSchema], default: [] })
-  gallery: Media[];
-}
-const ProjectMediaSchema = SchemaFactory.createForClass(ProjectMedia);
+    category: {
+      type: String,
+      enum: ProjectCategory,
+      required: true,
+    },
 
-@Schema({ _id: false })
-export class ProjectTheme {
-  /** Accent colour for the card, e.g. "#8b5cf6" for Lumora. */
-  @Prop({ match: /^#[0-9a-fA-F]{6}$/ })
-  accent?: string;
+    status: {
+      type: String,
+      enum: ProjectStatus,
+      default: ProjectStatus.COMPLETED,
+    },
 
-  /** Card uses a dark background (e.g. CarVia). */
-  @Prop({ default: false })
-  dark: boolean;
-}
-const ProjectThemeSchema = SchemaFactory.createForClass(ProjectTheme);
+    order: {
+      type: Number,
+      default: 0,
+    },
 
-@Schema({ _id: false })
-export class ProjectHighlight {
-  @Prop({ required: true })
-  icon: string;
+    showOnHome: {
+      type: Boolean,
+      default: false,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  label: LocalizedText;
-}
-const ProjectHighlightSchema = SchemaFactory.createForClass(ProjectHighlight);
+    skillIds: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Skill',
+      default: [],
+    },
 
-/** Case study page content. Text fields accept markdown. */
-@Schema({ _id: false })
-export class CaseStudy {
-  @Prop({ type: LocalizedTextSchema })
-  overview?: LocalizedText;
+    links: {
+      live: {
+        type: String,
+        trim: true,
+      },
+      github: {
+        type: String,
+        trim: true,
+      },
+      demo: {
+        type: String,
+        trim: true,
+      },
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  problem?: LocalizedText;
+    media: {
+      cover: {
+        type: MediaSchema,
+      },
+      thumbnail: {
+        type: MediaSchema,
+      },
+      /** Device mockups (laptop / phone) used in galleries. */
+      mockups: {
+        type: [MediaSchema],
+        default: [],
+      },
+      gallery: {
+        type: [MediaSchema],
+        default: [],
+      },
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  solution?: LocalizedText;
+    theme: {
+      /** Accent colour for the card, e.g. "#8b5cf6" for Lumora. */
+      accent: {
+        type: String,
+        match: /^#[0-9a-fA-F]{6}$/,
+      },
+      /** Card uses a dark background (e.g. CarVia). */
+      dark: {
+        type: Boolean,
+        default: false,
+      },
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  architecture?: LocalizedText;
+    highlights: {
+      type: [ProjectHighlightSchema],
+      default: [],
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  features: LocalizedText[];
+    /** Case study page content. Text fields accept markdown. */
+    caseStudy: {
+      overview: {
+        type: LocalizedTextSchema,
+      },
+      problem: {
+        type: LocalizedTextSchema,
+      },
+      solution: {
+        type: LocalizedTextSchema,
+      },
+      architecture: {
+        type: LocalizedTextSchema,
+      },
+      features: {
+        type: [LocalizedTextSchema],
+        default: [],
+      },
+      challenges: {
+        type: [LocalizedTextSchema],
+        default: [],
+      },
+      results: {
+        type: [LocalizedTextSchema],
+        default: [],
+      },
+      role: {
+        type: LocalizedTextSchema,
+      },
+      teamSize: {
+        type: Number,
+        min: 1,
+      },
+      duration: {
+        type: LocalizedTextSchema,
+      },
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  challenges: LocalizedText[];
+    period: {
+      start: {
+        type: Date,
+      },
+      end: {
+        type: Date,
+      },
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  results: LocalizedText[];
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true, collection: 'projects' },
+);
 
-  @Prop({ type: LocalizedTextSchema })
-  role?: LocalizedText;
-
-  @Prop({ min: 1 })
-  teamSize?: number;
-
-  @Prop({ type: LocalizedTextSchema })
-  duration?: LocalizedText;
-}
-const CaseStudySchema = SchemaFactory.createForClass(CaseStudy);
-
-@Schema({ _id: false })
-export class ProjectPeriod {
-  @Prop()
-  start?: Date;
-
-  @Prop()
-  end?: Date;
-}
-const ProjectPeriodSchema = SchemaFactory.createForClass(ProjectPeriod);
-
-@Schema({ collection: 'projects', timestamps: true })
-export class Project {
-  @Prop({
-    required: true,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-  })
-  slug: string;
-
-  /** Brand name, not translated (Fixora, CarVia, ...). */
-  @Prop({ required: true, trim: true })
-  title: string;
-
-  @Prop({ type: LocalizedTextSchema, required: true })
-  subtitle: LocalizedText;
-
-  @Prop({ type: LocalizedTextSchema, required: true })
-  summary: LocalizedText;
-
-  @Prop({ type: String, enum: Object.values(ProjectCategory), required: true })
-  category: ProjectCategory;
-
-  @Prop({
-    type: String,
-    enum: Object.values(ProjectStatus),
-    default: ProjectStatus.COMPLETED,
-  })
-  status: ProjectStatus;
-
-  @Prop({ default: 0 })
-  order: number;
-
-  @Prop({ default: false })
-  showOnHome: boolean;
-
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Skill' }], default: [] })
-  skills: Types.ObjectId[];
-
-  @Prop({ type: ProjectLinksSchema, default: () => ({}) })
-  links: ProjectLinks;
-
-  @Prop({ type: ProjectMediaSchema, default: () => ({}) })
-  media: ProjectMedia;
-
-  @Prop({ type: ProjectThemeSchema, default: () => ({}) })
-  theme: ProjectTheme;
-
-  @Prop({ type: [ProjectHighlightSchema], default: [] })
-  highlights: ProjectHighlight[];
-
-  @Prop({ type: CaseStudySchema, default: () => ({}) })
-  caseStudy: CaseStudy;
-
-  @Prop({ type: ProjectPeriodSchema, default: () => ({}) })
-  period: ProjectPeriod;
-
-  @Prop({ default: false })
-  isPublished: boolean;
-}
-
-export type ProjectDocument = HydratedDocument<Project>;
-export const ProjectSchema = SchemaFactory.createForClass(Project);
 ProjectSchema.index({ isPublished: 1, order: 1 });
 ProjectSchema.index({ isPublished: 1, showOnHome: 1, order: 1 });
+
+export default ProjectSchema;

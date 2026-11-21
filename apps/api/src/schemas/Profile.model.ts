@@ -1,235 +1,279 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Schema } from 'mongoose';
+import { SocialPlatform } from '../libs/enums/profile.enum';
 import {
-  IconCard,
   IconCardSchema,
-  LocalizedText,
   LocalizedTextSchema,
-  Media,
   MediaSchema,
-  Stat,
   StatSchema,
 } from './common';
-import { SocialPlatform } from '../libs/enums/profile.enum';
 
-@Schema({ _id: false })
-export class Location {
-  @Prop({ type: LocalizedTextSchema, required: true })
-  city: LocalizedText;
+const SocialLinkSchema = new Schema(
+  {
+    platform: {
+      type: String,
+      enum: SocialPlatform,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  country: LocalizedText;
+    url: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  /** IANA timezone, drives the header clock (e.g. Asia/Seoul). */
-  @Prop({ required: true, default: 'Asia/Seoul' })
-  timezone: string;
-}
-const LocationSchema = SchemaFactory.createForClass(Location);
+    handle: {
+      type: String,
+      trim: true,
+    },
+  },
+  { _id: false },
+);
 
-@Schema({ _id: false })
-export class Availability {
-  @Prop({ default: true })
-  isAvailable: boolean;
+const InterestSchema = new Schema(
+  {
+    icon: {
+      type: String,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  label?: LocalizedText;
+    title: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  details?: LocalizedText;
-}
-const AvailabilitySchema = SchemaFactory.createForClass(Availability);
+    description: {
+      type: LocalizedTextSchema,
+    },
 
-@Schema({ _id: false })
-export class SocialLink {
-  @Prop({ type: String, enum: Object.values(SocialPlatform), required: true })
-  platform: SocialPlatform;
+    tags: {
+      type: [LocalizedTextSchema],
+      default: [],
+    },
+  },
+  { _id: false },
+);
 
-  @Prop({ required: true, trim: true })
-  url: string;
+const SpokenLanguageSchema = new Schema(
+  {
+    code: {
+      type: String,
+      required: true,
+      lowercase: true,
+      trim: true,
+    },
 
-  @Prop({ trim: true })
-  handle?: string;
-}
-const SocialLinkSchema = SchemaFactory.createForClass(SocialLink);
+    name: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
+  },
+  { _id: false },
+);
 
-@Schema({ _id: false })
-export class Resume {
-  @Prop({ type: MediaSchema })
-  en?: Media;
+const MomentSchema = new Schema(
+  {
+    image: {
+      type: MediaSchema,
+      required: true,
+    },
 
-  @Prop({ type: MediaSchema })
-  ko?: Media;
-}
-const ResumeSchema = SchemaFactory.createForClass(Resume);
+    caption: {
+      type: LocalizedTextSchema,
+    },
+  },
+  { _id: false },
+);
 
-@Schema({ _id: false })
-export class ProfileImages {
-  @Prop({ type: MediaSchema })
-  heroPortrait?: Media;
+const QuoteSchema = new Schema(
+  {
+    /** Where the quote is shown, e.g. "philosophy", "journey", "education". */
+    key: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: MediaSchema })
-  aboutPortrait?: Media;
-
-  @Prop({ type: MediaSchema })
-  contactPortrait?: Media;
-
-  @Prop({ type: MediaSchema })
-  signature?: Media;
-}
-const ProfileImagesSchema = SchemaFactory.createForClass(ProfileImages);
-
-@Schema({ _id: false })
-export class Interest {
-  @Prop({ required: true })
-  icon: string;
-
-  @Prop({ type: LocalizedTextSchema, required: true })
-  title: LocalizedText;
-
-  @Prop({ type: LocalizedTextSchema })
-  description?: LocalizedText;
-
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  tags: LocalizedText[];
-}
-const InterestSchema = SchemaFactory.createForClass(Interest);
-
-@Schema({ _id: false })
-export class SpokenLanguage {
-  @Prop({ required: true, lowercase: true, trim: true })
-  code: string;
-
-  @Prop({ type: LocalizedTextSchema, required: true })
-  name: LocalizedText;
-}
-const SpokenLanguageSchema = SchemaFactory.createForClass(SpokenLanguage);
-
-@Schema({ _id: false })
-export class Moment {
-  @Prop({ type: MediaSchema, required: true })
-  image: Media;
-
-  @Prop({ type: LocalizedTextSchema })
-  caption?: LocalizedText;
-}
-const MomentSchema = SchemaFactory.createForClass(Moment);
-
-@Schema({ _id: false })
-export class JourneyBeginning {
-  @Prop()
-  date?: Date;
-
-  @Prop({ type: LocalizedTextSchema })
-  title?: LocalizedText;
-
-  @Prop({ type: LocalizedTextSchema })
-  text?: LocalizedText;
-}
-const JourneyBeginningSchema = SchemaFactory.createForClass(JourneyBeginning);
-
-@Schema({ _id: false })
-export class JourneyFuture {
-  @Prop({ type: LocalizedTextSchema })
-  title?: LocalizedText;
-
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  points: LocalizedText[];
-}
-const JourneyFutureSchema = SchemaFactory.createForClass(JourneyFuture);
-
-@Schema({ _id: false })
-export class Journey {
-  @Prop({ type: JourneyBeginningSchema })
-  beginning?: JourneyBeginning;
-
-  @Prop({ type: JourneyFutureSchema })
-  future?: JourneyFuture;
-}
-const JourneySchema = SchemaFactory.createForClass(Journey);
-
-@Schema({ _id: false })
-export class Quote {
-  /** Where the quote is shown, e.g. "philosophy", "journey", "education". */
-  @Prop({ required: true, trim: true })
-  key: string;
-
-  @Prop({ type: LocalizedTextSchema, required: true })
-  text: LocalizedText;
-}
-const QuoteSchema = SchemaFactory.createForClass(Quote);
+    text: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
+  },
+  { _id: false },
+);
 
 /** Singleton: the whole site has exactly one profile document. */
-@Schema({ collection: 'profile', timestamps: true })
-export class Profile {
-  @Prop({ default: 'profile', unique: true, immutable: true })
-  singletonKey: string;
+const ProfileSchema = new Schema(
+  {
+    singletonKey: {
+      type: String,
+      default: 'profile',
+      unique: true,
+      immutable: true,
+    },
 
-  @Prop({ required: true, trim: true })
-  name: string;
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  fullName: LocalizedText;
+    fullName: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  headline: LocalizedText;
+    headline: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  tagline?: LocalizedText;
+    tagline: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  heroOrbitLabels: LocalizedText[];
+    heroOrbitLabels: {
+      type: [LocalizedTextSchema],
+      default: [],
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  bioShort?: LocalizedText;
+    bioShort: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  bioLong?: LocalizedText;
+    bioLong: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: LocationSchema, required: true })
-  location: Location;
+    location: {
+      city: {
+        type: LocalizedTextSchema,
+        required: true,
+      },
+      country: {
+        type: LocalizedTextSchema,
+        required: true,
+      },
+      /** IANA timezone, drives the header clock (e.g. Asia/Seoul). */
+      timezone: {
+        type: String,
+        required: true,
+        default: 'Asia/Seoul',
+      },
+    },
 
-  @Prop({ type: AvailabilitySchema, default: () => ({}) })
-  availability: Availability;
+    availability: {
+      isAvailable: {
+        type: Boolean,
+        default: true,
+      },
+      label: {
+        type: LocalizedTextSchema,
+      },
+      details: {
+        type: LocalizedTextSchema,
+      },
+    },
 
-  @Prop({ required: true, lowercase: true, trim: true })
-  contactEmail: string;
+    contactEmail: {
+      type: String,
+      required: true,
+      lowercase: true,
+      trim: true,
+    },
 
-  @Prop({ type: [SocialLinkSchema], default: [] })
-  socials: SocialLink[];
+    socials: {
+      type: [SocialLinkSchema],
+      default: [],
+    },
 
-  @Prop({ type: ResumeSchema, default: () => ({}) })
-  resume: Resume;
+    resume: {
+      en: {
+        type: MediaSchema,
+      },
+      ko: {
+        type: MediaSchema,
+      },
+    },
 
-  @Prop({ type: ProfileImagesSchema, default: () => ({}) })
-  images: ProfileImages;
+    images: {
+      heroPortrait: {
+        type: MediaSchema,
+      },
+      aboutPortrait: {
+        type: MediaSchema,
+      },
+      contactPortrait: {
+        type: MediaSchema,
+      },
+      signature: {
+        type: MediaSchema,
+      },
+    },
 
-  @Prop({ type: [IconCardSchema], default: [] })
-  focusAreas: IconCard[];
+    focusAreas: {
+      type: [IconCardSchema],
+      default: [],
+    },
 
-  @Prop({ type: [IconCardSchema], default: [] })
-  philosophy: IconCard[];
+    philosophy: {
+      type: [IconCardSchema],
+      default: [],
+    },
 
-  @Prop({ type: [InterestSchema], default: [] })
-  interests: Interest[];
+    interests: {
+      type: [InterestSchema],
+      default: [],
+    },
 
-  @Prop({ type: [SpokenLanguageSchema], default: [] })
-  spokenLanguages: SpokenLanguage[];
+    spokenLanguages: {
+      type: [SpokenLanguageSchema],
+      default: [],
+    },
 
-  @Prop({ type: [MomentSchema], default: [] })
-  moments: Moment[];
+    moments: {
+      type: [MomentSchema],
+      default: [],
+    },
 
-  @Prop({ type: JourneySchema, default: () => ({}) })
-  journey: Journey;
+    journey: {
+      beginning: {
+        date: {
+          type: Date,
+        },
+        title: {
+          type: LocalizedTextSchema,
+        },
+        text: {
+          type: LocalizedTextSchema,
+        },
+      },
+      future: {
+        title: {
+          type: LocalizedTextSchema,
+        },
+        points: {
+          type: [LocalizedTextSchema],
+          default: [],
+        },
+      },
+    },
 
-  @Prop({ type: [IconCardSchema], default: [] })
-  contributions: IconCard[];
+    contributions: {
+      type: [IconCardSchema],
+      default: [],
+    },
 
-  @Prop({ type: [QuoteSchema], default: [] })
-  quotes: Quote[];
+    quotes: {
+      type: [QuoteSchema],
+      default: [],
+    },
 
-  @Prop({ type: [StatSchema], default: [] })
-  manualStats: Stat[];
-}
+    manualStats: {
+      type: [StatSchema],
+      default: [],
+    },
+  },
+  { timestamps: true, collection: 'profile' },
+);
 
-export type ProfileDocument = HydratedDocument<Profile>;
-export const ProfileSchema = SchemaFactory.createForClass(Profile);
+export default ProfileSchema;

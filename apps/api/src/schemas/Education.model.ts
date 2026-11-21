@@ -1,57 +1,69 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import {
-  LocalizedText,
-  LocalizedTextSchema,
-  Media,
-  MediaSchema,
-} from './common';
+import { Schema } from 'mongoose';
 import { DegreeType, EducationStatus } from '../libs/enums/education.enum';
+import { LocalizedTextSchema, MediaSchema } from './common';
 
-@Schema({ collection: 'education', timestamps: true })
-export class Education {
-  @Prop({ type: String, enum: Object.values(DegreeType), required: true })
-  degree: DegreeType;
+const EducationSchema = new Schema(
+  {
+    degree: {
+      type: String,
+      enum: DegreeType,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  institution: LocalizedText;
+    institution: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  /** Name in the institution's own language, e.g. "Toshkent davlat transport universiteti". */
-  @Prop({ trim: true })
-  institutionNative?: string;
+    /** Name in the institution's own language, e.g. "Toshkent davlat transport universiteti". */
+    institutionNative: {
+      type: String,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  program?: LocalizedText;
+    program: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  major?: LocalizedText;
+    major: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  qualification?: LocalizedText;
+    qualification: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  location?: LocalizedText;
+    location: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ required: true })
-  startDate: Date;
+    startDate: {
+      type: Date,
+      required: true,
+    },
 
-  /** Graduation date, or expected graduation while IN_PROGRESS. */
-  @Prop()
-  endDate?: Date;
+    /** Graduation date, or expected graduation while IN_PROGRESS. */
+    endDate: {
+      type: Date,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(EducationStatus),
-    required: true,
-  })
-  status: EducationStatus;
+    status: {
+      type: String,
+      enum: EducationStatus,
+      required: true,
+    },
 
-  @Prop({ type: MediaSchema })
-  image?: Media;
+    image: {
+      type: MediaSchema,
+    },
 
-  @Prop({ default: 0, index: true })
-  order: number;
-}
+    order: {
+      type: Number,
+      default: 0,
+      index: true,
+    },
+  },
+  { timestamps: true, collection: 'education' },
+);
 
-export type EducationDocument = HydratedDocument<Education>;
-export const EducationSchema = SchemaFactory.createForClass(Education);
+export default EducationSchema;

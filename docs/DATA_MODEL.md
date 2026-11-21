@@ -1,6 +1,6 @@
 # Data Model — Phase 01 (Backend)
 
-Status: **APPROVED 2026-11-22.** Implemented as Mongoose schemas in `apps/api/src/schemas/*.model.ts` (enums in `apps/api/src/libs/enums/`).
+Status: **APPROVED 2026-11-22.** Implemented nestar-style as plain `new Schema({...})` + `export default` in `apps/api/src/schemas/*.model.ts` (enums in `apps/api/src/libs/enums/`). Reference fields end in `Id` / `Ids`.
 
 Source of truth for fields: the project brief and the design mockups in `images for portfolio/`.
 Database: MongoDB (`portfolio`), ODM: Mongoose. All collections have `createdAt` / `updatedAt`.
@@ -34,7 +34,7 @@ Database: MongoDB (`portfolio`), ODM: Mongoose. All collections have `createdAt`
 
 | Field | Type | Notes |
 |---|---|---|
-| `user` | ref `users` | |
+| `userId` | ref `users` | |
 | `refreshTokenHash` | string | token itself only lives in an httpOnly cookie |
 | `userAgent`, `ipHash` | string | for "active sessions" view |
 | `expiresAt` | Date | **TTL index** — Mongo deletes expired sessions |
@@ -102,8 +102,8 @@ Everything about the owner that appears on Home, About, Contact and Footer.
 | `summary` | LocalizedText | |
 | `responsibilities` | LocalizedText[] | Key Responsibilities |
 | `achievements` | LocalizedText[] | |
-| `skills` | ref `skills`[] | Tech Stack icons |
-| `projects` | ref `projects`[] | Main Projects |
+| `skillIds` | ref `skills`[] | Tech Stack icons |
+| `projectIds` | ref `projects`[] | Main Projects |
 | `order` | number | |
 
 ---
@@ -124,7 +124,7 @@ Everything about the owner that appears on Home, About, Contact and Footer.
 | `name` | string unique | "Next.js" |
 | `slug` | string unique | `nextjs` |
 | `icon` | string | Simple Icons slug |
-| `category` | ref `skill_categories` | |
+| `categoryId` | ref `skill_categories` | |
 | `featured` | bool | shown in Home preview (3 per category) |
 | `order` | number | |
 
@@ -144,7 +144,7 @@ Skills are referenced by projects and experiences, so a tech name is spelled onc
 | `status` | enum `COMPLETED`\|`IN_PROGRESS` | Lumora = `IN_PROGRESS` |
 | `order` | number | Lumora last |
 | `showOnHome` | bool | "Things I've Built" selection |
-| `skills` | ref `skills`[] | tech chips |
+| `skillIds` | ref `skills`[] | tech chips |
 | `links` | `{ live?, github?, demo? }` | |
 | `media` | `{ cover, thumbnail, mockups: Media[], gallery: Media[] }` | |
 | `theme` | `{ accent?: string, dark?: bool }` | Lumora purple, CarVia dark |
@@ -173,14 +173,14 @@ Skills are referenced by projects and experiences, so a tech name is spelled onc
 | `readingTime` | `{ en: number, ko?: number }` | minutes, computed on save |
 | `translation` | `{ ko: { status: NONE|AI|REVIEWED, translatedAt?, model? } }` | articles are written in English for now; KO is added later by AI translation |
 | `viewCount`, `likeCount`, `commentCount` | number | denormalized counters for fast cards |
-| `author` | ref `users` | |
+| `authorId` | ref `users` | |
 
 ## 10. `comments`
 
 | Field | Type | Notes |
 |---|---|---|
-| `article` | ref `articles` | |
-| `parent` | ref `comments`? | one level of replies |
+| `articleId` | ref `articles` | |
+| `parentId` | ref `comments`? | one level of replies |
 | `authorName` | string | |
 | `authorEmail` | string? | private, never exposed publicly |
 | `content` | string | plain text, length-limited |
@@ -192,7 +192,7 @@ Skills are referenced by projects and experiences, so a tech name is spelled onc
 
 | Field | Type | Notes |
 |---|---|---|
-| `article` | ref `articles` | |
+| `articleId` | ref `articles` | |
 | `visitorId` | string | anonymous visitor cookie |
 
 Unique index `(article, visitorId)` → one like per visitor; toggling removes it.
@@ -233,7 +233,7 @@ Unique index `(article, visitorId)` → one like per visitor; toggling removes i
 | `path` | string | |
 | `locale` | `en`\|`ko` | |
 | `pageType` | enum `HOME`\|`ABOUT`\|`PROJECTS`\|`PROJECT`\|`SKILLS`\|`EXPERIENCE`\|`JOURNAL`\|`ARTICLE`\|`CONTACT` | |
-| `entity` | ObjectId? | project / article being viewed |
+| `entityId` | ObjectId? | project / article being viewed |
 | `referrer` | string? | |
 | `createdAt` | Date | |
 

@@ -1,55 +1,68 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Schema } from 'mongoose';
 import { DeviceType } from '../libs/enums/analytics.enum';
-
-@Schema({ _id: false })
-export class DeviceInfo {
-  @Prop()
-  browser?: string;
-
-  @Prop()
-  os?: string;
-
-  @Prop({
-    type: String,
-    enum: Object.values(DeviceType),
-    default: DeviceType.UNKNOWN,
-  })
-  type: DeviceType;
-}
-const DeviceInfoSchema = SchemaFactory.createForClass(DeviceInfo);
 
 /**
  * An anonymous visitor identified by a random id in a first-party cookie.
  * Raw IP addresses are never stored.
  */
-@Schema({ collection: 'visitors', timestamps: true })
-export class Visitor {
-  @Prop({ required: true, unique: true })
-  visitorId: string;
+const VisitorSchema = new Schema(
+  {
+    visitorId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
 
-  @Prop({ required: true, default: () => new Date() })
-  firstSeenAt: Date;
+    firstSeenAt: {
+      type: Date,
+      required: true,
+      default: () => new Date(),
+    },
 
-  @Prop({ required: true, default: () => new Date(), index: true })
-  lastSeenAt: Date;
+    lastSeenAt: {
+      type: Date,
+      required: true,
+      default: () => new Date(),
+      index: true,
+    },
 
-  @Prop({ default: 1, min: 1 })
-  visitCount: number;
+    visitCount: {
+      type: Number,
+      default: 1,
+      min: 1,
+    },
 
-  @Prop()
-  firstReferrer?: string;
+    firstReferrer: {
+      type: String,
+    },
 
-  @Prop()
-  locale?: string;
+    locale: {
+      type: String,
+    },
 
-  @Prop({ type: DeviceInfoSchema, default: () => ({}) })
-  device: DeviceInfo;
+    device: {
+      browser: {
+        type: String,
+      },
+      os: {
+        type: String,
+      },
+      type: {
+        type: String,
+        enum: DeviceType,
+        default: DeviceType.UNKNOWN,
+      },
+    },
 
-  /** ISO country code, optional. */
-  @Prop({ uppercase: true, minlength: 2, maxlength: 2 })
-  country?: string;
-}
+    /** ISO country code, optional. */
+    country: {
+      type: String,
+      uppercase: true,
+      minlength: 2,
+      maxlength: 2,
+    },
+  },
+  { timestamps: true, collection: 'visitors' },
+);
 
-export type VisitorDocument = HydratedDocument<Visitor>;
-export const VisitorSchema = SchemaFactory.createForClass(Visitor);
+export default VisitorSchema;

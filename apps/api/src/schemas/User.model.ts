@@ -1,26 +1,34 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Schema } from 'mongoose';
 import { UserRole } from '../libs/enums/user.enum';
 
-@Schema({ collection: 'users', timestamps: true })
-export class User {
-  @Prop({ required: true, unique: true, lowercase: true, trim: true })
-  email: string;
+const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
 
-  /** argon2 hash. Excluded from queries by default. */
-  @Prop({ required: true, select: false })
-  passwordHash: string;
+    /** argon2 hash. Excluded from queries by default. */
+    passwordHash: {
+      type: String,
+      required: true,
+      select: false,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(UserRole),
-    default: UserRole.ADMIN,
-  })
-  role: UserRole;
+    role: {
+      type: String,
+      enum: UserRole,
+      default: UserRole.ADMIN,
+    },
 
-  @Prop()
-  lastLoginAt?: Date;
-}
+    lastLoginAt: {
+      type: Date,
+    },
+  },
+  { timestamps: true, collection: 'users' },
+);
 
-export type UserDocument = HydratedDocument<User>;
-export const UserSchema = SchemaFactory.createForClass(User);
+export default UserSchema;

@@ -1,19 +1,19 @@
 import mongoose, { Connection, Model, Schema } from 'mongoose';
-import { ArticleSchema } from '../src/schemas/Article.model';
-import { AuthSessionSchema } from '../src/schemas/AuthSession.model';
-import { CommentSchema } from '../src/schemas/Comment.model';
-import { ContactMessageSchema } from '../src/schemas/ContactMessage.model';
-import { EducationSchema } from '../src/schemas/Education.model';
-import { ExperienceSchema } from '../src/schemas/Experience.model';
-import { LikeSchema } from '../src/schemas/Like.model';
-import { PageViewSchema } from '../src/schemas/PageView.model';
-import { ProfileSchema } from '../src/schemas/Profile.model';
-import { ProjectSchema } from '../src/schemas/Project.model';
-import { SkillCategorySchema } from '../src/schemas/SkillCategory.model';
-import { SkillSchema } from '../src/schemas/Skill.model';
-import { UploadSchema } from '../src/schemas/Upload.model';
-import { UserSchema } from '../src/schemas/User.model';
-import { VisitorSchema } from '../src/schemas/Visitor.model';
+import ArticleSchema from '../src/schemas/Article.model';
+import AuthSessionSchema from '../src/schemas/AuthSession.model';
+import CommentSchema from '../src/schemas/Comment.model';
+import ContactMessageSchema from '../src/schemas/ContactMessage.model';
+import EducationSchema from '../src/schemas/Education.model';
+import ExperienceSchema from '../src/schemas/Experience.model';
+import LikeSchema from '../src/schemas/Like.model';
+import PageViewSchema from '../src/schemas/PageView.model';
+import ProfileSchema from '../src/schemas/Profile.model';
+import ProjectSchema from '../src/schemas/Project.model';
+import SkillCategorySchema from '../src/schemas/SkillCategory.model';
+import SkillSchema from '../src/schemas/Skill.model';
+import UploadSchema from '../src/schemas/Upload.model';
+import UserSchema from '../src/schemas/User.model';
+import VisitorSchema from '../src/schemas/Visitor.model';
 
 // MongoDB runs in memory, started by test/global-setup.ts.
 const SCHEMAS: Record<string, Schema> = {
@@ -200,13 +200,13 @@ describe('Mongoose schemas (data model)', () => {
       category: 'PERSONAL',
     });
     await m('Comment').create({
-      article: article._id,
+      articleId: article._id,
       authorName: 'Visitor',
       authorEmail: 'v@example.com',
       content: 'Great post',
       ipHash: 'hash',
     });
-    const comment = await m('Comment').findOne({ article: article._id });
+    const comment = await m('Comment').findOne({ articleId: article._id });
     expect(comment?.get('status')).toBe('PENDING');
     expect(comment?.get('authorEmail')).toBeUndefined();
     expect(comment?.get('ipHash')).toBeUndefined();
@@ -220,12 +220,12 @@ describe('Mongoose schemas (data model)', () => {
       content: { en: 'c' },
       category: 'AI_ML',
     });
-    await m('Like').create({ article: article._id, visitorId: 'v1' });
+    await m('Like').create({ articleId: article._id, visitorId: 'v1' });
     await expect(
-      m('Like').create({ article: article._id, visitorId: 'v1' }),
+      m('Like').create({ articleId: article._id, visitorId: 'v1' }),
     ).rejects.toThrow(/duplicate key/);
     await expect(
-      m('Like').create({ article: article._id, visitorId: 'v2' }),
+      m('Like').create({ articleId: article._id, visitorId: 'v2' }),
     ).resolves.toBeDefined();
   });
 

@@ -1,63 +1,84 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import {
-  LocalizedText,
-  LocalizedTextSchema,
-  Media,
-  MediaSchema,
-} from './common';
+import { Schema } from 'mongoose';
 import { EmploymentType } from '../libs/enums/experience.enum';
+import { LocalizedTextSchema, MediaSchema } from './common';
 
-@Schema({ collection: 'experiences', timestamps: true })
-export class Experience {
-  @Prop({ required: true, trim: true })
-  company: string;
+const ExperienceSchema = new Schema(
+  {
+    company: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: MediaSchema })
-  companyLogo?: Media;
+    companyLogo: {
+      type: MediaSchema,
+    },
 
-  @Prop({ type: MediaSchema })
-  companyImage?: Media;
+    companyImage: {
+      type: MediaSchema,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  role: LocalizedText;
+    role: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({
-    type: String,
-    enum: Object.values(EmploymentType),
-    default: EmploymentType.FULL_TIME,
-  })
-  employmentType: EmploymentType;
+    employmentType: {
+      type: String,
+      enum: EmploymentType,
+      default: EmploymentType.FULL_TIME,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  location?: LocalizedText;
+    location: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ required: true })
-  startDate: Date;
+    startDate: {
+      type: Date,
+      required: true,
+    },
 
-  /** null = current position. Duration is computed, not stored. */
-  @Prop({ type: Date, default: null })
-  endDate: Date | null;
+    /** null = current position. Duration is computed, not stored. */
+    endDate: {
+      type: Date,
+      default: null,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  summary?: LocalizedText;
+    summary: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  responsibilities: LocalizedText[];
+    responsibilities: {
+      type: [LocalizedTextSchema],
+      default: [],
+    },
 
-  @Prop({ type: [LocalizedTextSchema], default: [] })
-  achievements: LocalizedText[];
+    achievements: {
+      type: [LocalizedTextSchema],
+      default: [],
+    },
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Skill' }], default: [] })
-  skills: Types.ObjectId[];
+    skillIds: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Skill',
+      default: [],
+    },
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Project' }], default: [] })
-  projects: Types.ObjectId[];
+    projectIds: {
+      type: [Schema.Types.ObjectId],
+      ref: 'Project',
+      default: [],
+    },
 
-  @Prop({ default: 0, index: true })
-  order: number;
-}
+    order: {
+      type: Number,
+      default: 0,
+      index: true,
+    },
+  },
+  { timestamps: true, collection: 'experiences' },
+);
 
-export type ExperienceDocument = HydratedDocument<Experience>;
-export const ExperienceSchema = SchemaFactory.createForClass(Experience);
 ExperienceSchema.index({ startDate: -1 });
+
+export default ExperienceSchema;

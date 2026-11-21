@@ -1,29 +1,41 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import { User } from './User.model';
+import { Schema } from 'mongoose';
 
 /** One refresh-token session. The raw token lives only in an httpOnly cookie. */
-@Schema({ collection: 'auth_sessions', timestamps: true })
-export class AuthSession {
-  @Prop({ type: Types.ObjectId, ref: User.name, required: true, index: true })
-  user: Types.ObjectId;
+const AuthSessionSchema = new Schema(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+      index: true,
+    },
 
-  @Prop({ required: true, select: false })
-  refreshTokenHash: string;
+    refreshTokenHash: {
+      type: String,
+      required: true,
+      select: false,
+    },
 
-  @Prop()
-  userAgent?: string;
+    userAgent: {
+      type: String,
+    },
 
-  @Prop()
-  ipHash?: string;
+    ipHash: {
+      type: String,
+    },
 
-  /** TTL index: MongoDB removes the session once it expires. */
-  @Prop({ required: true, expires: 0 })
-  expiresAt: Date;
+    /** TTL index: MongoDB removes the session once it expires. */
+    expiresAt: {
+      type: Date,
+      required: true,
+      expires: 0,
+    },
 
-  @Prop()
-  revokedAt?: Date;
-}
+    revokedAt: {
+      type: Date,
+    },
+  },
+  { timestamps: true, collection: 'auth_sessions' },
+);
 
-export type AuthSessionDocument = HydratedDocument<AuthSession>;
-export const AuthSessionSchema = SchemaFactory.createForClass(AuthSession);
+export default AuthSessionSchema;

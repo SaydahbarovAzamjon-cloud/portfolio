@@ -1,63 +1,91 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema } from 'mongoose';
 
 /**
- * Shared embedded types (sub-documents without their own _id).
- * See docs/DATA_MODEL.md §0.
+ * Shared embedded sub-schemas (no own _id). See docs/DATA_MODEL.md §0.
  */
 
 /** Human-readable text. `en` is required; `ko` falls back to `en` on the frontend. */
-@Schema({ _id: false })
-export class LocalizedText {
-  @Prop({ required: true, trim: true })
-  en: string;
+export const LocalizedTextSchema = new Schema(
+  {
+    en: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ trim: true })
-  ko?: string;
-}
-export const LocalizedTextSchema = SchemaFactory.createForClass(LocalizedText);
+    ko: {
+      type: String,
+      trim: true,
+    },
+  },
+  { _id: false },
+);
 
 /** An image or file stored on the VPS disk (see `uploads`). */
-@Schema({ _id: false })
-export class Media {
-  @Prop({ required: true, trim: true })
-  url: string;
+export const MediaSchema = new Schema(
+  {
+    url: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  alt?: LocalizedText;
+    alt: {
+      type: LocalizedTextSchema,
+    },
 
-  @Prop({ min: 0 })
-  width?: number;
+    width: {
+      type: Number,
+      min: 0,
+    },
 
-  @Prop({ min: 0 })
-  height?: number;
+    height: {
+      type: Number,
+      min: 0,
+    },
 
-  /** Tiny base64 placeholder for blur-up loading. */
-  @Prop()
-  blurDataUrl?: string;
-}
-export const MediaSchema = SchemaFactory.createForClass(Media);
+    /** Tiny base64 placeholder for blur-up loading. */
+    blurDataUrl: {
+      type: String,
+    },
+  },
+  { _id: false },
+);
 
 /** Icon + title + description tile (feature cards, philosophy, contributions). */
-@Schema({ _id: false })
-export class IconCard {
-  @Prop({ required: true, trim: true })
-  icon: string;
+export const IconCardSchema = new Schema(
+  {
+    icon: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  title: LocalizedText;
+    title: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema })
-  description?: LocalizedText;
-}
-export const IconCardSchema = SchemaFactory.createForClass(IconCard);
+    description: {
+      type: LocalizedTextSchema,
+    },
+  },
+  { _id: false },
+);
 
 /** A number that cannot be computed from data (e.g. "20+ technologies"). */
-@Schema({ _id: false })
-export class Stat {
-  @Prop({ required: true, trim: true })
-  value: string;
+export const StatSchema = new Schema(
+  {
+    value: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({ type: LocalizedTextSchema, required: true })
-  label: LocalizedText;
-}
-export const StatSchema = SchemaFactory.createForClass(Stat);
+    label: {
+      type: LocalizedTextSchema,
+      required: true,
+    },
+  },
+  { _id: false },
+);

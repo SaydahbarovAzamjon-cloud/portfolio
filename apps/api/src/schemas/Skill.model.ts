@@ -1,36 +1,51 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
-import { SkillCategory } from './SkillCategory.model';
+import { Schema } from 'mongoose';
 
 /** One technology. Projects and experiences reference skills, so names and icons stay consistent. */
-@Schema({ collection: 'skills', timestamps: true })
-export class Skill {
-  @Prop({ required: true, unique: true, trim: true })
-  name: string;
+const SkillSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
 
-  @Prop({ required: true, unique: true, lowercase: true, trim: true })
-  slug: string;
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
 
-  /** Simple Icons slug or custom icon key. */
-  @Prop({ required: true, trim: true })
-  icon: string;
+    /** Simple Icons slug or custom icon key. */
+    icon: {
+      type: String,
+      required: true,
+      trim: true,
+    },
 
-  @Prop({
-    type: Types.ObjectId,
-    ref: SkillCategory.name,
-    required: true,
-    index: true,
-  })
-  category: Types.ObjectId;
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'SkillCategory',
+      index: true,
+    },
 
-  /** Shown in the Home "Tools I Work With" preview. */
-  @Prop({ default: false })
-  featured: boolean;
+    /** Shown in the Home "Tools I Work With" preview. */
+    featured: {
+      type: Boolean,
+      default: false,
+    },
 
-  @Prop({ default: 0 })
-  order: number;
-}
+    order: {
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true, collection: 'skills' },
+);
 
-export type SkillDocument = HydratedDocument<Skill>;
-export const SkillSchema = SchemaFactory.createForClass(Skill);
-SkillSchema.index({ category: 1, order: 1 });
+SkillSchema.index({ categoryId: 1, order: 1 });
+
+export default SkillSchema;
