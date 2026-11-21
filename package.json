@@ -9,6 +9,7 @@
     "lint:api": "pnpm --filter api lint"
   },
   "engines": {
-    "node": ">=20"
-  }
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@12.16.1"
 }

@@ -3,8 +3,8 @@
 ## Phase 01 — Backend
 
 - [x] Project initialization (NestJS `apps/api`, pnpm workspace)
-- [ ] Database configuration
-- [ ] GraphQL configuration
+- [x] Database configuration (Mongoose, env validation)
+- [x] GraphQL configuration (Apollo 5, code-first, `health` query)
 - [ ] Authentication
 - [ ] Visitor tracking
 - [ ] Analytics

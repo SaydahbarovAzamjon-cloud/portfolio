@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Health {
+  database: String!
+  status: String!
+
+  """Process uptime in seconds"""
+  uptime: Float!
+}
+
+type Query {
+  """API and database status"""
+  health: Health!
+}
