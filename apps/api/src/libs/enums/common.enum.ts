@@ -15,6 +15,8 @@ export enum Message {
   UPDATE_SUCCESS = 'Updated successfully!',
   REMOVE_SUCCESS = 'Removed successfully!',
   PROFILE_REQUIRED_FIELDS = 'Profile does not exist yet: name, fullName, headline, location and contactEmail are required.',
+  ALREADY_EXISTS = 'This item already exists!',
+  CATEGORY_NOT_EMPTY = 'This category still has skills. Move or remove them first!',
 
   SOMETHING_WENT_WRONG = 'Something went wrong!',
   NO_DATA_FOUND = 'No data found!',

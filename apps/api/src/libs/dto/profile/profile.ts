@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import type { ObjectId } from 'mongoose';
+import type { Types } from 'mongoose';
 import { SocialPlatform } from '../../enums/profile.enum';
 import { IconCard, LocalizedText, Media, Stat } from '../common/common';
 
@@ -138,7 +138,7 @@ export class Quote {
 @ObjectType()
 export class Profile {
   @Field(() => String)
-  _id: ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => String)
   name: string;

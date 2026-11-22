@@ -218,12 +218,18 @@ input MomentInput {
 
 type Mutation {
   createEducationByAdmin(input: EducationInput!): EducationResult!
+  createSkillByAdmin(input: SkillInput!): SkillResult!
+  createSkillCategoryByAdmin(input: SkillCategoryInput!): SkillCategoryResult!
   login(input: LoginInput!): AuthPayload!
   logout: Boolean!
   refreshToken: AuthPayload!
   removeEducationByAdmin(educationId: String!): EducationResult!
+  removeSkillByAdmin(skillId: String!): SkillResult!
+  removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
   updateEducationByAdmin(input: EducationUpdate!): EducationResult!
   updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
+  updateSkillByAdmin(input: SkillUpdate!): SkillResult!
+  updateSkillCategoryByAdmin(input: SkillCategoryUpdate!): SkillCategoryResult!
 }
 
 type Profile {
@@ -301,6 +307,7 @@ input ProfileUpdate {
 type Query {
   getEducations: [Education!]!
   getProfile: Profile!
+  getSkills: [SkillCategory!]!
 
   """API and database status"""
   health: Health!
@@ -325,6 +332,74 @@ type Resume {
 input ResumeInput {
   en: MediaInput
   ko: MediaInput
+}
+
+type Skill {
+  _id: String!
+  categoryId: String!
+  createdAt: DateTime!
+  featured: Boolean!
+  icon: String!
+  name: String!
+  order: Int!
+  slug: String!
+  updatedAt: DateTime!
+}
+
+type SkillCategory {
+  _id: String!
+  description: LocalizedText
+  icon: String!
+  key: String!
+  order: Int!
+  skills: [Skill!]
+  title: LocalizedText!
+}
+
+input SkillCategoryInput {
+  description: LocalizedTextInput
+  icon: String!
+  key: String
+  order: Int
+  title: LocalizedTextInput!
+}
+
+type SkillCategoryResult {
+  data: SkillCategory!
+  message: String!
+}
+
+input SkillCategoryUpdate {
+  _id: String!
+  description: LocalizedTextInput
+  icon: String
+  key: String
+  order: Int
+  title: LocalizedTextInput
+}
+
+input SkillInput {
+  categoryId: String!
+  featured: Boolean
+  icon: String!
+  name: String!
+  order: Int
+  slug: String
+}
+
+type SkillResult {
+  data: Skill!
+  message: String!
+}
+
+input SkillUpdate {
+  _id: String!
+  categoryId: String
+  featured: Boolean
+  icon: String
+  name: String
+  order: Int
+  slug: String
 }
 
 type SocialLink {

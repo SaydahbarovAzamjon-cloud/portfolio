@@ -1,12 +1,12 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import type { ObjectId } from 'mongoose';
+import type { Types } from 'mongoose';
 import { DegreeType, EducationStatus } from '../../enums/education.enum';
 import { LocalizedText, Media } from '../common/common';
 
 @ObjectType()
 export class Education {
   @Field(() => String)
-  _id: ObjectId;
+  _id: Types.ObjectId;
 
   @Field(() => DegreeType)
   degree: DegreeType;

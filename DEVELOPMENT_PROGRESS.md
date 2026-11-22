@@ -14,7 +14,7 @@
 - [ ] Telegram notifications
 - [ ] Email integration
 - [x] Profile (About, singleton) & Education — getProfile, updateProfileByAdmin, getEducations, create/update/removeEducationByAdmin
-- [ ] Skills & skill categories
+- [x] Skills & skill categories — getSkills, create/update/remove SkillCategory|Skill ByAdmin
 - [ ] Experience
 - [ ] Projects
 - [ ] Journal
