@@ -43,16 +43,16 @@ export function formatGraphQLError(
       ? extensions.code
       : 'INTERNAL_SERVER_ERROR');
 
+  // Validation errors carry the real reasons in an array: show them, not "Bad Request Exception".
+  const details = (extensions.originalError as { message?: unknown })?.message;
+  const message = Array.isArray(details)
+    ? details.join(', ')
+    : formatted.message;
+
   // Print the error in red (dev: every error, production: only unexpected ones).
   if (!isProduction || !SAFE_CODES.has(code)) {
-    const details = (extensions.originalError as { message?: unknown })
-      ?.message;
     const where = formatted.path?.join('.') ?? 'request';
-    logger.error(
-      `✖ ${where} [${code}] ${
-        Array.isArray(details) ? details.join(', ') : formatted.message
-      }`,
-    );
+    logger.error(`✖ ${where} [${code}] ${message}`);
   }
 
   if (isProduction && !SAFE_CODES.has(code)) {
@@ -62,15 +62,10 @@ export function formatGraphQLError(
     };
   }
 
-  if (isProduction) {
-    // Keep only what the client needs.
-    return {
-      message: formatted.message,
-      locations: formatted.locations,
-      path: formatted.path,
-      extensions: { code },
-    };
-  }
-
-  return { ...formatted, extensions: { ...extensions, code } };
+  // Short and clean for the client (details are already in the terminal).
+  return {
+    message,
+    path: formatted.path,
+    extensions: { code },
+  };
 }

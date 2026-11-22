@@ -11,6 +11,10 @@ registerEnumType(Locale, { name: 'Locale' });
 export enum Message {
   LOGIN_SUCCESS = 'You successfully logged in to the dashboard!',
   SESSION_REFRESHED = 'Your session has been refreshed!',
+  CREATE_SUCCESS = 'Created successfully!',
+  UPDATE_SUCCESS = 'Updated successfully!',
+  REMOVE_SUCCESS = 'Removed successfully!',
+  PROFILE_REQUIRED_FIELDS = 'Profile does not exist yet: name, fullName, headline, location and contactEmail are required.',
 
   SOMETHING_WENT_WRONG = 'Something went wrong!',
   NO_DATA_FOUND = 'No data found!',

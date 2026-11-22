@@ -13,7 +13,7 @@
 - [ ] Contact
 - [ ] Telegram notifications
 - [ ] Email integration
-- [ ] Profile (About, singleton) & Education
+- [x] Profile (About, singleton) & Education — getProfile, updateProfileByAdmin, getEducations, create/update/removeEducationByAdmin
 - [ ] Skills & skill categories
 - [ ] Experience
 - [ ] Projects

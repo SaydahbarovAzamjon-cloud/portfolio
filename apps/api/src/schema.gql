@@ -15,10 +15,87 @@ type AuthPayload {
   message: String!
 }
 
+type Availability {
+  details: LocalizedText
+  isAvailable: Boolean!
+  label: LocalizedText
+}
+
+input AvailabilityInput {
+  details: LocalizedTextInput
+  isAvailable: Boolean!
+  label: LocalizedTextInput
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+enum DegreeType {
+  BACHELOR
+  MASTER
+  OTHER
+}
+
+type Education {
+  _id: String!
+  createdAt: DateTime!
+  degree: DegreeType!
+  endDate: DateTime
+  image: Media
+  institution: LocalizedText!
+  institutionNative: String
+  location: LocalizedText
+  major: LocalizedText
+  order: Int!
+  program: LocalizedText
+  qualification: LocalizedText
+  startDate: DateTime!
+  status: EducationStatus!
+  updatedAt: DateTime!
+}
+
+input EducationInput {
+  degree: DegreeType!
+  endDate: DateTime
+  image: MediaInput
+  institution: LocalizedTextInput!
+  institutionNative: String
+  location: LocalizedTextInput
+  major: LocalizedTextInput
+  order: Int
+  program: LocalizedTextInput
+  qualification: LocalizedTextInput
+  startDate: DateTime!
+  status: EducationStatus!
+}
+
+type EducationResult {
+  data: Education!
+  message: String!
+}
+
+enum EducationStatus {
+  COMPLETED
+  IN_PROGRESS
+}
+
+input EducationUpdate {
+  _id: String!
+  degree: DegreeType
+  endDate: DateTime
+  image: MediaInput
+  institution: LocalizedTextInput
+  institutionNative: String
+  location: LocalizedTextInput
+  major: LocalizedTextInput
+  order: Int
+  program: LocalizedTextInput
+  qualification: LocalizedTextInput
+  startDate: DateTime
+  status: EducationStatus
+}
 
 type Health {
   database: String!
@@ -28,21 +105,267 @@ type Health {
   uptime: Float!
 }
 
+type IconCard {
+  description: LocalizedText
+  icon: String!
+  title: LocalizedText!
+}
+
+input IconCardInput {
+  description: LocalizedTextInput
+  icon: String!
+  title: LocalizedTextInput!
+}
+
+type Interest {
+  description: LocalizedText
+  icon: String!
+  tags: [LocalizedText!]!
+  title: LocalizedText!
+}
+
+input InterestInput {
+  description: LocalizedTextInput
+  icon: String!
+  tags: [LocalizedTextInput!]
+  title: LocalizedTextInput!
+}
+
+type Journey {
+  beginning: JourneyBeginning
+  future: JourneyFuture
+}
+
+type JourneyBeginning {
+  date: DateTime
+  text: LocalizedText
+  title: LocalizedText
+}
+
+input JourneyBeginningInput {
+  date: DateTime
+  text: LocalizedTextInput
+  title: LocalizedTextInput
+}
+
+type JourneyFuture {
+  points: [LocalizedText!]!
+  title: LocalizedText
+}
+
+input JourneyFutureInput {
+  points: [LocalizedTextInput!]
+  title: LocalizedTextInput
+}
+
+input JourneyInput {
+  beginning: JourneyBeginningInput
+  future: JourneyFutureInput
+}
+
+type LocalizedText {
+  en: String!
+  ko: String
+}
+
+input LocalizedTextInput {
+  en: String!
+  ko: String
+}
+
+type Location {
+  city: LocalizedText!
+  country: LocalizedText!
+  timezone: String!
+}
+
+input LocationInput {
+  city: LocalizedTextInput!
+  country: LocalizedTextInput!
+  timezone: String
+}
+
 input LoginInput {
   email: String!
   password: String!
 }
 
+type Media {
+  alt: LocalizedText
+  blurDataUrl: String
+  height: Int
+  url: String!
+  width: Int
+}
+
+input MediaInput {
+  alt: LocalizedTextInput
+  blurDataUrl: String
+  height: Int
+  url: String!
+  width: Int
+}
+
+type Moment {
+  caption: LocalizedText
+  image: Media!
+}
+
+input MomentInput {
+  caption: LocalizedTextInput
+  image: MediaInput!
+}
+
 type Mutation {
+  createEducationByAdmin(input: EducationInput!): EducationResult!
   login(input: LoginInput!): AuthPayload!
   logout: Boolean!
   refreshToken: AuthPayload!
+  removeEducationByAdmin(educationId: String!): EducationResult!
+  updateEducationByAdmin(input: EducationUpdate!): EducationResult!
+  updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
+}
+
+type Profile {
+  _id: String!
+  availability: Availability!
+  bioLong: LocalizedText
+  bioShort: LocalizedText
+  contactEmail: String!
+  contributions: [IconCard!]!
+  createdAt: DateTime!
+  focusAreas: [IconCard!]!
+  fullName: LocalizedText!
+  headline: LocalizedText!
+  heroOrbitLabels: [LocalizedText!]!
+  images: ProfileImages
+  interests: [Interest!]!
+  journey: Journey
+  location: Location!
+  manualStats: [Stat!]!
+  moments: [Moment!]!
+  name: String!
+  philosophy: [IconCard!]!
+  quotes: [Quote!]!
+  resume: Resume
+  socials: [SocialLink!]!
+  spokenLanguages: [SpokenLanguage!]!
+  tagline: LocalizedText
+  updatedAt: DateTime!
+}
+
+type ProfileImages {
+  aboutPortrait: Media
+  contactPortrait: Media
+  heroPortrait: Media
+  signature: Media
+}
+
+input ProfileImagesInput {
+  aboutPortrait: MediaInput
+  contactPortrait: MediaInput
+  heroPortrait: MediaInput
+  signature: MediaInput
+}
+
+type ProfileResult {
+  data: Profile!
+  message: String!
+}
+
+input ProfileUpdate {
+  availability: AvailabilityInput
+  bioLong: LocalizedTextInput
+  bioShort: LocalizedTextInput
+  contactEmail: String
+  contributions: [IconCardInput!]
+  focusAreas: [IconCardInput!]
+  fullName: LocalizedTextInput
+  headline: LocalizedTextInput
+  heroOrbitLabels: [LocalizedTextInput!]
+  images: ProfileImagesInput
+  interests: [InterestInput!]
+  journey: JourneyInput
+  location: LocationInput
+  manualStats: [StatInput!]
+  moments: [MomentInput!]
+  name: String
+  philosophy: [IconCardInput!]
+  quotes: [QuoteInput!]
+  resume: ResumeInput
+  socials: [SocialLinkInput!]
+  spokenLanguages: [SpokenLanguageInput!]
+  tagline: LocalizedTextInput
 }
 
 type Query {
+  getEducations: [Education!]!
+  getProfile: Profile!
+
   """API and database status"""
   health: Health!
   me: Admin!
+}
+
+type Quote {
+  key: String!
+  text: LocalizedText!
+}
+
+input QuoteInput {
+  key: String!
+  text: LocalizedTextInput!
+}
+
+type Resume {
+  en: Media
+  ko: Media
+}
+
+input ResumeInput {
+  en: MediaInput
+  ko: MediaInput
+}
+
+type SocialLink {
+  handle: String
+  platform: SocialPlatform!
+  url: String!
+}
+
+input SocialLinkInput {
+  handle: String
+  platform: SocialPlatform!
+  url: String!
+}
+
+enum SocialPlatform {
+  GITHUB
+  INSTAGRAM
+  LINKEDIN
+  OTHER
+  TELEGRAM
+  X
+}
+
+type SpokenLanguage {
+  code: String!
+  name: LocalizedText!
+}
+
+input SpokenLanguageInput {
+  code: String!
+  name: LocalizedTextInput!
+}
+
+type Stat {
+  label: LocalizedText!
+  value: String!
+}
+
+input StatInput {
+  label: LocalizedTextInput!
+  value: String!
 }
 
 enum UserRole {
