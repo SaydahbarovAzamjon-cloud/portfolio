@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AnalyticsModule } from './analytics/analytics.module';
 import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
 import { CommentModule } from './comment/comment.module';
@@ -27,6 +28,7 @@ import { VisitorModule } from './visitor/visitor.module';
     CommentModule,
     ContactModule,
     VisitorModule,
+    AnalyticsModule,
   ],
 })
 export class ComponentsModule {}

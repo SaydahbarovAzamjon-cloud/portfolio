@@ -9,7 +9,7 @@
 - [x] Restructure API to nestar conventions (`components/`, `schemas/`, `libs/`)
 - [x] Authentication (login, refresh rotation, logout, guards, rate limit; admin via `pnpm seed:admin`)
 - [x] Visitor tracking — trackVisit (anonymous cookie, 30 min visits, page views, device; skips bots and the admin)
-- [ ] Analytics
+- [x] Analytics — getDashboardByAdmin(days): visitors, new visitors, visits, page views, daily chart (Seoul), top pages, sources, languages, devices, top articles, new messages, pending comments
 - [x] Contact — sendContactMessage (honeypot, rate limited, Telegram + email via Resend), admin: getContactMessages/getContactMessage (NEW→READ), updateContactMessageStatus/removeContactMessageByAdmin
 - [x] Telegram notifications — instant: new visit, like, comment, contact message
 - [x] Email integration — contact message → owner inbox via Resend (reply-to = sender)

@@ -305,6 +305,38 @@ input ContactStatusUpdate {
   status: ContactMessageStatus!
 }
 
+type CountItem {
+  count: Int!
+  label: String!
+}
+
+type DailyPoint {
+  date: String!
+  pageViews: Int!
+  visitors: Int!
+}
+
+type Dashboard {
+  daily: [DailyPoint!]!
+  days: Int!
+  devices: [DeviceCount!]!
+  languages: [CountItem!]!
+  newMessages: Int!
+  newVisitors: Int!
+  pageViews: Int!
+  pendingComments: Int!
+  sources: [CountItem!]!
+  topArticles: [TopArticle!]!
+  topPages: [CountItem!]!
+  totalVisitors: Int!
+  visitors: Int!
+  visits: Int!
+}
+
+input DashboardInquiry {
+  days: Int = 30
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -314,6 +346,19 @@ enum DegreeType {
   BACHELOR
   MASTER
   OTHER
+}
+
+type DeviceCount {
+  count: Int!
+  type: DeviceType!
+}
+
+enum DeviceType {
+  BOT
+  DESKTOP
+  MOBILE
+  TABLET
+  UNKNOWN
 }
 
 type Education {
@@ -854,6 +899,7 @@ type Query {
   getCommentsByAdmin(input: CommentsInquiry): Comments!
   getContactMessageByAdmin(messageId: String!): ContactMessage!
   getContactMessagesByAdmin(input: ContactMessagesInquiry): ContactMessages!
+  getDashboardByAdmin(input: DashboardInquiry): Dashboard!
   getEducations: [Education!]!
   getExperiences: [Experience!]!
   getJournalStats: JournalStats!
@@ -999,6 +1045,14 @@ type Stat {
 input StatInput {
   label: LocalizedTextInput!
   value: String!
+}
+
+type TopArticle {
+  commentCount: Int!
+  likeCount: Int!
+  slug: String!
+  title: LocalizedText!
+  views: Int!
 }
 
 type TotalCounter {
