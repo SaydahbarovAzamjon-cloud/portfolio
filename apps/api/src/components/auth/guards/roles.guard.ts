@@ -6,14 +6,17 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { GqlExecutionContext } from '@nestjs/graphql';
+import { GqlContextType, GqlExecutionContext } from '@nestjs/graphql';
 import { Message } from '../../../libs/enums/common.enum';
 import { UserRole } from '../../../libs/enums/user.enum';
-import type { GqlContext } from '../../../libs/types/auth';
+import type { AuthRequest, GqlContext } from '../../../libs/types/auth';
 import { AuthService } from '../auth.service';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 
-/** Login required AND the user must have one of the @Roles(...). */
+/**
+ * Login required AND the user must have one of the @Roles(...).
+ * Works for GraphQL resolvers and plain HTTP controllers (file upload).
+ */
 @Injectable()
 export class RolesGuard implements CanActivate {
   constructor(
@@ -26,8 +29,10 @@ export class RolesGuard implements CanActivate {
       ROLES_KEY,
       context.getHandler(),
     );
-    const { req } =
-      GqlExecutionContext.create(context).getContext<GqlContext>();
+    const req =
+      context.getType<GqlContextType>() === 'graphql'
+        ? GqlExecutionContext.create(context).getContext<GqlContext>().req
+        : context.switchToHttp().getRequest<AuthRequest>();
 
     const authUser = await this.authService.authenticate(req);
     if (!authUser) throw new UnauthorizedException(Message.NOT_AUTHENTICATED);

@@ -3,6 +3,13 @@ import { Schema } from 'mongoose';
 /** Metadata for a file saved on the VPS disk and served by Nginx under /uploads. */
 const UploadSchema = new Schema(
   {
+    /** UploadFolder: profile, projects, articles, ... */
+    folder: {
+      type: String,
+      required: true,
+      index: true,
+    },
+
     /** Relative path inside the uploads directory, e.g. projects/2026/11/<uuid>.webp */
     path: {
       type: String,
@@ -40,6 +47,11 @@ const UploadSchema = new Schema(
     height: {
       type: Number,
       min: 0,
+    },
+
+    /** Tiny blurred preview (images only). */
+    blurDataUrl: {
+      type: String,
     },
 
     uploadedBy: {

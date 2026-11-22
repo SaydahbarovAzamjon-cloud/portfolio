@@ -28,3 +28,6 @@ export const ACCESS_TOKEN_COOKIE = 'access_token';
 export const REFRESH_TOKEN_COOKIE = 'refresh_token';
 export const VISITOR_COOKIE = 'visitor_id';
 export const VISIT_SESSION_COOKIE = 'visit_session';
+
+/** Biggest file the admin can upload (10 MB). */
+export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;

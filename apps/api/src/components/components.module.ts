@@ -10,6 +10,7 @@ import { HealthModule } from './health/health.module';
 import { ProfileModule } from './profile/profile.module';
 import { ProjectModule } from './project/project.module';
 import { SkillModule } from './skill/skill.module';
+import { UploadModule } from './upload/upload.module';
 import { UserModule } from './user/user.module';
 import { VisitorModule } from './visitor/visitor.module';
 
@@ -29,6 +30,7 @@ import { VisitorModule } from './visitor/visitor.module';
     ContactModule,
     VisitorModule,
     AnalyticsModule,
+    UploadModule,
   ],
 })
 export class ComponentsModule {}

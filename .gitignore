@@ -24,6 +24,7 @@ node_modules/
 
 # nestjs
 apps/api/dist
+apps/api/uploads
 
 # misc
 .DS_Store

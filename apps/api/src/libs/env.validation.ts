@@ -45,6 +45,9 @@ export const envValidationSchema = Joi.object({
   /** Hour (0-23, Asia/Seoul) when the daily likes/visits report is sent. */
   DAILY_REPORT_HOUR: Joi.number().integer().min(0).max(23).default(21),
 
+  // Uploads: folder on disk (VPS: e.g. /var/www/portfolio/uploads), served at APP_URL/uploads
+  UPLOAD_DIR: Joi.string().default('uploads'),
+
   // Email (Resend)
   RESEND_API_KEY: requiredInProduction(Joi.string().pattern(/^re_/)),
   MAIL_FROM: requiredInProduction(Joi.string()),

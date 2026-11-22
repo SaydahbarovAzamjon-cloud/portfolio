@@ -19,6 +19,7 @@
 - [x] Projects — getProjects (filter), getProject(slug), getAllProjectsByAdmin, create/update/removeProjectByAdmin
 - [x] Journal — getArticles (category/tag/search/sort/paging), getJournalStats (header + tab counts), getArticle(slug, 1 view per visitor per 24h), likeArticle (toggle), shareArticle, admin: getAll/getArticleByAdmin, create/update/removeArticleByAdmin
 - [x] Comments — getComments (nested), createComment (pending, rate limited, Telegram alert), admin: getCommentsByAdmin, updateCommentStatus/replyComment/removeCommentByAdmin
+- [x] Uploads — POST /upload (admin, multipart: file + folder; images → WebP max 2400px + blur preview, PDF for resume, 10 MB limit, real content check), getUploadsByAdmin, removeUploadByAdmin; served at APP_URL/uploads
 - [ ] Testing — removed at the user's request (2026-11-22); verify manually via GraphiQL
 
 ## Phase 02 — Frontend

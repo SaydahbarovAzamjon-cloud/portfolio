@@ -24,6 +24,8 @@ export enum Message {
   SHARE_SUCCESS = 'Thanks for sharing!',
   CONTACT_SENT = 'Thank you! Your message has been sent. I will get back to you soon.',
   VISIT_SAVED = 'Visit saved.',
+  UPLOAD_SUCCESS = 'File uploaded successfully!',
+  FILE_TOO_LARGE = 'File is too large (max 10 MB)!',
   COMMENT_SENT = 'Thank you! Your comment will appear after review.',
   REPLY_NOT_ALLOWED = 'You can only reply to an approved top-level comment!',
 

@@ -648,6 +648,7 @@ type Mutation {
   removeProjectByAdmin(projectId: String!): ProjectResult!
   removeSkillByAdmin(skillId: String!): SkillResult!
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
+  removeUploadByAdmin(uploadId: String!): UploadResult!
   replyCommentByAdmin(input: CommentReplyInput!): CommentResult!
   sendContactMessage(input: ContactInput!): ContactSendResult!
   shareArticle(articleId: String!): ArticleShareResult!
@@ -907,6 +908,7 @@ type Query {
   getProject(slug: String!): Project!
   getProjects(input: ProjectsInquiry): [Project!]!
   getSkills: [SkillCategory!]!
+  getUploadsByAdmin(input: UploadsInquiry): Uploads!
 
   """API and database status"""
   health: Health!
@@ -1075,6 +1077,46 @@ enum TranslationStatus {
   AI
   NONE
   REVIEWED
+}
+
+type Upload {
+  _id: String!
+  blurDataUrl: String
+  createdAt: DateTime!
+  folder: UploadFolder!
+  height: Int
+  mimeType: String!
+  originalName: String!
+  path: String!
+  size: Int!
+  url: String!
+  width: Int
+}
+
+enum UploadFolder {
+  ARTICLES
+  EDUCATION
+  EXPERIENCE
+  OTHER
+  PROFILE
+  PROJECTS
+  SKILLS
+}
+
+type UploadResult {
+  data: Upload!
+  message: String!
+}
+
+type Uploads {
+  list: [Upload!]!
+  metaCounter: [TotalCounter!]
+}
+
+input UploadsInquiry {
+  folder: UploadFolder
+  limit: Int = 30
+  page: Int = 1
 }
 
 enum UserRole {

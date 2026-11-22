@@ -4,15 +4,20 @@ import { printStartupError, printStartupSuccess } from './libs/startup';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import { getConnectionToken } from '@nestjs/mongoose';
 import cookieParser from 'cookie-parser';
+import type { ServerResponse } from 'node:http';
+import { resolve } from 'node:path';
 import { Connection } from 'mongoose';
 import { AppModule } from './app.module';
 import { LoggingInterceptor } from './libs/interceptor/Logging.interceptor';
 
 async function bootstrap() {
   // abortOnError: false → startup errors reach our red error message below.
-  const app = await NestFactory.create(AppModule, { abortOnError: false });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    abortOnError: false,
+  });
   const config = app.get(ConfigService);
 
   // Auth tokens travel in httpOnly cookies.
@@ -30,6 +35,15 @@ async function bootstrap() {
   if (config.get<string>('NODE_ENV') !== 'production') {
     app.useGlobalInterceptors(new LoggingInterceptor());
   }
+
+  // Uploaded files: APP_URL/uploads/... (on the VPS Nginx can serve this folder directly).
+  app.useStaticAssets(resolve(config.getOrThrow<string>('UPLOAD_DIR')), {
+    prefix: '/uploads/',
+    index: false,
+    maxAge: '30d',
+    setHeaders: (res: ServerResponse) =>
+      res.setHeader('X-Content-Type-Options', 'nosniff'),
+  });
 
   app.enableCors({
     origin: config.getOrThrow<string>('FRONTEND_URL'),
