@@ -169,6 +169,17 @@ export class SkillService {
 
   /*** HELPERS ***/
 
+  /** Every skill id must point to a real skill (used by Experience, Projects). */
+  public async checkSkillsExist(skillIds: string[]): Promise<void> {
+    const unique = [...new Set(skillIds)];
+    const count = await this.skillModel
+      .countDocuments({ _id: { $in: unique } })
+      .exec();
+    if (count !== unique.length) {
+      throw new NotFoundException(Message.SKILL_NOT_FOUND);
+    }
+  }
+
   private async checkCategoryExists(categoryId: string): Promise<void> {
     const exists = await this.categoryModel.exists({ _id: categoryId }).exec();
     if (!exists) throw new NotFoundException(Message.NO_DATA_FOUND);

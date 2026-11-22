@@ -12,8 +12,8 @@ import {
 } from '../../libs/dto/experience/experience';
 import { ExperienceInput } from '../../libs/dto/experience/experience.input';
 import { ExperienceUpdate } from '../../libs/dto/experience/experience.update';
-import { Skill } from '../../libs/dto/skill/skill';
 import { Message } from '../../libs/enums/common.enum';
+import { SkillService } from '../skill/skill.service';
 
 @Injectable()
 export class ExperienceService {
@@ -22,7 +22,7 @@ export class ExperienceService {
   constructor(
     @InjectModel('Experience')
     private readonly experienceModel: Model<Experience>,
-    @InjectModel('Skill') private readonly skillModel: Model<Skill>,
+    private readonly skillService: SkillService,
   ) {}
 
   public async getExperiences(): Promise<Experience[]> {
@@ -48,7 +48,8 @@ export class ExperienceService {
   ): Promise<ExperienceResult> {
     // 1. check dates and skills
     this.checkDates(input.startDate, input.endDate);
-    if (input.skillIds) await this.checkSkillsExist(input.skillIds);
+    if (input.skillIds)
+      await this.skillService.checkSkillsExist(input.skillIds);
 
     // 2. save
     try {
@@ -66,7 +67,8 @@ export class ExperienceService {
     const { _id, ...fields } = input;
 
     // 1. check skills
-    if (fields.skillIds) await this.checkSkillsExist(fields.skillIds);
+    if (fields.skillIds)
+      await this.skillService.checkSkillsExist(fields.skillIds);
 
     // 2. find the saved job
     const current = await this.experienceModel.findById(_id).lean().exec();
@@ -120,17 +122,6 @@ export class ExperienceService {
   private checkDates(startDate: Date, endDate?: Date | null): void {
     if (endDate && new Date(endDate) < new Date(startDate)) {
       throw new BadRequestException(Message.INVALID_DATE_RANGE);
-    }
-  }
-
-  /** Every skill id must point to a real skill. */
-  private async checkSkillsExist(skillIds: string[]): Promise<void> {
-    const unique = [...new Set(skillIds)];
-    const count = await this.skillModel
-      .countDocuments({ _id: { $in: unique } })
-      .exec();
-    if (count !== unique.length) {
-      throw new NotFoundException(Message.SKILL_NOT_FOUND);
     }
   }
 }

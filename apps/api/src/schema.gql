@@ -27,6 +27,32 @@ input AvailabilityInput {
   label: LocalizedTextInput
 }
 
+type CaseStudy {
+  architecture: LocalizedText
+  challenges: [LocalizedText!]
+  duration: LocalizedText
+  features: [LocalizedText!]
+  overview: LocalizedText
+  problem: LocalizedText
+  results: [LocalizedText!]
+  role: LocalizedText
+  solution: LocalizedText
+  teamSize: Int
+}
+
+input CaseStudyInput {
+  architecture: LocalizedTextInput
+  challenges: [LocalizedTextInput!]
+  duration: LocalizedTextInput
+  features: [LocalizedTextInput!]
+  overview: LocalizedTextInput
+  problem: LocalizedTextInput
+  results: [LocalizedTextInput!]
+  role: LocalizedTextInput
+  solution: LocalizedTextInput
+  teamSize: Int
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -288,6 +314,7 @@ input MomentInput {
 type Mutation {
   createEducationByAdmin(input: EducationInput!): EducationResult!
   createExperienceByAdmin(input: ExperienceInput!): ExperienceResult!
+  createProjectByAdmin(input: ProjectInput!): ProjectResult!
   createSkillByAdmin(input: SkillInput!): SkillResult!
   createSkillCategoryByAdmin(input: SkillCategoryInput!): SkillCategoryResult!
   login(input: LoginInput!): AuthPayload!
@@ -295,11 +322,13 @@ type Mutation {
   refreshToken: AuthPayload!
   removeEducationByAdmin(educationId: String!): EducationResult!
   removeExperienceByAdmin(experienceId: String!): ExperienceResult!
+  removeProjectByAdmin(projectId: String!): ProjectResult!
   removeSkillByAdmin(skillId: String!): SkillResult!
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
   updateEducationByAdmin(input: EducationUpdate!): EducationResult!
   updateExperienceByAdmin(input: ExperienceUpdate!): ExperienceResult!
   updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
+  updateProjectByAdmin(input: ProjectUpdate!): ProjectResult!
   updateSkillByAdmin(input: SkillUpdate!): SkillResult!
   updateSkillCategoryByAdmin(input: SkillCategoryUpdate!): SkillCategoryResult!
 }
@@ -376,10 +405,154 @@ input ProfileUpdate {
   tagline: LocalizedTextInput
 }
 
+type Project {
+  _id: String!
+  caseStudy: CaseStudy
+  category: ProjectCategory!
+  createdAt: DateTime!
+  highlights: [ProjectHighlight!]!
+  isPublished: Boolean!
+  links: ProjectLinks
+  media: ProjectMedia
+  order: Int!
+  period: ProjectPeriod
+  showOnHome: Boolean!
+  skillIds: [String!]!
+  skills: [Skill!]
+  slug: String!
+  status: ProjectStatus!
+  subtitle: LocalizedText!
+  summary: LocalizedText!
+  theme: ProjectTheme
+  title: String!
+  updatedAt: DateTime!
+}
+
+enum ProjectCategory {
+  AI_ML
+  FULL_STACK
+  MOBILE
+  OTHER
+  WEB
+}
+
+type ProjectHighlight {
+  icon: String!
+  label: LocalizedText!
+}
+
+input ProjectHighlightInput {
+  icon: String!
+  label: LocalizedTextInput!
+}
+
+input ProjectInput {
+  caseStudy: CaseStudyInput
+  category: ProjectCategory!
+  highlights: [ProjectHighlightInput!]
+  isPublished: Boolean
+  links: ProjectLinksInput
+  media: ProjectMediaInput
+  order: Int
+  period: ProjectPeriodInput
+  showOnHome: Boolean
+  skillIds: [String!]
+  slug: String
+  status: ProjectStatus
+  subtitle: LocalizedTextInput!
+  summary: LocalizedTextInput!
+  theme: ProjectThemeInput
+  title: String!
+}
+
+type ProjectLinks {
+  demo: String
+  github: String
+  live: String
+}
+
+input ProjectLinksInput {
+  demo: String
+  github: String
+  live: String
+}
+
+type ProjectMedia {
+  cover: Media
+  gallery: [Media!]
+  mockups: [Media!]
+  thumbnail: Media
+}
+
+input ProjectMediaInput {
+  cover: MediaInput
+  gallery: [MediaInput!]
+  mockups: [MediaInput!]
+  thumbnail: MediaInput
+}
+
+type ProjectPeriod {
+  end: DateTime
+  start: DateTime
+}
+
+input ProjectPeriodInput {
+  end: DateTime
+  start: DateTime
+}
+
+type ProjectResult {
+  data: Project!
+  message: String!
+}
+
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+}
+
+type ProjectTheme {
+  accent: String
+  dark: Boolean
+}
+
+input ProjectThemeInput {
+  accent: String
+  dark: Boolean
+}
+
+input ProjectUpdate {
+  _id: String!
+  caseStudy: CaseStudyInput
+  category: ProjectCategory
+  highlights: [ProjectHighlightInput!]
+  isPublished: Boolean
+  links: ProjectLinksInput
+  media: ProjectMediaInput
+  order: Int
+  period: ProjectPeriodInput
+  showOnHome: Boolean
+  skillIds: [String!]
+  slug: String
+  status: ProjectStatus
+  subtitle: LocalizedTextInput
+  summary: LocalizedTextInput
+  theme: ProjectThemeInput
+  title: String
+}
+
+input ProjectsInquiry {
+  category: ProjectCategory
+  showOnHome: Boolean
+}
+
 type Query {
+  getAllProjectsByAdmin: [Project!]!
   getEducations: [Education!]!
   getExperiences: [Experience!]!
   getProfile: Profile!
+  getProject(slug: String!): Project!
+  getProjects(input: ProjectsInquiry): [Project!]!
   getSkills: [SkillCategory!]!
 
   """API and database status"""

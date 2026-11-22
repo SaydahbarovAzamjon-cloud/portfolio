@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import ExperienceSchema from '../../schemas/Experience.model';
-import SkillSchema from '../../schemas/Skill.model';
 import { AuthModule } from '../auth/auth.module';
+import { SkillModule } from '../skill/skill.module';
 import { ExperienceResolver } from './experience.resolver';
 import { ExperienceService } from './experience.service';
 
@@ -10,9 +10,9 @@ import { ExperienceService } from './experience.service';
   imports: [
     MongooseModule.forFeature([
       { name: 'Experience', schema: ExperienceSchema },
-      { name: 'Skill', schema: SkillSchema },
     ]),
     AuthModule,
+    SkillModule,
   ],
   providers: [ExperienceResolver, ExperienceService],
   exports: [ExperienceService],

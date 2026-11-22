@@ -16,7 +16,7 @@
 - [x] Profile (About, singleton) & Education — getProfile, updateProfileByAdmin, getEducations, create/update/removeEducationByAdmin
 - [x] Skills & skill categories — getSkills, create/update/remove SkillCategory|Skill ByAdmin
 - [x] Experience — getExperiences (with skills), create/update/removeExperienceByAdmin
-- [ ] Projects
+- [x] Projects — getProjects (filter), getProject(slug), getAllProjectsByAdmin, create/update/removeProjectByAdmin
 - [ ] Journal
 - [ ] Comments
 - [ ] Testing — removed at the user's request (2026-11-22); verify manually via GraphiQL

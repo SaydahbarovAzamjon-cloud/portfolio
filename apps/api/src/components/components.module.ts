@@ -4,6 +4,7 @@ import { EducationModule } from './education/education.module';
 import { ExperienceModule } from './experience/experience.module';
 import { HealthModule } from './health/health.module';
 import { ProfileModule } from './profile/profile.module';
+import { ProjectModule } from './project/project.module';
 import { SkillModule } from './skill/skill.module';
 import { UserModule } from './user/user.module';
 
@@ -17,6 +18,7 @@ import { UserModule } from './user/user.module';
     EducationModule,
     SkillModule,
     ExperienceModule,
+    ProjectModule,
   ],
 })
 export class ComponentsModule {}
