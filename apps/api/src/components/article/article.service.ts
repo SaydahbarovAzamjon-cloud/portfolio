@@ -31,6 +31,7 @@ import {
 import { Message } from '../../libs/enums/common.enum';
 import type { AuthRequest } from '../../libs/types/auth';
 import { ensureVisitorId } from '../../libs/visitor';
+import { NotificationService } from '../notification/notification.service';
 
 /** Like and ArticleView rows: one per visitor per article. */
 interface VisitorMark {
@@ -55,6 +56,7 @@ export class ArticleService {
     @InjectModel('ArticleView')
     private readonly viewModel: Model<VisitorMark>,
     @InjectModel('Comment') private readonly commentModel: Model<unknown>,
+    private readonly notificationService: NotificationService,
   ) {}
 
   /** Published articles without the body (default: newest first). */
@@ -206,6 +208,13 @@ export class ArticleService {
       )
       .lean()
       .exec();
+
+    // 4. tell the owner about a new like (does not wait)
+    if (liked && article) {
+      void this.notificationService.sendTelegram(
+        `❤️ New like: ${article.title.en}\nTotal likes: ${article.likeCount}`,
+      );
+    }
 
     return {
       message: liked ? Message.LIKE_ADDED : Message.LIKE_REMOVED,

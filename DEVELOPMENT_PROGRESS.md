@@ -8,11 +8,11 @@
 - [x] Data model (`docs/DATA_MODEL.md`, 15 Mongoose schemas + tests)
 - [x] Restructure API to nestar conventions (`components/`, `schemas/`, `libs/`)
 - [x] Authentication (login, refresh rotation, logout, guards, rate limit; admin via `pnpm seed:admin`)
-- [ ] Visitor tracking
+- [x] Visitor tracking — trackVisit (anonymous cookie, 30 min visits, page views, device; skips bots and the admin)
 - [ ] Analytics
-- [ ] Contact
-- [ ] Telegram notifications
-- [ ] Email integration
+- [x] Contact — sendContactMessage (honeypot, rate limited, Telegram + email via Resend), admin: getContactMessages/getContactMessage (NEW→READ), updateContactMessageStatus/removeContactMessageByAdmin
+- [x] Telegram notifications — instant: new visit, like, comment, contact message
+- [x] Email integration — contact message → owner inbox via Resend (reply-to = sender)
 - [x] Profile (About, singleton) & Education — getProfile, updateProfileByAdmin, getEducations, create/update/removeEducationByAdmin
 - [x] Skills & skill categories — getSkills, create/update/remove SkillCategory|Skill ByAdmin
 - [x] Experience — getExperiences (with skills), create/update/removeExperienceByAdmin

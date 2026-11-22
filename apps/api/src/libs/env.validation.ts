@@ -40,8 +40,8 @@ export const envValidationSchema = Joi.object({
     Joi.string().pattern(/^\d+:[A-Za-z0-9_-]{30,}$/),
   ),
   TELEGRAM_CHAT_ID: requiredInProduction(Joi.string().pattern(/^-?\d+$/)),
-  /** Send a Telegram message for every new visitor (otherwise only in the daily report). */
-  TELEGRAM_NOTIFY_NEW_VISITORS: Joi.boolean().default(false),
+  /** Send a Telegram message when someone starts a visit (bots and the logged-in admin are skipped). */
+  TELEGRAM_NOTIFY_VISITS: Joi.boolean().default(true),
   /** Hour (0-23, Asia/Seoul) when the daily likes/visits report is sent. */
   DAILY_REPORT_HOUR: Joi.number().integer().min(0).max(23).default(21),
 

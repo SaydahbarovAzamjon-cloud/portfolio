@@ -5,6 +5,7 @@ import ArticleViewSchema from '../../schemas/ArticleView.model';
 import CommentSchema from '../../schemas/Comment.model';
 import LikeSchema from '../../schemas/Like.model';
 import { AuthModule } from '../auth/auth.module';
+import { NotificationModule } from '../notification/notification.module';
 import { ArticleResolver } from './article.resolver';
 import { ArticleService } from './article.service';
 
@@ -17,6 +18,7 @@ import { ArticleService } from './article.service';
       { name: 'ArticleView', schema: ArticleViewSchema },
     ]),
     AuthModule,
+    NotificationModule,
   ],
   providers: [ArticleResolver, ArticleService],
   exports: [ArticleService],

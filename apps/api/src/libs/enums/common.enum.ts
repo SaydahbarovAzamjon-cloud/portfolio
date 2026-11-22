@@ -22,6 +22,8 @@ export enum Message {
   LIKE_ADDED = 'You liked this article!',
   LIKE_REMOVED = 'Like removed.',
   SHARE_SUCCESS = 'Thanks for sharing!',
+  CONTACT_SENT = 'Thank you! Your message has been sent. I will get back to you soon.',
+  VISIT_SAVED = 'Visit saved.',
   COMMENT_SENT = 'Thank you! Your comment will appear after review.',
   REPLY_NOT_ALLOWED = 'You can only reply to an approved top-level comment!',
 

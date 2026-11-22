@@ -244,6 +244,67 @@ input CommentsInquiry {
   status: CommentStatus
 }
 
+type ContactDelivery {
+  emailSentAt: DateTime
+  lastError: String
+  telegramSentAt: DateTime
+}
+
+input ContactInput {
+  email: String!
+  locale: Locale
+  message: String!
+  name: String!
+  subject: String!
+  website: String
+}
+
+type ContactMessage {
+  _id: String!
+  createdAt: DateTime!
+  delivery: ContactDelivery
+  email: String!
+  locale: Locale!
+  message: String!
+  name: String!
+  status: ContactMessageStatus!
+  subject: String!
+  updatedAt: DateTime!
+}
+
+type ContactMessageResult {
+  data: ContactMessage!
+  message: String!
+}
+
+enum ContactMessageStatus {
+  ARCHIVED
+  NEW
+  READ
+  REPLIED
+  SPAM
+}
+
+type ContactMessages {
+  list: [ContactMessage!]!
+  metaCounter: [TotalCounter!]
+}
+
+input ContactMessagesInquiry {
+  limit: Int = 20
+  page: Int = 1
+  status: ContactMessageStatus
+}
+
+type ContactSendResult {
+  message: String!
+}
+
+input ContactStatusUpdate {
+  _id: String!
+  status: ContactMessageStatus!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -464,6 +525,11 @@ type KoTranslation {
   translatedAt: DateTime
 }
 
+enum Locale {
+  EN
+  KO
+}
+
 type LocalizedText {
   en: String!
   ko: String
@@ -531,21 +597,38 @@ type Mutation {
   refreshToken: AuthPayload!
   removeArticleByAdmin(articleId: String!): ArticleResult!
   removeCommentByAdmin(commentId: String!): CommentResult!
+  removeContactMessageByAdmin(messageId: String!): ContactMessageResult!
   removeEducationByAdmin(educationId: String!): EducationResult!
   removeExperienceByAdmin(experienceId: String!): ExperienceResult!
   removeProjectByAdmin(projectId: String!): ProjectResult!
   removeSkillByAdmin(skillId: String!): SkillResult!
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
   replyCommentByAdmin(input: CommentReplyInput!): CommentResult!
+  sendContactMessage(input: ContactInput!): ContactSendResult!
   shareArticle(articleId: String!): ArticleShareResult!
+  trackVisit(input: TrackVisitInput!): TrackVisitResult!
   updateArticleByAdmin(input: ArticleUpdate!): ArticleResult!
   updateCommentStatusByAdmin(input: CommentStatusUpdate!): CommentResult!
+  updateContactMessageStatusByAdmin(input: ContactStatusUpdate!): ContactMessageResult!
   updateEducationByAdmin(input: EducationUpdate!): EducationResult!
   updateExperienceByAdmin(input: ExperienceUpdate!): ExperienceResult!
   updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
   updateProjectByAdmin(input: ProjectUpdate!): ProjectResult!
   updateSkillByAdmin(input: SkillUpdate!): SkillResult!
   updateSkillCategoryByAdmin(input: SkillCategoryUpdate!): SkillCategoryResult!
+}
+
+enum PageType {
+  ABOUT
+  ARTICLE
+  CONTACT
+  EXPERIENCE
+  HOME
+  JOURNAL
+  OTHER
+  PROJECT
+  PROJECTS
+  SKILLS
 }
 
 type Profile {
@@ -769,6 +852,8 @@ type Query {
   getArticles(input: ArticlesInquiry): Articles!
   getComments(articleId: String!): [Comment!]!
   getCommentsByAdmin(input: CommentsInquiry): Comments!
+  getContactMessageByAdmin(messageId: String!): ContactMessage!
+  getContactMessagesByAdmin(input: ContactMessagesInquiry): ContactMessages!
   getEducations: [Education!]!
   getExperiences: [Experience!]!
   getJournalStats: JournalStats!
@@ -918,6 +1003,18 @@ input StatInput {
 
 type TotalCounter {
   total: Int!
+}
+
+input TrackVisitInput {
+  entityId: String
+  locale: Locale
+  pageType: PageType!
+  path: String!
+  referrer: String
+}
+
+type TrackVisitResult {
+  message: String!
 }
 
 enum TranslationStatus {
