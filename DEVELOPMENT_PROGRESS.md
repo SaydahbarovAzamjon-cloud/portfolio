@@ -15,7 +15,7 @@
 - [ ] Email integration
 - [x] Profile (About, singleton) & Education — getProfile, updateProfileByAdmin, getEducations, create/update/removeEducationByAdmin
 - [x] Skills & skill categories — getSkills, create/update/remove SkillCategory|Skill ByAdmin
-- [ ] Experience
+- [x] Experience — getExperiences (with skills), create/update/removeExperienceByAdmin
 - [ ] Projects
 - [ ] Journal
 - [ ] Comments

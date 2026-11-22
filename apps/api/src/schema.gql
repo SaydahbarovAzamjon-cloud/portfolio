@@ -97,6 +97,75 @@ input EducationUpdate {
   status: EducationStatus
 }
 
+enum EmploymentType {
+  CONTRACT
+  FREELANCE
+  FULL_TIME
+  INTERNSHIP
+  PART_TIME
+}
+
+type Experience {
+  _id: String!
+  achievements: [LocalizedText!]!
+  company: String!
+  companyImage: Media
+  companyLogo: Media
+  createdAt: DateTime!
+  employmentType: EmploymentType!
+  endDate: DateTime
+  location: LocalizedText
+  order: Int!
+  projectIds: [String!]!
+  responsibilities: [LocalizedText!]!
+  role: LocalizedText!
+  skillIds: [String!]!
+  skills: [Skill!]
+  startDate: DateTime!
+  summary: LocalizedText
+  updatedAt: DateTime!
+}
+
+input ExperienceInput {
+  achievements: [LocalizedTextInput!]
+  company: String!
+  companyImage: MediaInput
+  companyLogo: MediaInput
+  employmentType: EmploymentType
+  endDate: DateTime
+  location: LocalizedTextInput
+  order: Int
+  projectIds: [String!]
+  responsibilities: [LocalizedTextInput!]
+  role: LocalizedTextInput!
+  skillIds: [String!]
+  startDate: DateTime!
+  summary: LocalizedTextInput
+}
+
+type ExperienceResult {
+  data: Experience!
+  message: String!
+}
+
+input ExperienceUpdate {
+  _id: String!
+  achievements: [LocalizedTextInput!]
+  company: String
+  companyImage: MediaInput
+  companyLogo: MediaInput
+  employmentType: EmploymentType
+  endDate: DateTime
+  location: LocalizedTextInput
+  order: Int
+  projectIds: [String!]
+  responsibilities: [LocalizedTextInput!]
+  role: LocalizedTextInput
+  skillIds: [String!]
+  startDate: DateTime
+  summary: LocalizedTextInput
+}
+
 type Health {
   database: String!
   status: String!
@@ -218,15 +287,18 @@ input MomentInput {
 
 type Mutation {
   createEducationByAdmin(input: EducationInput!): EducationResult!
+  createExperienceByAdmin(input: ExperienceInput!): ExperienceResult!
   createSkillByAdmin(input: SkillInput!): SkillResult!
   createSkillCategoryByAdmin(input: SkillCategoryInput!): SkillCategoryResult!
   login(input: LoginInput!): AuthPayload!
   logout: Boolean!
   refreshToken: AuthPayload!
   removeEducationByAdmin(educationId: String!): EducationResult!
+  removeExperienceByAdmin(experienceId: String!): ExperienceResult!
   removeSkillByAdmin(skillId: String!): SkillResult!
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
   updateEducationByAdmin(input: EducationUpdate!): EducationResult!
+  updateExperienceByAdmin(input: ExperienceUpdate!): ExperienceResult!
   updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
   updateSkillByAdmin(input: SkillUpdate!): SkillResult!
   updateSkillCategoryByAdmin(input: SkillCategoryUpdate!): SkillCategoryResult!
@@ -306,6 +378,7 @@ input ProfileUpdate {
 
 type Query {
   getEducations: [Education!]!
+  getExperiences: [Experience!]!
   getProfile: Profile!
   getSkills: [SkillCategory!]!
 

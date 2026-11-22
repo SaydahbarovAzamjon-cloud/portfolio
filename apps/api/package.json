@@ -1,16 +1,14 @@
 {
   "name": "api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Portfolio backend (NestJS + GraphQL + MongoDB)",
+  "author": "Azamjon Saydahbarov",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "nest start",
     "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "seed:admin": "nest build && node dist/scripts/seed-admin.js"

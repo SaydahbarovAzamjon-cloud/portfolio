@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { EducationModule } from './education/education.module';
+import { ExperienceModule } from './experience/experience.module';
 import { HealthModule } from './health/health.module';
 import { ProfileModule } from './profile/profile.module';
 import { SkillModule } from './skill/skill.module';
@@ -15,6 +16,7 @@ import { UserModule } from './user/user.module';
     ProfileModule,
     EducationModule,
     SkillModule,
+    ExperienceModule,
   ],
 })
 export class ComponentsModule {}
