@@ -7,7 +7,7 @@
 - [x] GraphQL configuration (Apollo 5, code-first, `health` query)
 - [x] Data model (`docs/DATA_MODEL.md`, 15 Mongoose schemas + tests)
 - [x] Restructure API to nestar conventions (`components/`, `schemas/`, `libs/`)
-- [ ] Authentication
+- [x] Authentication (login, refresh rotation, logout, guards, rate limit; admin via `pnpm seed:admin`)
 - [ ] Visitor tracking
 - [ ] Analytics
 - [ ] Contact
@@ -19,7 +19,7 @@
 - [ ] Projects
 - [ ] Journal
 - [ ] Comments
-- [ ] Testing (phase verification)
+- [ ] Testing — removed at the user's request (2026-11-22); verify manually via GraphiQL
 
 ## Phase 02 — Frontend
 

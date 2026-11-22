@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { InferSchemaType, Schema } from 'mongoose';
 import { UserRole } from '../libs/enums/user.enum';
 
 const UserSchema = new Schema(
@@ -30,5 +30,8 @@ const UserSchema = new Schema(
   },
   { timestamps: true, collection: 'users' },
 );
+
+/** TypeScript type of a user document, inferred from the schema above. */
+export type User = InferSchemaType<typeof UserSchema>;
 
 export default UserSchema;

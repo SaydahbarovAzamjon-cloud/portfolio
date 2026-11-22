@@ -23,6 +23,18 @@ export const envValidationSchema = Joi.object({
     .uri({ scheme: ['mongodb', 'mongodb+srv'] })
     .required(),
 
+  // Authentication
+  /** Signs access tokens. Long random string, generate with: openssl rand -base64 48 */
+  JWT_ACCESS_SECRET: Joi.string().min(32).required(),
+  ACCESS_TOKEN_TTL_MINUTES: Joi.number().integer().min(1).default(15),
+  REFRESH_TOKEN_TTL_DAYS: Joi.number().integer().min(1).default(7),
+  /** Max login attempts per IP within LOGIN_RATE_TTL_SECONDS. */
+  LOGIN_RATE_LIMIT: Joi.number().integer().min(1).default(5),
+  LOGIN_RATE_TTL_SECONDS: Joi.number().integer().min(1).default(60),
+  /** Used only by `pnpm seed:admin` to create the single admin account. */
+  ADMIN_EMAIL: Joi.string().email().allow(''),
+  ADMIN_PASSWORD: Joi.string().min(12).allow(''),
+
   // Telegram notifications (bot from @BotFather)
   TELEGRAM_BOT_TOKEN: requiredInProduction(
     Joi.string().pattern(/^\d+:[A-Za-z0-9_-]{30,}$/),

@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { InferSchemaType, Schema } from 'mongoose';
 
 /** One refresh-token session. The raw token lives only in an httpOnly cookie. */
 const AuthSessionSchema = new Schema(
@@ -37,5 +37,8 @@ const AuthSessionSchema = new Schema(
   },
   { timestamps: true, collection: 'auth_sessions' },
 );
+
+/** TypeScript type of a session document, inferred from the schema above. */
+export type AuthSession = InferSchemaType<typeof AuthSessionSchema>;
 
 export default AuthSessionSchema;

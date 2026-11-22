@@ -7,8 +7,11 @@ export enum Locale {
 }
 registerEnumType(Locale, { name: 'Locale' });
 
-/** User-facing error messages, shared by all components. */
+/** User-facing messages, shared by all components. */
 export enum Message {
+  LOGIN_SUCCESS = 'You successfully logged in to the dashboard!',
+  SESSION_REFRESHED = 'Your session has been refreshed!',
+
   SOMETHING_WENT_WRONG = 'Something went wrong!',
   NO_DATA_FOUND = 'No data found!',
   CREATE_FAILED = 'Creation failed!',
@@ -18,6 +21,8 @@ export enum Message {
   BAD_REQUEST = 'Bad request!',
   NOT_AUTHENTICATED = 'You are not authenticated. Please log in first!',
   WRONG_CREDENTIALS = 'Incorrect email or password!',
+  SESSION_EXPIRED = 'Your session has expired. Please log in again!',
+  TOO_MANY_ATTEMPTS = 'Too many attempts. Please try again later!',
   ONLY_SPECIFIC_ROLES_ALLOWED = 'Access is restricted to specific roles!',
   NOT_ALLOWED_REQUEST = 'Request is not allowed!',
   PROVIDE_ALLOWED_FORMAT = 'Unsupported file format!',

@@ -1,4 +1,7 @@
+import { Logger } from '@nestjs/common';
 import type { GraphQLFormattedError } from 'graphql';
+
+const logger = new Logger('GraphQL');
 
 const SAFE_CODES = new Set([
   'BAD_USER_INPUT',
@@ -13,6 +16,16 @@ const SAFE_CODES = new Set([
 ]);
 
 /**
+ * Nest only maps 400/401/403/422 to GraphQL codes; everything else arrives as
+ * INTERNAL_SERVER_ERROR with `extensions.status`. Give those a proper code.
+ */
+const STATUS_CODES: Record<number, string> = {
+  404: 'NOT_FOUND',
+  409: 'CONFLICT',
+  429: 'TOO_MANY_REQUESTS',
+};
+
+/**
  * Central GraphQL error formatter.
  * In production, unexpected errors are masked so internal details never reach clients.
  */
@@ -21,10 +34,26 @@ export function formatGraphQLError(
   _error: unknown,
   isProduction: boolean,
 ): GraphQLFormattedError {
+  const extensions = formatted.extensions ?? {};
+  const status =
+    typeof extensions.status === 'number' ? extensions.status : undefined;
   const code =
-    typeof formatted.extensions?.code === 'string'
-      ? formatted.extensions.code
-      : 'INTERNAL_SERVER_ERROR';
+    (status !== undefined ? STATUS_CODES[status] : undefined) ??
+    (typeof extensions.code === 'string'
+      ? extensions.code
+      : 'INTERNAL_SERVER_ERROR');
+
+  // Print the error in red (dev: every error, production: only unexpected ones).
+  if (!isProduction || !SAFE_CODES.has(code)) {
+    const details = (extensions.originalError as { message?: unknown })
+      ?.message;
+    const where = formatted.path?.join('.') ?? 'request';
+    logger.error(
+      `✖ ${where} [${code}] ${
+        Array.isArray(details) ? details.join(', ') : formatted.message
+      }`,
+    );
+  }
 
   if (isProduction && !SAFE_CODES.has(code)) {
     return {
@@ -33,5 +62,15 @@ export function formatGraphQLError(
     };
   }
 
-  return formatted;
+  if (isProduction) {
+    // Keep only what the client needs.
+    return {
+      message: formatted.message,
+      locations: formatted.locations,
+      path: formatted.path,
+      extensions: { code },
+    };
+  }
+
+  return { ...formatted, extensions: { ...extensions, code } };
 }

@@ -3,13 +3,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GraphQLModule as NestGraphQLModule } from '@nestjs/graphql';
-import type { Request, Response } from 'express';
+import type { GqlContext } from '../libs/types/auth';
 import { formatGraphQLError } from './format-error';
-
-export interface GraphQLContext {
-  req: Request;
-  res: Response;
-}
 
 @Module({
   imports: [
@@ -31,7 +26,7 @@ export interface GraphQLContext {
           includeStacktraceInErrorResponses: !isProduction,
           formatError: (formatted, error) =>
             formatGraphQLError(formatted, error, isProduction),
-          context: ({ req, res }: GraphQLContext): GraphQLContext => ({
+          context: ({ req, res }: GqlContext): GqlContext => ({
             req,
             res,
           }),

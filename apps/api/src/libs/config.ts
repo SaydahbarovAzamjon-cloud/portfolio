@@ -1,4 +1,4 @@
-/** Shared helpers (nestar style: libs/config.ts). */
+/** Shared helpers and constants (nestar style: libs/config.ts). */
 
 const WORDS_PER_MINUTE = 200;
 
@@ -8,3 +8,7 @@ export const readingMinutes = (text?: string): number | undefined => {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 };
+
+// AUTH COOKIES
+export const ACCESS_TOKEN_COOKIE = 'access_token';
+export const REFRESH_TOKEN_COOKIE = 'refresh_token';
