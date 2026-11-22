@@ -9,6 +9,130 @@ type Admin {
   role: UserRole!
 }
 
+input AllArticlesInquiry {
+  category: ArticleCategory
+  featured: Boolean
+  limit: Int = 10
+  page: Int = 1
+  search: String
+  sort: ArticleSort = LATEST
+  status: ArticleStatus
+  tag: String
+}
+
+type Article {
+  _id: String!
+  authorId: String
+  category: ArticleCategory!
+  commentCount: Int!
+  content: LocalizedText
+  cover: Media
+  createdAt: DateTime!
+  excerpt: LocalizedText!
+  featured: Boolean!
+  likeCount: Int!
+  meLiked: Boolean
+  publishedAt: DateTime
+  readingTime: ReadingTime
+  shareCount: Int!
+  slug: String!
+  status: ArticleStatus!
+  tags: [String!]!
+  title: LocalizedText!
+  translation: ArticleTranslation
+  updatedAt: DateTime!
+  viewCount: Int!
+}
+
+enum ArticleCategory {
+  AI_ML
+  DEVELOPMENT
+  FREELANCE
+  PERSONAL
+}
+
+input ArticleContentInput {
+  en: String!
+  ko: String
+}
+
+input ArticleInput {
+  category: ArticleCategory!
+  content: ArticleContentInput!
+  cover: MediaInput
+  excerpt: LocalizedTextInput!
+  featured: Boolean
+  slug: String
+  status: ArticleStatus
+  tags: [String!]
+  title: LocalizedTextInput!
+}
+
+type ArticleLike {
+  articleId: String!
+  likeCount: Int!
+  liked: Boolean!
+}
+
+type ArticleLikeResult {
+  data: ArticleLike!
+  message: String!
+}
+
+type ArticleResult {
+  data: Article!
+  message: String!
+}
+
+type ArticleShareResult {
+  message: String!
+  shareCount: Int!
+}
+
+enum ArticleSort {
+  LATEST
+  MOST_LIKED
+  MOST_VIEWED
+  OLDEST
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type ArticleTranslation {
+  ko: KoTranslation
+}
+
+input ArticleUpdate {
+  _id: String!
+  category: ArticleCategory
+  content: ArticleContentInput
+  cover: MediaInput
+  excerpt: LocalizedTextInput
+  featured: Boolean
+  slug: String
+  status: ArticleStatus
+  tags: [String!]
+  title: LocalizedTextInput
+}
+
+type Articles {
+  list: [Article!]!
+  metaCounter: [TotalCounter!]
+}
+
+input ArticlesInquiry {
+  category: ArticleCategory
+  featured: Boolean
+  limit: Int = 10
+  page: Int = 1
+  search: String
+  sort: ArticleSort = LATEST
+  tag: String
+}
+
 type AuthPayload {
   accessTokenExpiresAt: DateTime!
   admin: Admin!
@@ -51,6 +175,73 @@ input CaseStudyInput {
   role: LocalizedTextInput
   solution: LocalizedTextInput
   teamSize: Int
+}
+
+type CategoryCount {
+  category: ArticleCategory!
+  count: Int!
+}
+
+type Comment {
+  _id: String!
+  article: CommentArticle
+  articleId: String!
+  authorEmail: String
+  authorName: String!
+  content: String!
+  createdAt: DateTime!
+  isOwnerReply: Boolean!
+  parentId: String
+  replies: [Comment!]
+  status: CommentStatus!
+}
+
+type CommentArticle {
+  _id: String!
+  slug: String!
+  title: LocalizedText!
+}
+
+input CommentInput {
+  articleId: String!
+  authorEmail: String
+  authorName: String!
+  content: String!
+  parentId: String
+}
+
+input CommentReplyInput {
+  commentId: String!
+  content: String!
+}
+
+type CommentResult {
+  data: Comment!
+  message: String!
+}
+
+enum CommentStatus {
+  APPROVED
+  PENDING
+  REJECTED
+  SPAM
+}
+
+input CommentStatusUpdate {
+  _id: String!
+  status: CommentStatus!
+}
+
+type Comments {
+  list: [Comment!]!
+  metaCounter: [TotalCounter!]
+}
+
+input CommentsInquiry {
+  articleId: String
+  limit: Int = 20
+  page: Int = 1
+  status: CommentStatus
 }
 
 """
@@ -226,6 +417,15 @@ input InterestInput {
   title: LocalizedTextInput!
 }
 
+type JournalStats {
+  categories: [CategoryCount!]!
+  totalArticles: Int!
+  totalComments: Int!
+  totalLikes: Int!
+  totalShares: Int!
+  totalViews: Int!
+}
+
 type Journey {
   beginning: JourneyBeginning
   future: JourneyFuture
@@ -256,6 +456,12 @@ input JourneyFutureInput {
 input JourneyInput {
   beginning: JourneyBeginningInput
   future: JourneyFutureInput
+}
+
+type KoTranslation {
+  model: String
+  status: TranslationStatus
+  translatedAt: DateTime
 }
 
 type LocalizedText {
@@ -312,19 +518,28 @@ input MomentInput {
 }
 
 type Mutation {
+  createArticleByAdmin(input: ArticleInput!): ArticleResult!
+  createComment(input: CommentInput!): CommentResult!
   createEducationByAdmin(input: EducationInput!): EducationResult!
   createExperienceByAdmin(input: ExperienceInput!): ExperienceResult!
   createProjectByAdmin(input: ProjectInput!): ProjectResult!
   createSkillByAdmin(input: SkillInput!): SkillResult!
   createSkillCategoryByAdmin(input: SkillCategoryInput!): SkillCategoryResult!
+  likeArticle(articleId: String!): ArticleLikeResult!
   login(input: LoginInput!): AuthPayload!
   logout: Boolean!
   refreshToken: AuthPayload!
+  removeArticleByAdmin(articleId: String!): ArticleResult!
+  removeCommentByAdmin(commentId: String!): CommentResult!
   removeEducationByAdmin(educationId: String!): EducationResult!
   removeExperienceByAdmin(experienceId: String!): ExperienceResult!
   removeProjectByAdmin(projectId: String!): ProjectResult!
   removeSkillByAdmin(skillId: String!): SkillResult!
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
+  replyCommentByAdmin(input: CommentReplyInput!): CommentResult!
+  shareArticle(articleId: String!): ArticleShareResult!
+  updateArticleByAdmin(input: ArticleUpdate!): ArticleResult!
+  updateCommentStatusByAdmin(input: CommentStatusUpdate!): CommentResult!
   updateEducationByAdmin(input: EducationUpdate!): EducationResult!
   updateExperienceByAdmin(input: ExperienceUpdate!): ExperienceResult!
   updateProfileByAdmin(input: ProfileUpdate!): ProfileResult!
@@ -547,9 +762,16 @@ input ProjectsInquiry {
 }
 
 type Query {
+  getAllArticlesByAdmin(input: AllArticlesInquiry): Articles!
   getAllProjectsByAdmin: [Project!]!
+  getArticle(slug: String!): Article!
+  getArticleByAdmin(articleId: String!): Article!
+  getArticles(input: ArticlesInquiry): Articles!
+  getComments(articleId: String!): [Comment!]!
+  getCommentsByAdmin(input: CommentsInquiry): Comments!
   getEducations: [Education!]!
   getExperiences: [Experience!]!
+  getJournalStats: JournalStats!
   getProfile: Profile!
   getProject(slug: String!): Project!
   getProjects(input: ProjectsInquiry): [Project!]!
@@ -568,6 +790,11 @@ type Quote {
 input QuoteInput {
   key: String!
   text: LocalizedTextInput!
+}
+
+type ReadingTime {
+  en: Int
+  ko: Int
 }
 
 type Resume {
@@ -687,6 +914,16 @@ type Stat {
 input StatInput {
   label: LocalizedTextInput!
   value: String!
+}
+
+type TotalCounter {
+  total: Int!
+}
+
+enum TranslationStatus {
+  AI
+  NONE
+  REVIEWED
 }
 
 enum UserRole {

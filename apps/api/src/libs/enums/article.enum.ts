@@ -21,3 +21,12 @@ export enum TranslationStatus {
   REVIEWED = 'REVIEWED',
 }
 registerEnumType(TranslationStatus, { name: 'TranslationStatus' });
+
+/** Journal list order ("Latest First" dropdown). */
+export enum ArticleSort {
+  LATEST = 'LATEST',
+  OLDEST = 'OLDEST',
+  MOST_VIEWED = 'MOST_VIEWED',
+  MOST_LIKED = 'MOST_LIKED',
+}
+registerEnumType(ArticleSort, { name: 'ArticleSort' });

@@ -26,3 +26,4 @@ export const isDuplicateKeyError = (err: unknown): boolean =>
 // AUTH COOKIES
 export const ACCESS_TOKEN_COOKIE = 'access_token';
 export const REFRESH_TOKEN_COOKIE = 'refresh_token';
+export const VISITOR_COOKIE = 'visitor_id';

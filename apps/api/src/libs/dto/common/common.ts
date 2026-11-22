@@ -49,3 +49,10 @@ export class Stat {
   @Field(() => LocalizedText)
   label: LocalizedText;
 }
+
+/** Total count for paginated lists ($facet metaCounter). */
+@ObjectType()
+export class TotalCounter {
+  @Field(() => Int)
+  total: number;
+}

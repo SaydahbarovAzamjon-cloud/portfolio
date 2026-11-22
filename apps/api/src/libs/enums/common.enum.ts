@@ -19,6 +19,11 @@ export enum Message {
   CATEGORY_NOT_EMPTY = 'This category still has skills. Move or remove them first!',
   INVALID_DATE_RANGE = 'End date cannot be before the start date!',
   SKILL_NOT_FOUND = 'One or more selected skills do not exist!',
+  LIKE_ADDED = 'You liked this article!',
+  LIKE_REMOVED = 'Like removed.',
+  SHARE_SUCCESS = 'Thanks for sharing!',
+  COMMENT_SENT = 'Thank you! Your comment will appear after review.',
+  REPLY_NOT_ALLOWED = 'You can only reply to an approved top-level comment!',
 
   SOMETHING_WENT_WRONG = 'Something went wrong!',
   NO_DATA_FOUND = 'No data found!',

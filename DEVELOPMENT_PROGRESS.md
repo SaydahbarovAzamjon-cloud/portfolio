@@ -17,8 +17,8 @@
 - [x] Skills & skill categories — getSkills, create/update/remove SkillCategory|Skill ByAdmin
 - [x] Experience — getExperiences (with skills), create/update/removeExperienceByAdmin
 - [x] Projects — getProjects (filter), getProject(slug), getAllProjectsByAdmin, create/update/removeProjectByAdmin
-- [ ] Journal
-- [ ] Comments
+- [x] Journal — getArticles (category/tag/search/sort/paging), getJournalStats (header + tab counts), getArticle(slug, 1 view per visitor per 24h), likeArticle (toggle), shareArticle, admin: getAll/getArticleByAdmin, create/update/removeArticleByAdmin
+- [x] Comments — getComments (nested), createComment (pending, rate limited, Telegram alert), admin: getCommentsByAdmin, updateCommentStatus/replyComment/removeCommentByAdmin
 - [ ] Testing — removed at the user's request (2026-11-22); verify manually via GraphiQL
 
 ## Phase 02 — Frontend
