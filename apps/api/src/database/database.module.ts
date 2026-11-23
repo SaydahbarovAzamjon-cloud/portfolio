@@ -8,7 +8,9 @@ import { MongooseModule } from '@nestjs/mongoose';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         uri: config.getOrThrow<string>('MONGODB_URI'),
-        autoIndex: config.get<string>('NODE_ENV') !== 'production',
+        // Create indexes on startup in every environment (unique slugs, one like per
+        // visitor, 24h view TTL, text search, session expiry). Data is small, so it is cheap.
+        autoIndex: true,
       }),
     }),
   ],

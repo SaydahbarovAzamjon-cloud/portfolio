@@ -9,6 +9,8 @@ registerEnumType(Locale, { name: 'Locale' });
 
 /** User-facing messages, shared by all components. */
 export enum Message {
+  CODE_SENT = 'Confirmation code sent to your email. It is valid for 10 minutes.',
+  PASSWORD_CHANGED = 'Password changed. Other devices were logged out.',
   LOGIN_SUCCESS = 'You successfully logged in to the dashboard!',
   SESSION_REFRESHED = 'Your session has been refreshed!',
   CREATE_SUCCESS = 'Created successfully!',
@@ -37,6 +39,11 @@ export enum Message {
   UPLOAD_FAILED = 'Upload failed!',
   BAD_REQUEST = 'Bad request!',
   NOT_AUTHENTICATED = 'You are not authenticated. Please log in first!',
+  CODE_INVALID = 'Wrong confirmation code!',
+  CODE_EXPIRED = 'The code expired or was not requested. Please request a new code.',
+  EMAIL_SEND_FAILED = 'Could not send the email. Please try again later!',
+  WRONG_CURRENT_PASSWORD = 'Current password is incorrect!',
+  SAME_PASSWORD = 'New password must be different from the current one!',
   WRONG_CREDENTIALS = 'Incorrect email or password!',
   SESSION_EXPIRED = 'Your session has expired. Please log in again!',
   TOO_MANY_ATTEMPTS = 'Too many attempts. Please try again later!',

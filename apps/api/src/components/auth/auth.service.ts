@@ -133,10 +133,18 @@ export class AuthService {
       .exec();
   }
 
-  public async revokeAllSessions(userId: Types.ObjectId): Promise<void> {
+  /** Logs out every device; `keepSessionId` stays logged in (the current one). */
+  public async revokeAllSessions(
+    userId: Types.ObjectId,
+    keepSessionId?: string,
+  ): Promise<void> {
     await this.sessionModel
       .updateMany(
-        { userId, revokedAt: { $exists: false } },
+        {
+          userId,
+          revokedAt: { $exists: false },
+          ...(keepSessionId ? { _id: { $ne: keepSessionId } } : {}),
+        },
         { revokedAt: new Date() },
       )
       .exec();

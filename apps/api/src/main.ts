@@ -20,6 +20,12 @@ async function bootstrap() {
   });
   const config = app.get(ConfigService);
 
+  // Production runs behind Nginx: read the visitor's real IP from X-Forwarded-For
+  // (otherwise every visitor looks like 127.0.0.1 and shares one rate limit).
+  if (config.get<string>('NODE_ENV') === 'production') {
+    app.set('trust proxy', 1);
+  }
+
   // Auth tokens travel in httpOnly cookies.
   app.use(cookieParser());
 

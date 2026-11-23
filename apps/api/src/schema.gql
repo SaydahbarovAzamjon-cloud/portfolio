@@ -182,6 +182,12 @@ type CategoryCount {
   count: Int!
 }
 
+input ChangePasswordInput {
+  code: String!
+  currentPassword: String!
+  newPassword: String!
+}
+
 type Comment {
   _id: String!
   article: CommentArticle
@@ -618,6 +624,10 @@ input MediaInput {
   width: Int
 }
 
+type MessageResult {
+  message: String!
+}
+
 type Moment {
   caption: LocalizedText
   image: Media!
@@ -629,6 +639,7 @@ input MomentInput {
 }
 
 type Mutation {
+  changePasswordByAdmin(input: ChangePasswordInput!): MessageResult!
   createArticleByAdmin(input: ArticleInput!): ArticleResult!
   createComment(input: CommentInput!): CommentResult!
   createEducationByAdmin(input: EducationInput!): EducationResult!
@@ -650,6 +661,7 @@ type Mutation {
   removeSkillCategoryByAdmin(categoryId: String!): SkillCategoryResult!
   removeUploadByAdmin(uploadId: String!): UploadResult!
   replyCommentByAdmin(input: CommentReplyInput!): CommentResult!
+  requestPasswordCodeByAdmin: MessageResult!
   sendContactMessage(input: ContactInput!): ContactSendResult!
   shareArticle(articleId: String!): ArticleShareResult!
   trackVisit(input: TrackVisitInput!): TrackVisitResult!

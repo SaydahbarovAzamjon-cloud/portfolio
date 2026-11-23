@@ -27,6 +27,20 @@ const UserSchema = new Schema(
     lastLoginAt: {
       type: Date,
     },
+
+    /** Email confirmation code for changing the password (hidden, one at a time). */
+    passwordCode: {
+      type: new Schema(
+        {
+          /** argon2 hash of the 6-digit code (never the code itself) */
+          hash: { type: String, required: true },
+          expiresAt: { type: Date, required: true },
+          attempts: { type: Number, default: 0 },
+        },
+        { _id: false },
+      ),
+      select: false,
+    },
   },
   { timestamps: true, collection: 'users' },
 );

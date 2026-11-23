@@ -29,3 +29,10 @@ export class AuthPayload {
   @Field(() => Date)
   accessTokenExpiresAt: Date;
 }
+
+/** Result with only a success text (change password). */
+@ObjectType()
+export class MessageResult {
+  @Field(() => String)
+  message: string;
+}
