@@ -39,7 +39,6 @@ type Article {
   status: ArticleStatus!
   tags: [String!]!
   title: LocalizedText!
-  translation: ArticleTranslation
   updatedAt: DateTime!
   viewCount: Int!
 }
@@ -99,10 +98,6 @@ enum ArticleSort {
 enum ArticleStatus {
   DRAFT
   PUBLISHED
-}
-
-type ArticleTranslation {
-  ko: KoTranslation
 }
 
 input ArticleUpdate {
@@ -568,12 +563,6 @@ input JourneyFutureInput {
 input JourneyInput {
   beginning: JourneyBeginningInput
   future: JourneyFutureInput
-}
-
-type KoTranslation {
-  model: String
-  status: TranslationStatus
-  translatedAt: DateTime
 }
 
 enum Locale {
@@ -1083,12 +1072,6 @@ input TrackVisitInput {
 
 type TrackVisitResult {
   message: String!
-}
-
-enum TranslationStatus {
-  AI
-  NONE
-  REVIEWED
 }
 
 type Upload {

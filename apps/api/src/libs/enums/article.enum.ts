@@ -15,13 +15,6 @@ export enum ArticleStatus {
 }
 registerEnumType(ArticleStatus, { name: 'ArticleStatus' });
 
-export enum TranslationStatus {
-  NONE = 'NONE',
-  AI = 'AI',
-  REVIEWED = 'REVIEWED',
-}
-registerEnumType(TranslationStatus, { name: 'TranslationStatus' });
-
 /** Journal list order ("Latest First" dropdown). */
 export enum ArticleSort {
   LATEST = 'LATEST',

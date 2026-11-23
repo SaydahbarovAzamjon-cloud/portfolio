@@ -1,9 +1,5 @@
 import { Schema } from 'mongoose';
-import {
-  ArticleCategory,
-  ArticleStatus,
-  TranslationStatus,
-} from '../libs/enums/article.enum';
+import { ArticleCategory, ArticleStatus } from '../libs/enums/article.enum';
 import { readingMinutes } from '../libs/config';
 import { LocalizedTextSchema, MediaSchema } from './common';
 
@@ -28,7 +24,7 @@ const ArticleSchema = new Schema(
       required: true,
     },
 
-    /** Markdown. English is written now; Korean is filled later by AI translation. */
+    /** Markdown. `ko` is written by the admin (optional; the site falls back to `en`). */
     content: {
       type: LocalizedTextSchema,
       required: true,
@@ -73,23 +69,6 @@ const ArticleSchema = new Schema(
       ko: {
         type: Number,
         min: 1,
-      },
-    },
-
-    translation: {
-      ko: {
-        status: {
-          type: String,
-          enum: TranslationStatus,
-          default: TranslationStatus.NONE,
-        },
-        translatedAt: {
-          type: Date,
-        },
-        /** AI model used for the translation, when status = AI. */
-        model: {
-          type: String,
-        },
       },
     },
 

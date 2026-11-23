@@ -1,10 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import type { Types } from 'mongoose';
-import {
-  ArticleCategory,
-  ArticleStatus,
-  TranslationStatus,
-} from '../../enums/article.enum';
+import { ArticleCategory, ArticleStatus } from '../../enums/article.enum';
 import { LocalizedText, Media, TotalCounter } from '../common/common';
 
 @ObjectType()
@@ -14,24 +10,6 @@ export class ReadingTime {
 
   @Field(() => Int, { nullable: true })
   ko?: number;
-}
-
-@ObjectType()
-export class KoTranslation {
-  @Field(() => TranslationStatus, { nullable: true })
-  status?: TranslationStatus;
-
-  @Field(() => Date, { nullable: true })
-  translatedAt?: Date;
-
-  @Field(() => String, { nullable: true })
-  model?: string;
-}
-
-@ObjectType()
-export class ArticleTranslation {
-  @Field(() => KoTranslation, { nullable: true })
-  ko?: KoTranslation;
 }
 
 @ObjectType()
@@ -72,9 +50,6 @@ export class Article {
 
   @Field(() => ReadingTime, { nullable: true })
   readingTime?: ReadingTime;
-
-  @Field(() => ArticleTranslation, { nullable: true })
-  translation?: ArticleTranslation;
 
   @Field(() => Int)
   viewCount: number;

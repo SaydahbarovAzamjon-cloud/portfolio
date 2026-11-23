@@ -11,7 +11,7 @@ Database: MongoDB (`portfolio`), ODM: Mongoose. All collections have `createdAt`
 
 | Type | Shape | Used for |
 |---|---|---|
-| `LocalizedText` | `{ en: string, ko?: string }` | Every human-readable text. `en` is required; `ko` is optional and the frontend falls back to `en`. A future AI-translation feature fills `ko`. |
+| `LocalizedText` | `{ en: string, ko?: string }` | Every human-readable text. `en` is required; `ko` is optional and the frontend falls back to `en`. Korean (`ko`) is written by the admin. |
 | `Media` | `{ url, alt: LocalizedText, width, height, blurDataUrl? }` | Images (covers, portraits, mockups) |
 | `Link` | `{ label: LocalizedText, url, icon? }` | Buttons / external links |
 | `IconCard` | `{ icon, title: LocalizedText, description: LocalizedText }` | Feature tiles, philosophy cards, contributions |
@@ -171,7 +171,6 @@ Skills are referenced by projects and experiences, so a tech name is spelled onc
 | `publishedAt` | Date? | |
 | `featured` | bool | Featured article block |
 | `readingTime` | `{ en: number, ko?: number }` | minutes, computed on save |
-| `translation` | `{ ko: { status: NONE|AI|REVIEWED, translatedAt?, model? } }` | articles are written in English for now; KO is added later by AI translation |
 | `viewCount`, `likeCount`, `commentCount` | number | denormalized counters for fast cards |
 | `authorId` | ref `users` | |
 
@@ -271,6 +270,6 @@ profile, education          standalone
 
 ## Decisions (2026-11-22)
 
-1. **Articles** — English only for now. `content.ko` / `title.ko` stay empty; an AI translation integration will fill them later (`translation.ko.status`).
+1. **Articles** — `ko` fields are optional and written by the admin; the frontend shows `en` when `ko` is empty.
 2. **Comments** — saved as `PENDING`; visible only after the admin approves them. Name required, email optional.
 3. **Files** — stored on the Hostinger VPS disk, served by Nginx; metadata in `uploads`.

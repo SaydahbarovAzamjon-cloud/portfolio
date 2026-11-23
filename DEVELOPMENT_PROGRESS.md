@@ -21,7 +21,6 @@
 - [x] Comments — getComments (nested), createComment (pending, rate limited, Telegram alert), admin: getCommentsByAdmin, updateCommentStatus/replyComment/removeCommentByAdmin
 - [x] Uploads — POST /upload (admin, multipart: file + folder; images → WebP max 2400px + blur preview, PDF for resume, 10 MB limit, real content check), getUploadsByAdmin, removeUploadByAdmin; served at APP_URL/uploads
 - [x] Production readiness — trust proxy behind Nginx (real visitor IP for rate limits), indexes auto-created in every environment
-- [ ] Korean AI translation (later: needs an AI API key)
 - [ ] Testing — removed at the user's request (2026-11-22); verify manually via GraphiQL
 
 ## Phase 02 — Frontend
