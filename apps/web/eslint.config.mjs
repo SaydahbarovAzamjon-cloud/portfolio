@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // CommonJS config files read by Next.js and next-i18next
+    "next.config.js",
+    "next-i18next.config.js",
   ]),
 ]);
 

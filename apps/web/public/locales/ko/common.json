@@ -1,0 +1,39 @@
+{
+	"meta": {
+		"title": "아잠존 — 풀스택 개발자 & AI 엔지니어",
+		"description": "웹 애플리케이션과 AI 기반 제품을 만듭니다."
+	},
+	"nav": {
+		"home": "홈",
+		"about": "소개",
+		"projects": "프로젝트",
+		"skills": "기술",
+		"experience": "경력",
+		"journal": "저널",
+		"contact": "연락처"
+	},
+	"top": {
+		"country": "대한민국",
+		"cta": "함께 일해요",
+		"menu": "메뉴"
+	},
+	"footer": {
+		"eyebrow": "풀스택 개발자 • AI 엔지니어",
+		"description": "실제 문제를 해결하는 현대적인 웹 애플리케이션과 AI 솔루션을 만듭니다.",
+		"chips": {
+			"web": "웹 개발",
+			"ai": "AI & 머신러닝",
+			"product": "제품 개발",
+			"learning": "꾸준한 학습"
+		},
+		"navigation": "메뉴",
+		"featuredProjects": "대표 프로젝트",
+		"connect": "연락하기",
+		"email": "이메일",
+		"copyright": "© {{year}} Azamjon. All rights reserved.",
+		"builtWith": "Next.js와 TypeScript, 그리고 많은 커피와",
+		"builtUsing": "함께 만들었습니다.",
+		"backToTop": "맨 위로"
+	},
+	"placeholder": "이 섹션은 디자인에 맞춰 제작 중입니다."
+}

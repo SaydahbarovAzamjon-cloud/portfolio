@@ -1,0 +1,36 @@
+@use '../../variables' as *;
+
+/** HOMEPAGE **/
+#pc-wrap {
+	.page-placeholder {
+		min-height: 80vh;
+		padding-top: calc(#{$nav-height} + 80px);
+		background: linear-gradient(180deg, $peach 0%, $cream 100%);
+
+		.container {
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.number {
+			font-size: 14px;
+			font-weight: 600;
+			letter-spacing: 0.18em;
+			color: $accent;
+		}
+
+		h1 {
+			font-family: $font-display;
+			font-weight: 400;
+			font-size: clamp(72px, 14vw, 200px);
+			line-height: 0.9;
+			text-transform: uppercase;
+			color: $black;
+		}
+
+		p {
+			font-size: 20px;
+			color: $muted;
+		}
+	}
+}

@@ -1,0 +1,13 @@
+/** Same values as the API's PageType. */
+export enum PageType {
+	HOME = 'HOME',
+	ABOUT = 'ABOUT',
+	PROJECTS = 'PROJECTS',
+	PROJECT = 'PROJECT',
+	SKILLS = 'SKILLS',
+	EXPERIENCE = 'EXPERIENCE',
+	JOURNAL = 'JOURNAL',
+	ARTICLE = 'ARTICLE',
+	CONTACT = 'CONTACT',
+	OTHER = 'OTHER',
+}

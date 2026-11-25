@@ -1,6 +1,6 @@
 # Data Model — Phase 01 (Backend)
 
-Status: **APPROVED 2026-11-22.** Implemented nestar-style as plain `new Schema({...})` + `export default` in `apps/api/src/schemas/*.model.ts` (enums in `apps/api/src/libs/enums/`). Reference fields end in `Id` / `Ids`.
+Status: **APPROVED 2026-11-22.** Implemented as plain `new Schema({...})` + `export default` in `apps/api/src/schemas/*.model.ts` (enums in `apps/api/src/libs/enums/`). Reference fields end in `Id` / `Ids`.
 
 Source of truth for fields: the project brief and the design mockups in `images for portfolio/`.
 Database: MongoDB (`portfolio`), ODM: Mongoose. All collections have `createdAt` / `updatedAt`.

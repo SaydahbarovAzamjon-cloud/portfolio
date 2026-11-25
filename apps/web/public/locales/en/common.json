@@ -1,0 +1,39 @@
+{
+	"meta": {
+		"title": "Azamjon — Full-Stack Developer & AI Engineer",
+		"description": "I build web applications and AI-powered products."
+	},
+	"nav": {
+		"home": "Home",
+		"about": "About",
+		"projects": "Projects",
+		"skills": "Skills",
+		"experience": "Experience",
+		"journal": "Journal",
+		"contact": "Contact"
+	},
+	"top": {
+		"country": "South Korea",
+		"cta": "Let's Work Together",
+		"menu": "Menu"
+	},
+	"footer": {
+		"eyebrow": "Full-Stack Developer • AI Engineer",
+		"description": "Building modern web applications and AI-powered solutions that solve real-world problems.",
+		"chips": {
+			"web": "Web Development",
+			"ai": "AI & Machine Learning",
+			"product": "Product Development",
+			"learning": "Continuous Learning"
+		},
+		"navigation": "Navigation",
+		"featuredProjects": "Featured Projects",
+		"connect": "Let's Connect",
+		"email": "Email",
+		"copyright": "© {{year}} Azamjon. All rights reserved.",
+		"builtWith": "Built with",
+		"builtUsing": "using Next.js, TypeScript and lots of coffee.",
+		"backToTop": "Back to top"
+	},
+	"placeholder": "This section is being built from its design."
+}

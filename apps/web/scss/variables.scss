@@ -1,0 +1,32 @@
+/** VARIABLES **/
+
+// fonts (loaded with next/font in pages/_app.tsx)
+$font: var(--font-body), 'Plus Jakarta Sans', sans-serif;
+$font-display: var(--font-display), 'Anton', sans-serif;
+
+// colours (from the mockups)
+$accent: #ff3d00;
+$accent-2: #ff6a1a;
+$black: #0d0d0d;
+$text: #1c1c1c;
+$muted: #5c5048;
+$peach: #fde3cf;
+$peach-2: #fbd2b0;
+$cream: #fff4ea;
+$white: #ffffff;
+$line: rgba(13, 13, 13, 0.12);
+
+// layout
+$container: 1320px;
+$container-wide: 1680px; // navbar and footer span almost the full width
+$nav-height: 96px;
+$radius: 18px;
+$pill: 999px;
+
+// breakpoints
+$nav-collapse: 1320px;
+$tablet: 1024px;
+$mobile: 768px;
+
+// motion
+$ease: cubic-bezier(0.22, 1, 0.36, 1);

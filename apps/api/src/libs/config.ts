@@ -1,4 +1,4 @@
-/** Shared helpers and constants (nestar style: libs/config.ts). */
+/** Shared helpers and constants. */
 
 const WORDS_PER_MINUTE = 200;
 

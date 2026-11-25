@@ -6,7 +6,7 @@
 - [x] Database configuration (Mongoose, env validation)
 - [x] GraphQL configuration (Apollo 5, code-first, `health` query)
 - [x] Data model (`docs/DATA_MODEL.md`, 15 Mongoose schemas + tests)
-- [x] Restructure API to nestar conventions (`components/`, `schemas/`, `libs/`)
+- [x] API structure (`components/`, `schemas/`, `libs/`)
 - [x] Authentication (login, refresh rotation, logout, requestPasswordCodeByAdmin + changePasswordByAdmin (6-digit code emailed only to MAIL_TO, 10 min, 5 tries, one use), guards, rate limit; admin via `pnpm seed:admin`)
 - [x] Visitor tracking — trackVisit (anonymous cookie, 30 min visits, page views, device; skips bots and the admin)
 - [x] Analytics — getDashboardByAdmin(days): visitors, new visitors, visits, page views, daily chart (Seoul), top pages, sources, languages, devices, top articles, new messages, pending comments
