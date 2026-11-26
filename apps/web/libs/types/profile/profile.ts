@@ -23,6 +23,10 @@ export interface Resume {
 	ko?: Media | null;
 }
 
+export interface ProfileImages {
+	heroPortrait?: Media | null;
+}
+
 export interface Profile {
 	_id: string;
 	name: string;
@@ -34,4 +38,6 @@ export interface Profile {
 	availability: Availability;
 	socials: SocialLink[];
 	resume?: Resume | null;
+	heroOrbitLabels?: LocalizedText[];
+	images?: ProfileImages | null;
 }

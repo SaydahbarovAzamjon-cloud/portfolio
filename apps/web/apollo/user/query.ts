@@ -53,6 +53,22 @@ export const GET_PROFILE = gql`
 					url
 				}
 			}
+			heroOrbitLabels {
+				en
+				ko
+			}
+			images {
+				heroPortrait {
+					url
+					width
+					height
+					blurDataUrl
+					alt {
+						en
+						ko
+					}
+				}
+			}
 		}
 	}
 `;

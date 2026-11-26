@@ -67,6 +67,42 @@ const Footer = () => {
 
 	return (
 		<Stack className={'footer-container'}>
+			{/* decoration: arc + dot at the top, soft panel, dunes at the bottom (as in the mockup) */}
+			<svg className={'footer-arcs'} viewBox={'0 0 2100 160'} preserveAspectRatio={'none'} aria-hidden={'true'}>
+				<path d={'M 470 160 C 540 40, 640 0, 760 0'} />
+				<path d={'M 1020 160 C 1180 40, 1420 -10, 1720 110'} />
+			</svg>
+			<span className={'footer-arc-dot'} aria-hidden={'true'} />
+			<svg className={'footer-dunes'} viewBox={'0 0 2100 260'} preserveAspectRatio={'none'} aria-hidden={'true'}>
+				<defs>
+					<linearGradient id={'dune-far'} x1={'0'} y1={'0'} x2={'0'} y2={'1'}>
+						<stop offset={'0%'} stopColor={'#f0874a'} />
+						<stop offset={'100%'} stopColor={'#c4561f'} />
+					</linearGradient>
+					<linearGradient id={'dune-mid'} x1={'0'} y1={'0'} x2={'0'} y2={'1'}>
+						<stop offset={'0%'} stopColor={'#c25a24'} />
+						<stop offset={'100%'} stopColor={'#7a2f10'} />
+					</linearGradient>
+					<linearGradient id={'dune-near'} x1={'0'} y1={'0'} x2={'0'} y2={'1'}>
+						<stop offset={'0%'} stopColor={'#6b2a0f'} />
+						<stop offset={'100%'} stopColor={'#2a0f05'} />
+					</linearGradient>
+				</defs>
+				<path
+					fill={'url(#dune-far)'}
+					opacity={'0.7'}
+					d={'M0 110 C 220 40, 420 60, 640 100 S 1060 20, 1320 80 S 1800 30, 2100 90 V 260 H 0 Z'}
+				/>
+				<path
+					fill={'url(#dune-mid)'}
+					d={'M0 170 C 260 110, 520 130, 760 170 S 1180 100, 1420 150 S 1880 120, 2100 160 V 260 H 0 Z'}
+				/>
+				<path
+					fill={'url(#dune-near)'}
+					d={'M0 225 C 300 180, 560 190, 820 220 S 1240 150, 1540 205 S 1960 190, 2100 215 V 260 H 0 Z'}
+				/>
+			</svg>
+
 			<Stack className={'container'}>
 				<Stack className={'main'}>
 					<Stack className={'brand-box'}>
@@ -102,7 +138,7 @@ const Footer = () => {
 							<Link key={project._id} href={`/projects/${project.slug}`} className={'item'}>
 								<Box
 									className={'icon'}
-									style={{ background: project.theme?.accent ?? undefined }}
+									style={{ '--accent': project.theme?.accent ?? undefined } as React.CSSProperties}
 								>
 									{project.media?.thumbnail?.url ? (
 										<Image src={project.media.thumbnail.url} alt={''} width={56} height={56} />

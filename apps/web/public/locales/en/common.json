@@ -35,5 +35,19 @@
 		"builtUsing": "using Next.js, TypeScript and lots of coffee.",
 		"backToTop": "Back to top"
 	},
-	"placeholder": "This section is being built from its design."
+	"placeholder": "This section is being built from its design.",
+	"home": {
+		"hero": {
+			"tagline": "I build web applications and AI-powered products.",
+			"explore": "Explore My Work",
+			"together": "Let's Work Together",
+			"basedIn": "Based in",
+			"scroll": "Scroll to explore",
+			"eyebrow1": "Full-Stack Developer",
+			"eyebrow2": "AI Engineer",
+			"orbit1": "Web Applications",
+			"orbit2": "AI Solutions",
+			"orbit3": "Real-World Impact"
+		}
+	}
 }

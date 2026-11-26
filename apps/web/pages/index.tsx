@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { Stack } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import withLayoutHome from '../libs/components/layout/LayoutHome';
-import PagePlaceholder from '../libs/components/common/PagePlaceholder';
+import HeroSection from '../libs/components/homepage/HeroSection';
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
 	props: {
@@ -13,7 +13,8 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
 const Home: NextPage = () => {
 	return (
 		<Stack className={'home-page'}>
-			<PagePlaceholder pageKey={'home'} number={'01'} />
+			<HeroSection />
+			<Stack id={'next'} className={'home-next'} />
 		</Stack>
 	);
 };

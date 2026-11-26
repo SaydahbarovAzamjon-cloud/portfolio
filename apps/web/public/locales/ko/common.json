@@ -35,5 +35,19 @@
 		"builtUsing": "함께 만들었습니다.",
 		"backToTop": "맨 위로"
 	},
-	"placeholder": "이 섹션은 디자인에 맞춰 제작 중입니다."
+	"placeholder": "이 섹션은 디자인에 맞춰 제작 중입니다.",
+	"home": {
+		"hero": {
+			"tagline": "웹 애플리케이션과 AI 기반 제품을 만듭니다.",
+			"explore": "작업 보기",
+			"together": "함께 일해요",
+			"basedIn": "거주지",
+			"scroll": "스크롤해서 보기",
+			"eyebrow1": "풀스택 개발자",
+			"eyebrow2": "AI 엔지니어",
+			"orbit1": "웹 애플리케이션",
+			"orbit2": "AI 솔루션",
+			"orbit3": "실질적인 임팩트"
+		}
+	}
 }

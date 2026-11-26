@@ -18,7 +18,8 @@ $line: rgba(13, 13, 13, 0.12);
 
 // layout
 $container: 1320px;
-$container-wide: 1680px; // navbar and footer span almost the full width
+$container-wide: none; // navbar, hero and footer span the full width
+$side: clamp(20px, 3.3vw, 64px); // their left/right padding (mockup: 58px at 1795px)
 $nav-height: 96px;
 $radius: 18px;
 $pill: 999px;
