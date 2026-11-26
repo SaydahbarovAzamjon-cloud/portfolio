@@ -18,13 +18,13 @@
 		"menu": "Menu"
 	},
 	"footer": {
-		"eyebrow": "Full-Stack Developer • AI Engineer",
-		"description": "Building modern web applications and AI-powered solutions that solve real-world problems.",
+		"eyebrow": "Full-Stack & AI Engineer",
+		"description": "Building full-stack web services and connecting them with AI, from Next.js frontends to NestJS backends and PyTorch models.",
 		"chips": {
-			"web": "Web Development",
-			"ai": "AI & Machine Learning",
-			"product": "Product Development",
-			"learning": "Continuous Learning"
+			"web": "Full-Stack Development",
+			"ai": "AI & Computer Vision",
+			"devops": "DevOps & Deployment",
+			"realtime": "Real-Time Systems"
 		},
 		"navigation": "Navigation",
 		"featuredProjects": "Featured Projects",
@@ -38,16 +38,16 @@
 	"placeholder": "This section is being built from its design.",
 	"home": {
 		"hero": {
-			"tagline": "I build web applications and AI-powered products.",
+			"tagline": "I build full-stack web services and connect them with AI.",
 			"explore": "Explore My Work",
 			"together": "Let's Work Together",
 			"basedIn": "Based in",
 			"scroll": "Scroll to explore",
-			"eyebrow1": "Full-Stack Developer",
+			"eyebrow1": "Full-Stack Engineer",
 			"eyebrow2": "AI Engineer",
-			"orbit1": "Web Applications",
-			"orbit2": "AI Solutions",
-			"orbit3": "Real-World Impact"
+			"orbit1": "Full-Stack Web",
+			"orbit2": "AI & Computer Vision",
+			"orbit3": "DevOps & Deployment"
 		},
 		"about": {
 			"eyebrow": "About me",

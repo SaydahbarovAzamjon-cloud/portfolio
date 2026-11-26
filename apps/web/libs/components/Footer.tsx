@@ -136,7 +136,7 @@ const Footer = () => {
 						</Box>
 						<p className={'description'}>{t('footer.description')}</p>
 						<Box className={'chips'}>
-							{['web', 'ai', 'product', 'learning'].map((chip) => (
+							{['web', 'ai', 'devops', 'realtime'].map((chip) => (
 								<span key={chip} className={'chip'}>
 									{t(`footer.chips.${chip}`)}
 								</span>

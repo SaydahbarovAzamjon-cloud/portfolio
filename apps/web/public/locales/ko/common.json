@@ -18,13 +18,13 @@
 		"menu": "메뉴"
 	},
 	"footer": {
-		"eyebrow": "풀스택 개발자 • AI 엔지니어",
-		"description": "실제 문제를 해결하는 현대적인 웹 애플리케이션과 AI 솔루션을 만듭니다.",
+		"eyebrow": "풀스택 & AI 엔지니어",
+		"description": "Next.js 프론트엔드부터 NestJS 백엔드, PyTorch 모델까지 웹 서비스를 만들고 AI와 연결합니다.",
 		"chips": {
-			"web": "웹 개발",
-			"ai": "AI & 머신러닝",
-			"product": "제품 개발",
-			"learning": "꾸준한 학습"
+			"web": "풀스택 개발",
+			"ai": "AI & 컴퓨터 비전",
+			"devops": "DevOps & 배포",
+			"realtime": "실시간 시스템"
 		},
 		"navigation": "메뉴",
 		"featuredProjects": "대표 프로젝트",
@@ -38,16 +38,16 @@
 	"placeholder": "이 섹션은 디자인에 맞춰 제작 중입니다.",
 	"home": {
 		"hero": {
-			"tagline": "웹 애플리케이션과 AI 기반 제품을 만듭니다.",
+			"tagline": "풀스택 웹 서비스를 만들고 AI와 연결합니다.",
 			"explore": "작업 보기",
 			"together": "함께 일해요",
 			"basedIn": "거주지",
 			"scroll": "스크롤해서 보기",
-			"eyebrow1": "풀스택 개발자",
+			"eyebrow1": "풀스택 엔지니어",
 			"eyebrow2": "AI 엔지니어",
-			"orbit1": "웹 애플리케이션",
-			"orbit2": "AI 솔루션",
-			"orbit3": "실질적인 임팩트"
+			"orbit1": "풀스택 웹",
+			"orbit2": "AI & 컴퓨터 비전",
+			"orbit3": "DevOps & 배포"
 		},
 		"about": {
 			"eyebrow": "소개",
