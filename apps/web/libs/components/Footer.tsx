@@ -18,6 +18,38 @@ import { SocialPlatform } from '../enums/profile.enum';
 
 const FEATURED_LIMIT = 3;
 
+/** One dune period is 2100 units wide (the footer's viewBox). */
+const DUNE_PERIOD = 2100;
+
+/**
+ * Dune outline drawn twice side by side (0 → 4200), built from sine waves that repeat exactly
+ * every 2100 units, so sliding it left by 2100 loops forever without a seam.
+ */
+const dunePath = (base: number, waves: [amplitude: number, cycles: number, phase: number][]): string => {
+	const points: string[] = [];
+	for (let x = 0; x <= DUNE_PERIOD * 2; x += 20) {
+		const y = waves.reduce(
+			(sum, [amplitude, cycles, phase]) => sum + amplitude * Math.sin((2 * Math.PI * cycles * x) / DUNE_PERIOD + phase),
+			base,
+		);
+		points.push(`${x} ${y.toFixed(1)}`);
+	}
+	return `M${points.join(' L')} V 260 H 0 Z`;
+};
+
+const DUNE_FAR = dunePath(85, [
+	[28, 2, 0.4],
+	[12, 5, 1.7],
+]);
+const DUNE_MID = dunePath(150, [
+	[26, 3, 2.1],
+	[10, 7, 0.3],
+]);
+const DUNE_NEAR = dunePath(212, [
+	[20, 2, 4.2],
+	[9, 6, 2.6],
+]);
+
 const Footer = () => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
@@ -42,7 +74,8 @@ const Footer = () => {
 			icon: <HiOutlineMail />,
 			label: t('footer.email'),
 			value: profile.contactEmail,
-			href: `mailto:${profile.contactEmail}`,
+			// opens a Gmail "new message" tab (a mailto: link fails when no mail app is set up)
+			href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.contactEmail)}`,
 		},
 		linkedin && {
 			key: 'linkedin',
@@ -88,19 +121,9 @@ const Footer = () => {
 						<stop offset={'100%'} stopColor={'#2a0f05'} />
 					</linearGradient>
 				</defs>
-				<path
-					fill={'url(#dune-far)'}
-					opacity={'0.7'}
-					d={'M0 110 C 220 40, 420 60, 640 100 S 1060 20, 1320 80 S 1800 30, 2100 90 V 260 H 0 Z'}
-				/>
-				<path
-					fill={'url(#dune-mid)'}
-					d={'M0 170 C 260 110, 520 130, 760 170 S 1180 100, 1420 150 S 1880 120, 2100 160 V 260 H 0 Z'}
-				/>
-				<path
-					fill={'url(#dune-near)'}
-					d={'M0 225 C 300 180, 560 190, 820 220 S 1240 150, 1540 205 S 1960 190, 2100 215 V 260 H 0 Z'}
-				/>
+				<path className={'dune dune-far'} fill={'url(#dune-far)'} opacity={'0.7'} d={DUNE_FAR} />
+				<path className={'dune dune-mid'} fill={'url(#dune-mid)'} d={DUNE_MID} />
+				<path className={'dune dune-near'} fill={'url(#dune-near)'} d={DUNE_NEAR} />
 			</svg>
 
 			<Stack className={'container'}>

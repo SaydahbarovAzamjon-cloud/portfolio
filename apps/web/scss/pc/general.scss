@@ -253,7 +253,24 @@
 				bottom: 0;
 				width: 100%;
 				height: 16%;
+				overflow: hidden;
 				pointer-events: none;
+
+				// slow drifting dunes: each layer is two periods wide and slides one period left, forever.
+				// Different speeds per layer give depth (far = slowest).
+				.dune {
+					animation: dune-drift linear infinite;
+					will-change: transform;
+				}
+				.dune-far {
+					animation-duration: 140s;
+				}
+				.dune-mid {
+					animation-duration: 95s;
+				}
+				.dune-near {
+					animation-duration: 65s;
+				}
 			}
 
 			.container {
@@ -264,7 +281,7 @@
 
 			.main {
 				display: grid;
-				grid-template-columns: 31fr 12fr 23fr 21fr;
+				grid-template-columns: 27fr 12.5fr 22fr 27fr;
 				padding-bottom: clamp(36px, 2.6vw, 56px);
 				border-bottom: 1px solid rgba($black, 0.18);
 
@@ -505,5 +522,14 @@
 				}
 			}
 		}
+	}
+}
+
+@keyframes dune-drift {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-2100px); // one period in SVG units
 	}
 }
