@@ -6,45 +6,10 @@ import { useTranslation } from 'next-i18next/pages';
 import { useQuery } from '@apollo/client';
 import { Stack, Box } from '@mui/material';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import {
-	LuArrowRight,
-	LuArrowUpRight,
-	LuBrain,
-	LuCircleCheck,
-	LuCode,
-	LuLoaderCircle,
-	LuLock,
-	LuZap,
-} from 'react-icons/lu';
-import {
-	SiDocker,
-	SiExpress,
-	SiFastapi,
-	SiGooglegemini,
-	SiGraphql,
-	SiJsonwebtokens,
-	SiKakao,
-	SiMongodb,
-	SiMui,
-	SiNestjs,
-	SiNextdotjs,
-	SiNginx,
-	SiNodedotjs,
-	SiOpencv,
-	SiPm2,
-	SiPostgresql,
-	SiPython,
-	SiPytorch,
-	SiReact,
-	SiRedux,
-	SiSocketdotio,
-	SiTailwindcss,
-	SiTypescript,
-	SiVite,
-} from 'react-icons/si';
-import { IconType } from 'react-icons';
+import { LuArrowRight, LuArrowUpRight, LuCircleCheck, LuLoaderCircle, LuLock } from 'react-icons/lu';
 import { GET_PROJECTS } from '../../../apollo/user/query';
 import { localize } from '../../utils';
+import { getSkillBrand } from '../../skillIcons';
 import { Project } from '../../types/project/project';
 import { ProjectCategory, ProjectStatus } from '../../enums/project.enum';
 import fixoraHome from '../../../public/img/projects/fixora-home.webp';
@@ -54,41 +19,6 @@ import gadgetStoreHome from '../../../public/img/projects/gadget-store-home.webp
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CARD_LIMIT = 4;
 const CHIP_LIMIT = 5; // the rest of the stack is behind a "+N" chip
-
-/** Brand icon + colour for a skill, found by its icon name or slug. */
-const SKILL_ICONS: Record<string, { icon: IconType; color: string }> = {
-	nextjs: { icon: SiNextdotjs, color: '#000000' },
-	react: { icon: SiReact, color: '#149eca' },
-	typescript: { icon: SiTypescript, color: '#3178c6' },
-	vite: { icon: SiVite, color: '#646cff' },
-	reduxtoolkit: { icon: SiRedux, color: '#764abc' },
-	redux: { icon: SiRedux, color: '#764abc' },
-	mui: { icon: SiMui, color: '#007fff' },
-	tailwindcss: { icon: SiTailwindcss, color: '#06b6d4' },
-	nestjs: { icon: SiNestjs, color: '#e0234e' },
-	nodejs: { icon: SiNodedotjs, color: '#5fa04e' },
-	express: { icon: SiExpress, color: '#000000' },
-	expressjs: { icon: SiExpress, color: '#000000' },
-	graphql: { icon: SiGraphql, color: '#e10098' },
-	mongodb: { icon: SiMongodb, color: '#47a248' },
-	postgresql: { icon: SiPostgresql, color: '#4169e1' },
-	websocket: { icon: LuZap, color: '#ff6a00' },
-	socketio: { icon: SiSocketdotio, color: '#010101' },
-	jwt: { icon: SiJsonwebtokens, color: '#d63aff' },
-	python: { icon: SiPython, color: '#3776ab' },
-	fastapi: { icon: SiFastapi, color: '#009688' },
-	pytorch: { icon: SiPytorch, color: '#ee4c2c' },
-	torchvision: { icon: SiPytorch, color: '#ee4c2c' },
-	opencv: { icon: SiOpencv, color: '#5c3ee8' },
-	convnexttiny: { icon: LuBrain, color: '#ff6a00' },
-	mobilenetv2: { icon: LuBrain, color: '#ff6a00' },
-	geminiapi: { icon: SiGooglegemini, color: '#8e75b2' },
-	gemini: { icon: SiGooglegemini, color: '#8e75b2' },
-	docker: { icon: SiDocker, color: '#2496ed' },
-	nginx: { icon: SiNginx, color: '#009639' },
-	pm2: { icon: SiPm2, color: '#2b037a' },
-	kakaomaps: { icon: SiKakao, color: '#e5b800' },
-};
 
 /** Home screenshots shipped with the site, used until the admin uploads a thumbnail. */
 const DEFAULT_SHOTS: Record<string, StaticImageData> = {
@@ -252,11 +182,11 @@ const WorkCard = (props: WorkCardProps) => {
 
 			<Box className={'stack'}>
 				{skills.slice(0, CHIP_LIMIT).map((item) => {
-					const brand = SKILL_ICONS[item.icon] ?? SKILL_ICONS[item.slug.replace(/-/g, '')];
-					const Icon = brand?.icon ?? LuCode;
+					const brand = getSkillBrand(item.icon, item.slug);
+					const Icon = brand.icon;
 					return (
 						<span key={item._id} className={'tech'}>
-							<Icon style={{ color: brand?.color }} />
+							<Icon style={{ color: brand.color }} />
 							{item.name}
 						</span>
 					);

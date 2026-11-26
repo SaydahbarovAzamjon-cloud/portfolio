@@ -850,9 +850,11 @@
 					display: block;
 					overflow: hidden;
 					padding-bottom: 0.08em;
+					line-height: inherit;
 				}
 				.title-line {
 					display: block;
+					line-height: inherit;
 				}
 				.accent {
 					background: linear-gradient(180deg, #ff7a1a 0%, #ff3d00 100%);
