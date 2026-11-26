@@ -48,6 +48,25 @@
 			"orbit1": "Web Applications",
 			"orbit2": "AI Solutions",
 			"orbit3": "Real-World Impact"
+		},
+		"about": {
+			"eyebrow": "About me",
+			"title1": "Building Ideas",
+			"title2": "Into Real Products.",
+			"text": "I'm a Full-Stack & AI Engineer based in South Korea. I design and build web services end to end, from Next.js and TypeScript frontends to NestJS, GraphQL and MongoDB backends, deployed with Docker and NGINX. I don't treat full-stack and AI separately: I connect them inside one working service.",
+			"feature1": "Full-Stack Development",
+			"feature2": "AI & Computer Vision",
+			"feature3": "Real-Time Systems",
+			"feature4": "DevOps & Deployment",
+			"statValue": "3+",
+			"statLabel": "Years of Experience",
+			"basedIn": "Based in",
+			"more": "More About Me",
+			"together": "Let's Work Together",
+			"momentsEyebrow": "Moments",
+			"momentsTitle": "Beyond Coding",
+			"next": "Next photos",
+			"photo": "Photo"
 		}
 	}
 }

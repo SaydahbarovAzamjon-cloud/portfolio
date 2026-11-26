@@ -1,6 +1,22 @@
 import { SocialPlatform } from '../../enums/profile.enum';
 import { LocalizedText, Media } from '../common';
 
+export interface IconCard {
+	icon: string;
+	title: LocalizedText;
+	description?: LocalizedText | null;
+}
+
+export interface Stat {
+	value: string;
+	label: LocalizedText;
+}
+
+export interface Moment {
+	image: Media;
+	caption?: LocalizedText | null;
+}
+
 export interface SocialLink {
 	platform: SocialPlatform;
 	url: string;
@@ -25,6 +41,7 @@ export interface Resume {
 
 export interface ProfileImages {
 	heroPortrait?: Media | null;
+	aboutPortrait?: Media | null;
 }
 
 export interface Profile {
@@ -39,5 +56,9 @@ export interface Profile {
 	socials: SocialLink[];
 	resume?: Resume | null;
 	heroOrbitLabels?: LocalizedText[];
+	bioShort?: LocalizedText | null;
+	focusAreas?: IconCard[];
+	manualStats?: Stat[];
+	moments?: Moment[];
 	images?: ProfileImages | null;
 }

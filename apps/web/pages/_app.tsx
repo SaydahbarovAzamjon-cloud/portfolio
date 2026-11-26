@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 import React, { useEffect } from 'react';
-import { Anton, Plus_Jakarta_Sans } from 'next/font/google';
+import { Anton, Mrs_Saint_Delafield, Plus_Jakarta_Sans } from 'next/font/google';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@mui/material/styles';
 import { AppCacheProvider } from '@mui/material-nextjs/v16-pagesRouter';
@@ -15,7 +15,8 @@ import '../scss/mobile/main.scss';
 
 const display = Anton({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-display' });
 const body = Plus_Jakarta_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
-const fontVariables = `${display.variable} ${body.variable}`;
+const script = Mrs_Saint_Delafield({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-script' });
+const fontVariables = `${display.variable} ${body.variable} ${script.variable}`;
 
 const MainApp = appWithTranslation(({ Component, pageProps }: AppProps) => {
 	const client = useApollo(pageProps.initialApolloState ?? null);
@@ -23,7 +24,7 @@ const MainApp = appWithTranslation(({ Component, pageProps }: AppProps) => {
 	/** LIFECYCLES **/
 	useEffect(() => {
 		// popups (alerts, menus) render outside the app root, so the font variables also go on <html>
-		document.documentElement.classList.add(display.variable, body.variable);
+		document.documentElement.classList.add(display.variable, body.variable, script.variable);
 	}, []);
 
 	return (

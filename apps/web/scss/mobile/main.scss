@@ -77,6 +77,27 @@
 			padding: 0 24px;
 		}
 
+		.about-preview {
+			.about-main {
+				grid-template-columns: 1fr;
+				row-gap: 56px;
+			}
+			.about-visual {
+				max-width: 640px;
+				width: 100%;
+				margin: 0 auto;
+			}
+			.about-content {
+				max-width: none;
+
+				.features {
+					grid-template-columns: repeat(2, auto);
+					justify-content: start;
+					column-gap: 40px;
+				}
+			}
+		}
+
 		#footer .footer-container {
 			.main {
 				grid-template-columns: 1fr 1fr 1fr;

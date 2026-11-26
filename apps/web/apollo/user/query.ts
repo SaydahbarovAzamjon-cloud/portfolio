@@ -57,7 +57,43 @@ export const GET_PROFILE = gql`
 				en
 				ko
 			}
+			bioShort {
+				en
+				ko
+			}
+			focusAreas {
+				icon
+				title {
+					en
+					ko
+				}
+			}
+			manualStats {
+				value
+				label {
+					en
+					ko
+				}
+			}
+			moments {
+				image {
+					url
+					width
+					height
+					blurDataUrl
+				}
+				caption {
+					en
+					ko
+				}
+			}
 			images {
+				aboutPortrait {
+					url
+					width
+					height
+					blurDataUrl
+				}
 				heroPortrait {
 					url
 					width

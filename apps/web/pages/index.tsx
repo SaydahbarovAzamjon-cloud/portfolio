@@ -3,6 +3,7 @@ import { Stack } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import withLayoutHome from '../libs/components/layout/LayoutHome';
 import HeroSection from '../libs/components/homepage/HeroSection';
+import AboutPreview from '../libs/components/homepage/AboutPreview';
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
 	props: {
@@ -14,7 +15,9 @@ const Home: NextPage = () => {
 	return (
 		<Stack className={'home-page'}>
 			<HeroSection />
-			<Stack id={'next'} className={'home-next'} />
+			<Stack id={'next'}>
+				<AboutPreview />
+			</Stack>
 		</Stack>
 	);
 };

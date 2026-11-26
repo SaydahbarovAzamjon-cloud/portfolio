@@ -48,6 +48,25 @@
 			"orbit1": "웹 애플리케이션",
 			"orbit2": "AI 솔루션",
 			"orbit3": "실질적인 임팩트"
+		},
+		"about": {
+			"eyebrow": "소개",
+			"title1": "아이디어를",
+			"title2": "실제 제품으로.",
+			"text": "한국에서 활동하는 풀스택 & AI 엔지니어입니다. Next.js와 TypeScript 기반의 프론트엔드부터 NestJS, GraphQL, MongoDB 기반의 백엔드까지 웹 서비스를 설계·구현했으며, Docker와 NGINX로 배포 환경을 구축했습니다. Full-Stack과 AI를 별개로 다루지 않고, 하나의 서비스 안에서 연결해 구현합니다.",
+			"feature1": "풀스택 개발",
+			"feature2": "AI & 컴퓨터 비전",
+			"feature3": "실시간 시스템",
+			"feature4": "DevOps & 배포",
+			"statValue": "3+",
+			"statLabel": "년 경력",
+			"basedIn": "거주지",
+			"more": "더 알아보기",
+			"together": "함께 일해요",
+			"momentsEyebrow": "순간들",
+			"momentsTitle": "코딩 너머",
+			"next": "다음 사진",
+			"photo": "사진"
 		}
 	}
 }
