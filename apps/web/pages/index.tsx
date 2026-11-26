@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslation
 import withLayoutHome from '../libs/components/layout/LayoutHome';
 import HeroSection from '../libs/components/homepage/HeroSection';
 import AboutPreview from '../libs/components/homepage/AboutPreview';
+import SelectedWork from '../libs/components/homepage/SelectedWork';
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
 	props: {
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
 			<HeroSection />
 			<Stack id={'next'}>
 				<AboutPreview />
+				<SelectedWork />
 			</Stack>
 		</Stack>
 	);

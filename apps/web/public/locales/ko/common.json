@@ -67,6 +67,20 @@
 			"momentsTitle": "코딩 너머",
 			"next": "다음 사진",
 			"photo": "사진"
+		},
+		"work": {
+			"eyebrow": "주요 작업",
+			"years": "2023 — 2026",
+			"title1": "제가 만든",
+			"title2": "것들.",
+			"text1": "실제 프로젝트. 실제 문제.",
+			"text2": "풀스택과 AI를 하나의 서비스로.",
+			"all": "모든 프로젝트 보기",
+			"live": "운영 중",
+			"inProgress": "개발 중",
+			"comingSoon": "곧 공개",
+			"inDevelopment": "현재 개발 중입니다",
+			"caseStudy": "케이스 스터디 보기"
 		}
 	}
 }

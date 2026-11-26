@@ -123,8 +123,25 @@ export const GET_PROJECTS = gql`
 				en
 				ko
 			}
+			summary {
+				en
+				ko
+			}
 			category
+			status
+			order
 			showOnHome
+			links {
+				live
+				github
+			}
+			skillIds
+			skills {
+				_id
+				name
+				slug
+				icon
+			}
 			theme {
 				accent
 				dark

@@ -5,3 +5,8 @@ export enum ProjectCategory {
 	MOBILE = 'MOBILE',
 	OTHER = 'OTHER',
 }
+
+export enum ProjectStatus {
+	COMPLETED = 'COMPLETED',
+	IN_PROGRESS = 'IN_PROGRESS',
+}

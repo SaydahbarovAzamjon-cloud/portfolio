@@ -67,6 +67,20 @@
 			"momentsTitle": "Beyond Coding",
 			"next": "Next photos",
 			"photo": "Photo"
+		},
+		"work": {
+			"eyebrow": "Selected work",
+			"years": "2023 — 2026",
+			"title1": "Things I've",
+			"title2": "Built.",
+			"text1": "Real projects. Real problems.",
+			"text2": "Full-stack and AI, working together.",
+			"all": "See all projects",
+			"live": "Live",
+			"inProgress": "In Progress",
+			"comingSoon": "Coming Soon",
+			"inDevelopment": "Currently in development",
+			"caseStudy": "View Case Study"
 		}
 	}
 }
