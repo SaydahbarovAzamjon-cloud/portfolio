@@ -13,6 +13,15 @@ export const navLinks = [
 	{ key: 'contact', href: '/contact' },
 ];
 
+/** Home page sections, top to bottom. Each one shows its place, e.g. "02 / 05". */
+export const homeSections = ['hero', 'about', 'work', 'skills', 'contact'] as const;
+export type HomeSection = (typeof homeSections)[number];
+
+const twoDigits = (value: number): string => String(value).padStart(2, '0');
+export const sectionTotal = twoDigits(homeSections.length);
+export const sectionNumber = (key: HomeSection): string => twoDigits(homeSections.indexOf(key) + 1);
+export const sectionCount = (key: HomeSection): string => `${sectionNumber(key)} / ${sectionTotal}`;
+
 /** Which page type a route is, for visit tracking. */
 export const pageTypes: Record<string, PageType> = {
 	'/': PageType.HOME,

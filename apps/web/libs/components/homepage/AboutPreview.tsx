@@ -23,6 +23,7 @@ import { GET_PROFILE } from '../../../apollo/user/query';
 import { localize } from '../../utils';
 import { Profile } from '../../types/profile/profile';
 import defaultPortrait from '../../../public/img/home/about-portrait.webp';
+import { sectionCount } from '../../config';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 // const MOMENT_SLOTS = 8; // moments strip (hidden for now)
@@ -151,7 +152,7 @@ const AboutPreview = () => {
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.about.eyebrow')}</span>
 						<span className={'line'} />
-						<span className={'count'}>02 / 07</span>
+						<span className={'count'}>{sectionCount('about')}</span>
 					</motion.div>
 
 					{/* the heading (not the masked lines) watches the viewport: clipped lines never count as visible */}

@@ -24,6 +24,7 @@ import { GET_SKILLS } from '../../../apollo/user/query';
 import { localize } from '../../utils';
 import { getSkillBrand } from '../../skillIcons';
 import { Skill, SkillCategory } from '../../types/skill/skill';
+import { sectionCount } from '../../config';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CARD_LIMIT = 4;
@@ -254,7 +255,7 @@ const SkillsPreview = () => {
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.skills.eyebrow')}</span>
 						<span className={'line'} />
-						<span className={'count'}>04 / 07</span>
+						<span className={'count'}>{sectionCount('skills')}</span>
 					</motion.div>
 
 					<motion.h2

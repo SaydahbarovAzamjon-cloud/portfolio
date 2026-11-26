@@ -11,6 +11,7 @@ import { GET_PROFILE } from '../../../apollo/user/query';
 import { localize } from '../../utils';
 import { Profile } from '../../types/profile/profile';
 import defaultPortrait from '../../../public/img/home/hero-portrait.webp';
+import { sectionNumber, sectionTotal } from '../../config';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -183,9 +184,9 @@ const HeroSection = () => {
 			</motion.a>
 
 			<motion.div className={'section-counter'} {...rise(1.2)}>
-				<span>01</span>
+				<span>{sectionNumber('hero')}</span>
 				<span className={'line'} />
-				<span>07</span>
+				<span>{sectionTotal}</span>
 			</motion.div>
 		</Stack>
 	);
