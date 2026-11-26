@@ -5,6 +5,23 @@
 // the 7 nav links + CTA need about 1300px; below that the burger menu takes over
 @media (max-width: $nav-collapse) {
 	#pc-wrap {
+		.skills-preview {
+			.skills-main {
+				grid-template-columns: 38% 1fr;
+				padding-right: $side;
+			}
+			.skills-visual {
+				display: none;
+			}
+			.skills-strip {
+				flex-wrap: wrap;
+
+				.quote {
+					border-right: none;
+				}
+			}
+		}
+
 		#top .navbar {
 			.navbar-main {
 				height: 76px;
@@ -98,6 +115,11 @@
 			}
 		}
 
+		.skills-preview .skills-main {
+			grid-template-columns: 1fr;
+			row-gap: 40px;
+		}
+
 		.selected-work {
 			.work-main {
 				grid-template-columns: 1fr;
@@ -140,6 +162,29 @@
 		#top .navbar .navbar-main .local-time {
 			min-width: 0;
 			font-size: 13px;
+		}
+
+		.skills-preview {
+			.skills-arcs,
+			.skills-dot {
+				display: none;
+			}
+			.skills-grid {
+				grid-template-columns: 1fr;
+			}
+			.skills-strip {
+				flex-direction: column;
+				align-items: flex-start;
+
+				.quote {
+					border-right: none;
+					padding-right: 0;
+				}
+				.stats {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
 		}
 
 		.selected-work {

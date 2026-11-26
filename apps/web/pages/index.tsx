@@ -5,6 +5,7 @@ import withLayoutHome from '../libs/components/layout/LayoutHome';
 import HeroSection from '../libs/components/homepage/HeroSection';
 import AboutPreview from '../libs/components/homepage/AboutPreview';
 import SelectedWork from '../libs/components/homepage/SelectedWork';
+import SkillsPreview from '../libs/components/homepage/SkillsPreview';
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
 	props: {
@@ -19,6 +20,7 @@ const Home: NextPage = () => {
 			<Stack id={'next'}>
 				<AboutPreview />
 				<SelectedWork />
+				<SkillsPreview />
 			</Stack>
 		</Stack>
 	);

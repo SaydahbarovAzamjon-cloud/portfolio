@@ -154,3 +154,34 @@ export const GET_PROJECTS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         SKILLS         *
+ *************************/
+
+export const GET_SKILLS = gql`
+	query GetSkills {
+		getSkills {
+			_id
+			key
+			title {
+				en
+				ko
+			}
+			description {
+				en
+				ko
+			}
+			icon
+			order
+			skills {
+				_id
+				name
+				slug
+				icon
+				featured
+				order
+			}
+		}
+	}
+`;

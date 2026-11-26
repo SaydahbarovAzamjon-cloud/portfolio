@@ -81,6 +81,26 @@
 			"comingSoon": "곧 공개",
 			"inDevelopment": "현재 개발 중입니다",
 			"caseStudy": "케이스 스터디 보기"
+		},
+		"skills": {
+			"eyebrow": "기술 & 도구",
+			"title1": "함께 일하는",
+			"title2": "도구들.",
+			"text": "첫 화면부터 서비스가 돌아가는 서버까지, 풀스택 웹 서비스를 만들고 AI와 연결할 때 사용하는 기술입니다.",
+			"explore": "전체 기술 보기",
+			"badge1": "클린 코드",
+			"badge2": "확장 가능한 솔루션",
+			"ideas1": "아이디어에서",
+			"ideas2": "실제 제품까지",
+			"quote": "더 나은 제품을 만들기 위해 항상 새로운 기술을 배우고 있습니다.",
+			"mainStacks": "주요 스택",
+			"technologies": "기술",
+			"learning1": "끊임없는",
+			"learning2": "학습",
+			"viewAll": "전체 기술 보기",
+			"certLabel": "수료 · 2026",
+			"certIssuer": "Devex Academy",
+			"certTitle": "풀스택, DevOps & AI 엔지니어"
 		}
 	}
 }

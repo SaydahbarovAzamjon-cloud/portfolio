@@ -81,6 +81,26 @@
 			"comingSoon": "Coming Soon",
 			"inDevelopment": "Currently in development",
 			"caseStudy": "View Case Study"
+		},
+		"skills": {
+			"eyebrow": "Skills & Technologies",
+			"title1": "Tools I Work",
+			"title2": "With.",
+			"text": "The stack I use to build full-stack web services and connect them with AI, from the first screen to the server it runs on.",
+			"explore": "Explore All Skills",
+			"badge1": "Clean Code",
+			"badge2": "Scalable Solutions",
+			"ideas1": "From Ideas",
+			"ideas2": "to Real Products",
+			"quote": "I always keep learning new technologies to build better products.",
+			"mainStacks": "Main Stacks",
+			"technologies": "Technologies",
+			"learning1": "Continuous",
+			"learning2": "Learning",
+			"viewAll": "View All Skills",
+			"certLabel": "Certified · 2026",
+			"certIssuer": "Devex Academy",
+			"certTitle": "Full-Stack, DevOps & AI Engineer"
 		}
 	}
 }
