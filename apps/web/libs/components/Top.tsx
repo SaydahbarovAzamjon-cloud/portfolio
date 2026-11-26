@@ -9,7 +9,7 @@ import { RiMenu4Line, RiCloseLine } from 'react-icons/ri';
 import { GET_PROFILE } from '../../apollo/user/query';
 import { navLinks } from '../config';
 import { localize } from '../utils';
-import useLocalTime from '../hooks/useLocalTime';
+import LiveClock from './common/LiveClock';
 import { Profile } from '../types/profile/profile';
 
 const Top = () => {
@@ -23,7 +23,6 @@ const Top = () => {
 		fetchPolicy: 'cache-first',
 	});
 	const profile = getProfileData?.getProfile;
-	const time = useLocalTime(profile?.location?.timezone);
 	const country = localize(profile?.location?.country, router.locale) || t('top.country');
 
 	/** LIFECYCLES **/
@@ -59,7 +58,7 @@ const Top = () => {
 						<span className={'dot'} />
 						<span className={'country'}>{country}</span>
 						<span className={'divider'}>•</span>
-						<span className={'time'}>{time}</span>
+						<LiveClock timeZone={profile?.location?.timezone} />
 					</Box>
 
 					<Box component={'nav'} className={'router-box'}>

@@ -49,9 +49,34 @@
 					.divider {
 						font-size: 10px;
 					}
-					.time {
-						min-width: 44px;
+					// live clock: each digit sits in its own fixed-width slot and rolls when it changes
+					.live-clock {
+						display: inline-flex;
+						align-items: center;
+						min-width: 4.6em;
 						font-variant-numeric: tabular-nums;
+
+						.digit-slot {
+							position: relative;
+							display: inline-flex;
+							justify-content: center;
+							width: 0.66em;
+							height: 1.3em;
+							overflow: hidden;
+
+							.digit {
+								display: inline-block;
+								line-height: 1.3em;
+							}
+							&.seconds {
+								color: $accent;
+							}
+						}
+						.colon {
+							width: 0.32em;
+							text-align: center;
+							opacity: 0.6;
+						}
 					}
 				}
 
