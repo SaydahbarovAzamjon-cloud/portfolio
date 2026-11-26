@@ -176,6 +176,10 @@ export class Profile {
   @Field(() => Resume, { nullable: true })
   resume?: Resume;
 
+  /** Portfolio PDF in both languages (same shape as the resume). */
+  @Field(() => Resume, { nullable: true })
+  portfolio?: Resume;
+
   @Field(() => ProfileImages, { nullable: true })
   images?: ProfileImages;
 

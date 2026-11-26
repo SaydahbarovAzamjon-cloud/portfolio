@@ -195,6 +195,16 @@ const ProfileSchema = new Schema(
       },
     },
 
+    /** Portfolio PDF, one per language. */
+    portfolio: {
+      en: {
+        type: MediaSchema,
+      },
+      ko: {
+        type: MediaSchema,
+      },
+    },
+
     images: {
       heroPortrait: {
         type: MediaSchema,

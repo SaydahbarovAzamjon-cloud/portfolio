@@ -43,16 +43,20 @@ async function bootstrap() {
   }
 
   // Uploaded files: APP_URL/uploads/... (on the VPS Nginx can serve this folder directly).
+  // CORS lets the site fetch a file and save it with a readable name (resume / portfolio download).
+  const frontendUrl = config.getOrThrow<string>('FRONTEND_URL');
   app.useStaticAssets(resolve(config.getOrThrow<string>('UPLOAD_DIR')), {
     prefix: '/uploads/',
     index: false,
     maxAge: '30d',
-    setHeaders: (res: ServerResponse) =>
-      res.setHeader('X-Content-Type-Options', 'nosniff'),
+    setHeaders: (res: ServerResponse) => {
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+      res.setHeader('Access-Control-Allow-Origin', frontendUrl);
+    },
   });
 
   app.enableCors({
-    origin: config.getOrThrow<string>('FRONTEND_URL'),
+    origin: frontendUrl,
     credentials: true,
   });
 

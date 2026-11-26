@@ -306,6 +306,12 @@ export class ProfileUpdate {
 
   @IsOptional()
   @ValidateNested()
+  @Type(() => ResumeInput)
+  @Field(() => ResumeInput, { nullable: true })
+  portfolio?: ResumeInput;
+
+  @IsOptional()
+  @ValidateNested()
   @Type(() => ProfileImagesInput)
   @Field(() => ProfileImagesInput, { nullable: true })
   images?: ProfileImagesInput;
