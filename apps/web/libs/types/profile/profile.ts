@@ -42,6 +42,7 @@ export interface Resume {
 export interface ProfileImages {
 	heroPortrait?: Media | null;
 	aboutPortrait?: Media | null;
+	contactPortrait?: Media | null;
 }
 
 export interface Profile {
@@ -55,6 +56,7 @@ export interface Profile {
 	availability: Availability;
 	socials: SocialLink[];
 	resume?: Resume | null;
+	portfolio?: Resume | null;
 	heroOrbitLabels?: LocalizedText[];
 	bioShort?: LocalizedText | null;
 	focusAreas?: IconCard[];

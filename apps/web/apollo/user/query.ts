@@ -53,6 +53,14 @@ export const GET_PROFILE = gql`
 					url
 				}
 			}
+			portfolio {
+				en {
+					url
+				}
+				ko {
+					url
+				}
+			}
 			heroOrbitLabels {
 				en
 				ko
@@ -88,6 +96,12 @@ export const GET_PROFILE = gql`
 				}
 			}
 			images {
+				contactPortrait {
+					url
+					width
+					height
+					blurDataUrl
+				}
 				aboutPortrait {
 					url
 					width

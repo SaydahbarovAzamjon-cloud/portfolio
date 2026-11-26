@@ -101,6 +101,31 @@
 			"certLabel": "수료 · 2026",
 			"certIssuer": "Devex Academy",
 			"certTitle": "풀스택, DevOps & AI 엔지니어"
+		},
+		"contact": {
+			"eyebrow": "연락하기",
+			"title1": "함께 멋진 것을",
+			"title2": "만들어요.",
+			"text": "풀스택 개발과 AI 엔지니어링을 결합해 실제 비즈니스 문제를 해결합니다.",
+			"touch": "연락하기",
+			"download": "이력서 다운로드",
+			"careerTitle": "채용 기회",
+			"careerText": "풀스택 & AI 엔지니어 포지션",
+			"collaborateTitle": "협업",
+			"collaborateText": "웹 서비스와 AI 기반 제품",
+			"impactTitle": "실질적인 가치",
+			"impactText": "하나의 서비스 안에서 풀스택과 AI",
+			"basedIn": "거주지",
+			"email": "이메일",
+			"resume": "이력서",
+			"resumeText": "이력서 & 포트폴리오 · EN / KO"
 		}
+	},
+	"download": {
+		"resume": "이력서 (CV)",
+		"portfolio": "포트폴리오",
+		"en": "영어 (English)",
+		"ko": "한국어",
+		"empty": "파일이 곧 준비됩니다."
 	}
 }

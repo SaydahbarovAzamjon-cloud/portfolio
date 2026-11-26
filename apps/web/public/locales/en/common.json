@@ -101,6 +101,31 @@
 			"certLabel": "Certified · 2026",
 			"certIssuer": "Devex Academy",
 			"certTitle": "Full-Stack, DevOps & AI Engineer"
+		},
+		"contact": {
+			"eyebrow": "Let's connect",
+			"title1": "Let's Build",
+			"title2": "Something Great.",
+			"text": "Full-stack development and AI engineering, combined to solve real business problems.",
+			"touch": "Get In Touch",
+			"download": "Download Resume",
+			"careerTitle": "Career Opportunities",
+			"careerText": "Open to Full-Stack & AI Engineer roles",
+			"collaborateTitle": "Collaborate",
+			"collaborateText": "Web services and AI-powered products",
+			"impactTitle": "Create Real Impact",
+			"impactText": "Full-stack and AI in one working service",
+			"basedIn": "Based in",
+			"email": "Email",
+			"resume": "Resume",
+			"resumeText": "CV & Portfolio · EN / KO"
 		}
+	},
+	"download": {
+		"resume": "Resume (CV)",
+		"portfolio": "Portfolio",
+		"en": "English",
+		"ko": "Korean (한국어)",
+		"empty": "The files will be available soon."
 	}
 }

@@ -219,8 +219,10 @@
 			position: relative;
 			overflow: hidden;
 			isolation: isolate;
-			padding: clamp(80px, 6vw, 125px) 0 clamp(80px, 6.2vw, 130px);
+			padding: clamp(88px, 6.4vw, 128px) 0 clamp(80px, 6.2vw, 130px);
 			background:
+				// the top fades in from the colour the page ends with, so there is no seam above the footer
+				linear-gradient(180deg, #fbdcc4 0px, rgba(#fbdcc4, 0) 140px),
 				radial-gradient(45% 70% at 100% 10%, rgba(#f26a1b, 0.85) 0%, rgba(#f26a1b, 0) 70%),
 				radial-gradient(40% 60% at 0% 60%, rgba(#f08a4b, 0.55) 0%, rgba(#f08a4b, 0) 70%),
 				linear-gradient(180deg, #fbdcc4 0%, #f8c7a2 55%, #f29a62 100%);
@@ -232,7 +234,7 @@
 				z-index: -1;
 				left: 0;
 				right: 0;
-				top: 14%;
+				top: clamp(16px, 1.3vw, 26px);
 				bottom: 8%;
 				border-radius: 0 160px 0 0;
 				background: linear-gradient(180deg, rgba(#fff3ea, 0.75) 0%, rgba(#fde6d4, 0.45) 100%);
@@ -556,5 +558,134 @@
 	}
 	to {
 		transform: translateX(-2100px); // one period in SVG units
+	}
+}
+
+#pc-wrap {
+	/** DOWNLOAD MENU (resume + portfolio) **/
+	.download-menu {
+		position: relative;
+		display: inline-flex;
+
+		.download-trigger {
+			display: flex;
+			flex: 1;
+			cursor: pointer;
+			outline: none;
+			border-radius: inherit;
+
+			&:focus-visible {
+				box-shadow: 0 0 0 3px rgba($accent, 0.45);
+				border-radius: $pill;
+			}
+		}
+
+		.download-panel {
+			position: absolute;
+			left: 0;
+			min-width: 280px;
+			padding: 10px;
+			border-radius: 20px;
+			background: rgba(#fff8f2, 0.96);
+			border: 1px solid rgba($white, 0.9);
+			box-shadow: 0 24px 60px rgba(#5a1d05, 0.25);
+			backdrop-filter: blur(14px);
+			z-index: 30;
+		}
+		&.bottom .download-panel {
+			top: calc(100% + 10px);
+			transform-origin: top left;
+		}
+		&.top .download-panel {
+			bottom: calc(100% + 14px);
+			transform-origin: bottom left;
+		}
+
+		.download-group + .download-group {
+			margin-top: 6px;
+			padding-top: 6px;
+			border-top: 1px solid $line;
+		}
+		.group-title {
+			display: block;
+			padding: 8px 12px 4px;
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: $accent;
+		}
+		.download-item {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 10px 12px;
+			border: none;
+			border-radius: 12px;
+			background: transparent;
+			font-family: inherit;
+			text-align: left;
+			color: $black;
+			cursor: pointer;
+			transition: background 0.25s $ease;
+
+			.file-icon {
+				flex-shrink: 0;
+				font-size: 20px;
+				color: $accent;
+			}
+			.item-text {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+
+				strong {
+					font-size: 14px;
+					font-weight: 600;
+				}
+				small {
+					font-size: 11px;
+					color: $muted;
+				}
+			}
+			.down-icon {
+				font-size: 17px;
+				color: $muted;
+				transition:
+					transform 0.3s $ease,
+					color 0.3s $ease;
+
+				&.busy {
+					animation: download-bounce 0.7s $ease infinite;
+					color: $accent;
+				}
+			}
+
+			&:hover,
+			&:focus-visible {
+				background: rgba($accent, 0.08);
+				outline: none;
+
+				.down-icon {
+					transform: translateY(2px);
+					color: $accent;
+				}
+			}
+			&:disabled {
+				cursor: progress;
+			}
+		}
+		.download-empty {
+			padding: 12px;
+			font-size: 13px;
+			color: $muted;
+		}
+	}
+}
+
+@keyframes download-bounce {
+	50% {
+		transform: translateY(3px);
 	}
 }
