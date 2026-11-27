@@ -1,5 +1,7 @@
 import { Project } from './types/project/project';
 import { ProjectCategory, ProjectStatus } from './enums/project.enum';
+import { Education } from './types/education/education';
+import { DegreeType, EducationStatus } from './enums/education.enum';
 
 /**
  * What the site shows while the database is still empty (before the admin fills it in).
@@ -86,5 +88,35 @@ export const FALLBACK_PROJECTS: Project[] = [
 		showOnHome: true,
 		theme: { accent: '#8b5cf6' },
 		skills: ['Next.js', 'FastAPI', 'OpenCV', 'PyTorch'].map(skill),
+	},
+];
+
+/** Degrees, newest first (from the diploma and the CV). The status shown on the site comes from endDate. */
+export const FALLBACK_EDUCATION: Education[] = [
+	{
+		_id: 'inje',
+		degree: DegreeType.MASTER,
+		institution: { en: 'Inje University', ko: '인제대학교' },
+		institutionNative: '인제대학교',
+		major: { en: 'Financial Management', ko: '재무관리' },
+		location: { en: 'Gimhae, South Korea', ko: '대한민국 김해' },
+		startDate: '2025-03-01',
+		endDate: '2027-02-28',
+		status: EducationStatus.IN_PROGRESS,
+	},
+	{
+		_id: 'tstu',
+		degree: DegreeType.BACHELOR,
+		institution: { en: 'Tashkent State Transport University', ko: '타슈켄트 국립교통대학교' },
+		institutionNative: 'Toshkent davlat transport universiteti',
+		major: {
+			en: 'Electrical Engineering, Electromechanics and Electrical Technology (Railway Transport)',
+			ko: '전기공학·전기기계·전기기술 (철도 운송)',
+		},
+		qualification: { en: 'Electromechanical Engineer', ko: '전기기계 엔지니어' },
+		location: { en: 'Tashkent, Uzbekistan', ko: '우즈베키스탄 타슈켄트' },
+		startDate: '2020-09-01',
+		endDate: '2024-06-14',
+		status: EducationStatus.COMPLETED,
 	},
 ];

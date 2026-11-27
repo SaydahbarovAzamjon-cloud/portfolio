@@ -695,9 +695,6 @@
 				& + .story {
 					margin-top: 14px;
 				}
-				.reveal-word {
-					white-space: nowrap;
-				}
 			}
 
 			.sub-title {
@@ -782,6 +779,686 @@
 				}
 			}
 
+		}
+	}
+	/* journey (timeline) */
+	.journey {
+		position: relative;
+		overflow: hidden;
+		isolation: isolate;
+		padding: clamp(64px, 6vw, 110px) 0 clamp(150px, 12vw, 220px);
+		background:
+			radial-gradient(45% 40% at 85% 10%, rgba(#ffb27a, 0.35) 0%, rgba(#ffb27a, 0) 70%),
+			linear-gradient(180deg, #fde3cf 0%, #fde8d8 50%, #fbd8bd 100%);
+
+		.journey-head {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: end;
+			gap: 40px;
+			padding: 0 $side;
+
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 18px;
+				max-width: 30em;
+				font-size: clamp(12px, 0.85vw, 16px);
+				font-weight: 500;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: #3a302a;
+
+				.dot {
+					width: 14px;
+					height: 14px;
+					border-radius: 50%;
+					background: $accent;
+				}
+				.line {
+					flex: 1;
+					height: 1px;
+					background: rgba($black, 0.35);
+				}
+			}
+			.title {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0 0.25em;
+				margin-top: clamp(16px, 1.6vw, 28px);
+				font-size: clamp(48px, 6vw, 120px);
+				font-weight: 800;
+				line-height: 0.95;
+				letter-spacing: -0.04em;
+				color: $black;
+
+				.title-mask {
+					display: block;
+					overflow: hidden;
+					padding-bottom: 0.08em;
+					line-height: inherit;
+				}
+				.title-line {
+					display: block;
+					line-height: inherit;
+				}
+				.accent {
+					background: linear-gradient(90deg, #ff7a1a 0%, #ff3d00 60%, #e8000f 100%);
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent;
+				}
+			}
+			.head-text {
+				max-width: 24em;
+				padding-left: 22px;
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(14px, 1vw, 19px);
+				line-height: 1.55;
+				color: #3a302a;
+			}
+		}
+
+		/* the rising line with pins */
+		.timeline-track {
+			position: relative;
+			height: clamp(80px, 7vw, 130px);
+			margin: clamp(24px, 2.4vw, 44px) $side 0;
+
+			.track-line {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				overflow: visible;
+
+				path {
+					fill: none;
+					vector-effect: non-scaling-stroke;
+					stroke-linecap: round;
+				}
+				.track-base {
+					stroke: rgba($accent, 0.15);
+					stroke-width: 6;
+				}
+				.track-fill {
+					stroke: $accent;
+					stroke-width: 2.5;
+				}
+			}
+			.pin {
+				position: absolute;
+				width: 26px;
+				height: 26px;
+				translate: -50% -50%;
+				border-radius: 50%;
+				background: $white;
+				border: 6px solid $accent;
+				box-shadow: 0 0 0 6px rgba($accent, 0.15);
+
+				&.future {
+					animation: pulse 2.4s ease-in-out infinite;
+				}
+			}
+		}
+
+		/* five step cards, one under every pin */
+		.timeline-steps {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			padding: 0 $side;
+		}
+		.step {
+			margin: clamp(10px, 1vw, 18px) clamp(5px, 0.5vw, 10px) 0;
+			padding: clamp(18px, 1.4vw, 26px) clamp(16px, 1.3vw, 24px) clamp(22px, 1.6vw, 30px);
+			border-radius: 22px;
+			background: linear-gradient(180deg, rgba(#fff6ee, 0.75) 0%, rgba(#fde6d4, 0.35) 100%);
+			border: 1px solid rgba($white, 0.85);
+			box-shadow: 0 16px 40px rgba(#b54a12, 0.06);
+			transition:
+				translate 0.5s $ease,
+				box-shadow 0.5s $ease,
+				border-color 0.5s $ease;
+
+			.date {
+				display: inline-block;
+				padding: 7px 16px;
+				border-radius: $pill;
+				background: rgba($white, 0.75);
+				border: 1px solid rgba($white, 0.95);
+				box-shadow: 0 6px 16px rgba(#b54a12, 0.08);
+				font-size: clamp(12px, 0.82vw, 15px);
+				font-weight: 600;
+				color: $black;
+			}
+			.icon {
+				margin-top: 18px;
+				width: clamp(44px, 3vw, 56px);
+				height: clamp(44px, 3vw, 56px);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 14px;
+				background: rgba($white, 0.8);
+				box-shadow: 0 8px 20px rgba(#b54a12, 0.1);
+				color: $accent;
+				font-size: clamp(22px, 1.5vw, 28px);
+				transition:
+					background 0.45s $ease,
+					color 0.45s $ease,
+					rotate 0.45s $ease;
+			}
+			.step-title {
+				margin-top: 16px;
+				font-size: clamp(18px, 1.35vw, 26px);
+				font-weight: 800;
+				line-height: 1.15;
+				letter-spacing: -0.01em;
+				color: $black;
+			}
+			.step-role {
+				display: block;
+				margin-top: 6px;
+				font-size: clamp(13px, 0.92vw, 17px);
+				font-weight: 700;
+				color: $accent;
+			}
+			.step-text {
+				margin-top: 14px;
+				font-size: clamp(13px, 0.9vw, 16px);
+				line-height: 1.55;
+				color: #3a302a;
+			}
+			.step-list {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				margin-top: 14px;
+				list-style: none;
+
+				li {
+					position: relative;
+					padding-left: 16px;
+					font-size: clamp(12px, 0.84vw, 15px);
+					line-height: 1.45;
+					color: #3a302a;
+
+					&::before {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0.55em;
+						width: 6px;
+						height: 6px;
+						border-radius: 50%;
+						background: $accent;
+					}
+				}
+			}
+
+			&.future .date {
+				background: linear-gradient(180deg, #ff7a2a 0%, $accent 100%);
+				border-color: transparent;
+				color: $white;
+				box-shadow: 0 10px 22px rgba($accent, 0.3);
+			}
+
+			&:hover {
+				translate: 0 -6px;
+				border-color: rgba($accent, 0.3);
+				box-shadow: 0 26px 50px rgba(#b54a12, 0.14);
+
+				.icon {
+					background: $accent;
+					color: $white;
+					rotate: -8deg;
+				}
+			}
+		}
+
+		/* numbers + quote */
+		.journey-stats {
+			display: grid;
+			grid-template-columns: auto auto auto 1fr;
+			align-items: center;
+			gap: clamp(20px, 3vw, 60px);
+			margin-top: clamp(36px, 3.4vw, 64px);
+			padding: 0 $side;
+
+			.stat {
+				padding-right: clamp(20px, 3vw, 60px);
+				border-right: 1px solid rgba($black, 0.15);
+
+				strong {
+					display: flex;
+					align-items: baseline;
+					gap: 12px;
+					font-size: clamp(36px, 3vw, 58px);
+					font-weight: 800;
+					line-height: 1;
+					color: $accent;
+
+					span:last-child {
+						font-size: 0.55em;
+					}
+				}
+				small {
+					display: block;
+					margin-top: 10px;
+					font-size: clamp(13px, 0.92vw, 17px);
+					color: #4a3d35;
+				}
+			}
+		}
+		.journey-quote {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: clamp(16px, 1.6vw, 30px);
+
+			.quote-mark {
+				flex-shrink: 0;
+				font-size: clamp(44px, 3.4vw, 64px);
+				color: $accent;
+			}
+			p {
+				padding-left: clamp(16px, 1.6vw, 30px);
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(17px, 1.3vw, 26px);
+				font-style: italic;
+				line-height: 1.35;
+				color: $black;
+
+				em {
+					font-weight: 800;
+				}
+			}
+			.quote-swoosh {
+				position: absolute;
+				right: 4%;
+				bottom: -22px;
+				width: 46%;
+				height: 16px;
+
+				path {
+					fill: none;
+					stroke: $accent;
+					stroke-width: 2.5;
+					stroke-linecap: round;
+					vector-effect: non-scaling-stroke;
+				}
+			}
+		}
+
+		/* drifting waves along the bottom */
+		.journey-waves {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: clamp(90px, 8vw, 150px);
+			z-index: -1;
+			pointer-events: none;
+
+			.dune {
+				animation: dune-drift linear infinite;
+				will-change: transform;
+			}
+			.wave-far {
+				fill: rgba(#f7a56e, 0.55);
+				animation-duration: 130s;
+			}
+			.wave-near {
+				fill: rgba(#f08a4b, 0.7);
+				animation-duration: 85s;
+			}
+		}
+	}
+	/* education */
+	.education {
+		position: relative;
+		overflow: hidden;
+		isolation: isolate;
+		padding: clamp(60px, 5.5vw, 100px) $side clamp(70px, 6vw, 110px);
+		background:
+			radial-gradient(35% 45% at 0% 100%, rgba(#f3874a, 0.45) 0%, rgba(#f3874a, 0) 70%),
+			radial-gradient(35% 45% at 100% 100%, rgba(#ff6a1a, 0.45) 0%, rgba(#ff6a1a, 0) 70%),
+			linear-gradient(180deg, #fbd8bd 0%, #fde9da 30%, #fde3cf 100%);
+
+		.education-head {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			align-items: end;
+			gap: clamp(30px, 4vw, 80px);
+
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				font-size: clamp(12px, 0.85vw, 16px);
+				font-weight: 600;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: $black;
+
+				.dot {
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background: $accent;
+				}
+				.line {
+					width: 120px;
+					height: 1px;
+					background: linear-gradient(90deg, $accent, transparent);
+				}
+			}
+			.title {
+				margin-top: 10px;
+				font-size: clamp(48px, 5.4vw, 108px);
+				font-weight: 800;
+				line-height: 1;
+				letter-spacing: -0.04em;
+				color: $black;
+
+				.title-mask {
+					display: block;
+					overflow: hidden;
+					padding-bottom: 0.08em;
+					line-height: inherit;
+				}
+				.title-line {
+					display: block;
+					line-height: inherit;
+				}
+				.accent {
+					background: linear-gradient(90deg, #ff7a1a 0%, #ff3d00 55%, #c81e00 100%);
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent;
+				}
+			}
+			.head-text {
+				max-width: 36em;
+				padding-left: clamp(20px, 2vw, 40px);
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(15px, 1.2vw, 23px);
+				line-height: 1.45;
+				color: #2b2420;
+
+				em {
+					font-style: italic;
+					font-weight: 700;
+				}
+			}
+		}
+
+		/* two degree cards */
+		.edu-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: clamp(16px, 2vw, 40px);
+			margin-top: clamp(28px, 2.6vw, 48px);
+		}
+		.edu-card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			min-height: clamp(360px, 22vw, 430px);
+			border-radius: clamp(22px, 1.8vw, 32px);
+			background: linear-gradient(160deg, rgba(#fff6ee, 0.92) 0%, rgba(#fde6d4, 0.7) 100%);
+			border: 1px solid rgba($white, 0.9);
+			box-shadow: 0 24px 60px rgba(#b54a12, 0.1);
+			transition:
+				translate 0.5s $ease,
+				box-shadow 0.5s $ease;
+
+			// campus photo on the right, melting into the card on the left and the bottom
+			.edu-photo {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 62%;
+				height: 72%;
+				mask-image: linear-gradient(90deg, transparent 0%, #000 38%), linear-gradient(180deg, #000 55%, transparent 100%);
+				mask-composite: intersect;
+
+				img {
+					object-fit: cover;
+					object-position: center;
+					transition: scale 1.1s $ease;
+				}
+			}
+			&:hover {
+				translate: 0 -6px;
+				box-shadow: 0 34px 70px rgba(#b54a12, 0.16);
+
+				.edu-photo img {
+					scale: 1.06;
+				}
+			}
+
+			// fills the whole card, so the details sit at the bottom (no empty space under them)
+			.edu-body {
+				position: relative;
+				z-index: 1;
+				flex: 1;
+				padding: clamp(22px, 1.8vw, 34px);
+			}
+			.edu-top {
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				gap: 12px;
+			}
+			.degree-pill,
+			.status-pill,
+			.location-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				border-radius: $pill;
+				font-weight: 700;
+			}
+			.degree-pill {
+				padding: 9px 20px;
+				background: rgba(#ff8a3d, 0.2);
+				font-size: clamp(14px, 1vw, 19px);
+				color: $accent;
+
+				svg {
+					font-size: 1.3em;
+				}
+			}
+			.status-pill {
+				padding: 7px 14px;
+				background: rgba($white, 0.85);
+				box-shadow: 0 8px 20px rgba(#7a2a08, 0.12);
+				font-size: clamp(12px, 0.8vw, 14px);
+				color: $black;
+
+				.status-dot {
+					width: 9px;
+					height: 9px;
+					border-radius: 50%;
+				}
+				&.done .status-dot {
+					background: #22a447;
+				}
+				&.progress .status-dot {
+					background: $accent;
+					animation: pulse 2.4s ease-in-out infinite;
+				}
+			}
+
+			.school {
+				max-width: 58%;
+				margin-top: clamp(22px, 2vw, 36px);
+				font-size: clamp(26px, 2.2vw, 42px);
+				font-weight: 800;
+				line-height: 1.08;
+				letter-spacing: -0.02em;
+				color: $black;
+				text-shadow: 0 1px 12px rgba(#fff6ee, 0.8);
+			}
+			.school-native {
+				display: block;
+				margin-top: 8px;
+				font-size: clamp(14px, 1.05vw, 20px);
+				color: #4a3d35;
+			}
+
+			.edu-fields {
+				display: grid;
+				grid-template-columns: 1.4fr 1fr 1fr;
+				margin-top: auto;
+				padding-top: clamp(22px, 2vw, 36px);
+			}
+			.edu-field {
+				display: flex;
+				gap: 12px;
+				padding: 0 clamp(12px, 1.2vw, 22px);
+
+				&:first-child {
+					padding-left: 0;
+				}
+				& + .edu-field {
+					border-left: 1px solid rgba($black, 0.12);
+				}
+
+				.field-icon {
+					flex-shrink: 0;
+					font-size: clamp(20px, 1.4vw, 26px);
+					color: $accent;
+				}
+				span {
+					display: flex;
+					flex-direction: column;
+					gap: 4px;
+				}
+				small {
+					font-size: clamp(12px, 0.8vw, 15px);
+					color: #5c5048;
+				}
+				strong {
+					font-size: clamp(13px, 0.95vw, 17px);
+					font-weight: 700;
+					line-height: 1.3;
+					color: $black;
+				}
+			}
+			.location-pill {
+				align-self: flex-start;
+				margin-top: clamp(16px, 1.4vw, 24px);
+				padding: 9px 18px;
+				background: rgba($white, 0.75);
+				font-size: clamp(13px, 0.9vw, 16px);
+				color: $black;
+
+				svg {
+					font-size: 1.25em;
+					color: $accent;
+				}
+			}
+		}
+
+		/* bachelor's → master's line */
+		.degree-line {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			margin: clamp(24px, 2.2vw, 40px) 22% 0;
+
+			.degree-track {
+				position: absolute;
+				left: 0;
+				right: -8%;
+				top: 13px;
+				width: 108%;
+				height: 20px;
+				translate: 0 -50%;
+				overflow: visible;
+
+				path {
+					fill: none;
+					stroke: $accent;
+					stroke-width: 2.5;
+					stroke-linecap: round;
+					vector-effect: non-scaling-stroke;
+				}
+			}
+		}
+		.degree-point {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 12px;
+			translate: -50% 0;
+
+			&:last-child {
+				translate: 50% 0;
+			}
+			.point-pin {
+				width: 26px;
+				height: 26px;
+				border-radius: 50%;
+				background: $white;
+				border: 6px solid #ff8a3d;
+				box-shadow: 0 0 0 6px rgba($accent, 0.12);
+			}
+			&.progress .point-pin {
+				border-color: $accent;
+				animation: pulse 2.4s ease-in-out infinite;
+			}
+			.point-label {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 10px 24px;
+				border-radius: 16px;
+				background: rgba(#fff6ee, 0.85);
+				box-shadow: 0 10px 24px rgba(#b54a12, 0.1);
+				font-size: clamp(13px, 0.9vw, 16px);
+				font-weight: 700;
+				color: $black;
+
+				small {
+					font-weight: 500;
+					color: #4a3d35;
+				}
+			}
+		}
+
+		.education-quote {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: clamp(16px, 1.6vw, 30px);
+			margin-top: clamp(28px, 2.4vw, 44px);
+
+			.quote-mark {
+				flex-shrink: 0;
+				font-size: clamp(44px, 3.4vw, 64px);
+				color: $accent;
+			}
+			p {
+				max-width: 46em;
+				padding-left: clamp(16px, 1.6vw, 30px);
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(16px, 1.25vw, 24px);
+				font-style: italic;
+				line-height: 1.4;
+				color: $black;
+
+				em {
+					font-weight: 800;
+				}
+				.underlined {
+					background: linear-gradient(90deg, $accent, $accent) 0 100% / 100% 2px no-repeat;
+				}
+			}
 		}
 	}
 }

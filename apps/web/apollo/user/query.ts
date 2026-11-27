@@ -213,6 +213,7 @@ export const GET_EDUCATIONS = gql`
 				en
 				ko
 			}
+			institutionNative
 			program {
 				en
 				ko
@@ -221,10 +222,22 @@ export const GET_EDUCATIONS = gql`
 				en
 				ko
 			}
+			qualification {
+				en
+				ko
+			}
+			location {
+				en
+				ko
+			}
 			startDate
 			endDate
 			status
 			order
+			image {
+				url
+				blurDataUrl
+			}
 		}
 	}
 `;

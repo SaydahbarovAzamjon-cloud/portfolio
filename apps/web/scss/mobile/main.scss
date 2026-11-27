@@ -115,6 +115,35 @@
 
 @media (max-width: $tablet) {
 	#pc-wrap {
+		.education {
+			.education-head {
+				grid-template-columns: 1fr;
+			}
+			.edu-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.journey {
+			.journey-head {
+				grid-template-columns: 1fr;
+			}
+			.timeline-track {
+				display: none;
+			}
+			.timeline-steps {
+				grid-template-columns: repeat(2, 1fr);
+				row-gap: 12px;
+			}
+			.journey-stats {
+				grid-template-columns: repeat(3, auto);
+
+				.journey-quote {
+					grid-column: 1 / -1;
+				}
+			}
+		}
+
 		.who-i-am {
 			.who-main {
 				grid-template-columns: 1fr;
@@ -243,6 +272,63 @@
 				.stats {
 					flex-direction: column;
 					align-items: flex-start;
+				}
+			}
+		}
+
+		.education {
+			.edu-card {
+				.edu-photo {
+					width: 100%;
+					height: 46%;
+					mask-image: linear-gradient(180deg, #000 50%, transparent 100%);
+				}
+				.edu-body {
+					padding-top: 56%;
+				}
+				.edu-top {
+					position: absolute;
+					top: 18px;
+					left: 18px;
+					right: 18px;
+
+					// readable on top of the photo
+					.degree-pill {
+						background: rgba(#fff6ee, 0.92);
+						box-shadow: 0 8px 20px rgba(#7a2a08, 0.15);
+					}
+				}
+				.school {
+					max-width: none;
+					margin-top: 0;
+				}
+				.edu-fields {
+					grid-template-columns: 1fr;
+					gap: 14px;
+				}
+				.edu-field {
+					padding: 0;
+
+					& + .edu-field {
+						border-left: none;
+					}
+				}
+			}
+			.degree-line {
+				margin: 28px 18% 0;
+			}
+		}
+
+		.journey {
+			.timeline-steps {
+				grid-template-columns: 1fr;
+			}
+			.journey-stats {
+				grid-template-columns: 1fr;
+
+				.stat {
+					padding-right: 0;
+					border-right: none;
 				}
 			}
 		}
