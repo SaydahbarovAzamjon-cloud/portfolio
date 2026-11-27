@@ -246,8 +246,8 @@
 			"chip_football": "축구",
 			"chip_martial": "무술",
 			"chip_uz": "모국어",
-			"chip_en": "C1",
-			"chip_ko": "C1",
+			"chip_en": "IELTS 6.5",
+			"chip_ko": "KIIP 4단계",
 			"chip_ru": "C1",
 			"photo_korea": "Life in South Korea",
 			"photo_learning": "Learning & Reading",
@@ -266,6 +266,22 @@
 			"routeFromCity": "타슈켄트",
 			"routeTo": "대한민국",
 			"routeToCity": "김해 · 부산"
+		},
+		"certs": {
+			"title": "자격증",
+			"view": "자격증 보기",
+			"devexAlt": "Devex Academy 수료증: 풀스택, DevOps & AI 엔지니어",
+			"devexIssuer": "Devex Academy · 2026",
+			"devexTitle": "풀스택, DevOps & AI 엔지니어",
+			"devexProgram": "Agentic Fullstack and AI Engineering",
+			"ieltsIssuer": "IELTS Academic · 2025",
+			"ieltsOverall": "종합 점수",
+			"ieltsMeta": "학업과 업무를 위한 영어",
+			"improving": "꾸준히 향상 중",
+			"kiipIssuer": "사회통합프로그램 (KIIP)",
+			"kiipLevel": "4단계",
+			"kiipScale": "0 – 5단계 중",
+			"kiipMeta": "한국어와 한국 사회 이해"
 		}
 	}
 }

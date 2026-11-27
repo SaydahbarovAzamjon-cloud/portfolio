@@ -35,11 +35,14 @@ const SPORTS: { key: string; icon: IconType }[] = [
 	{ key: 'martial', icon: GiBoxingGlove },
 ];
 const TOPICS = ['business', 'finance', 'technology', 'growth'];
-/** Language level as a share of the bar: native = full, C1 = 85% (from the CV). */
+/**
+ * Language level as a share of the bar: native = full; English and Korean follow the test results
+ * (IELTS 6.5 of 9, KIIP stage 4 of 0 – 5); Russian C1 is from the CV.
+ */
 const LANGUAGES: { key: string; level: number }[] = [
 	{ key: 'uz', level: 100 },
-	{ key: 'en', level: 85 },
-	{ key: 'ko', level: 85 },
+	{ key: 'en', level: 72 },
+	{ key: 'ko', level: 80 },
 	{ key: 'ru', level: 85 },
 ];
 

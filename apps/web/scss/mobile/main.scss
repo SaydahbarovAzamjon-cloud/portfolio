@@ -128,6 +128,13 @@
 			.edu-grid {
 				grid-template-columns: 1fr;
 			}
+			.cert-grid {
+				grid-template-columns: 1fr 1fr;
+
+				.cert-devex {
+					grid-column: 1 / -1;
+				}
+			}
 		}
 
 		.journey {
@@ -337,6 +344,12 @@
 			}
 			.degree-line {
 				margin: 28px 18% 0;
+			}
+			.cert-grid {
+				grid-template-columns: 1fr;
+			}
+			.cert-devex {
+				flex-direction: column;
 			}
 		}
 

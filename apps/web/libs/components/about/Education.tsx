@@ -18,6 +18,7 @@ import injePhoto from '../../../public/img/about/edu-inje.webp';
 import tstuPhoto from '../../../public/img/about/edu-tstu.webp';
 import ScrollRise from '../common/ScrollRise';
 import ScrollRevealText from '../common/ScrollRevealText';
+import Certifications from './Certifications';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -243,6 +244,8 @@ const Education = () => {
 					<DegreePoint key={item._id} item={item} />
 				))}
 			</motion.div>
+
+			<Certifications />
 
 			<motion.div className={'education-quote'} {...reveal(0.2, 24)}>
 				<RiDoubleQuotesL className={'quote-mark'} />

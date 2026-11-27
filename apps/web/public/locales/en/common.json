@@ -246,8 +246,8 @@
 			"chip_football": "Football",
 			"chip_martial": "Martial Arts",
 			"chip_uz": "Native",
-			"chip_en": "C1",
-			"chip_ko": "C1",
+			"chip_en": "IELTS 6.5",
+			"chip_ko": "KIIP 4",
 			"chip_ru": "C1",
 			"photo_korea": "Life in South Korea",
 			"photo_learning": "Learning & Reading",
@@ -266,6 +266,22 @@
 			"routeFromCity": "Tashkent",
 			"routeTo": "South Korea",
 			"routeToCity": "Gimhae · Busan"
+		},
+		"certs": {
+			"title": "Certifications",
+			"view": "View certificate",
+			"devexAlt": "Devex Academy certificate: Full-Stack, DevOps and AI Engineer",
+			"devexIssuer": "Devex Academy · 2026",
+			"devexTitle": "Full-Stack, DevOps & AI Engineer",
+			"devexProgram": "Agentic Fullstack and AI Engineering",
+			"ieltsIssuer": "IELTS Academic · 2025",
+			"ieltsOverall": "Overall band",
+			"ieltsMeta": "English for academic and professional work",
+			"improving": "Continuously improving",
+			"kiipIssuer": "KIIP · Korea Immigration & Integration Program",
+			"kiipLevel": "Level 4",
+			"kiipScale": "of stages 0 – 5",
+			"kiipMeta": "Korean language and understanding of Korean society"
 		}
 	}
 }
