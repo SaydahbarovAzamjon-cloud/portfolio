@@ -241,7 +241,7 @@
 			"languagesTitle": "Languages",
 			"languagesText": "Uzbek is my native language; I also speak English, Korean and Russian.",
 			"travelTitle": "Travel & Explore",
-			"travelText": "Discovering new places, cultures and perspectives.",
+			"travelText": "Discovering new places, cultures and perspectives, from Uzbekistan to Korea and beyond.",
 			"chip_fitness": "Fitness",
 			"chip_football": "Football",
 			"chip_martial": "Martial Arts",
@@ -257,7 +257,15 @@
 			"quote1": "I believe a well-rounded life, with sports, learning, travel and cultural experiences, makes me",
 			"quote2": "a better engineer",
 			"quote3": "and a",
-			"quote4": "more creative problem solver."
+			"quote4": "more creative problem solver.",
+			"topic_business": "Business",
+			"topic_finance": "Finance",
+			"topic_technology": "Technology",
+			"topic_growth": "Self-development",
+			"routeFrom": "Uzbekistan",
+			"routeFromCity": "Tashkent",
+			"routeTo": "South Korea",
+			"routeToCity": "Gimhae · Busan"
 		}
 	}
 }

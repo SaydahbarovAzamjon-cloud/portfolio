@@ -286,34 +286,14 @@
 			.interests {
 				grid-template-columns: 1fr;
 			}
-			.collage {
-				grid-template-columns: 1fr 1fr;
-				grid-template-rows: repeat(3, 180px);
+			.beyond-content {
+				position: static;
 			}
 			.photo-tile {
-				&.tile-korea {
-					grid-column: 1;
-					grid-row: 1 / 3;
-					margin-top: 0;
-				}
-				&.tile-learning {
-					grid-column: 2;
-					grid-row: 1;
-				}
-				&.tile-fitness {
-					grid-column: 2;
-					grid-row: 2;
-					margin-top: 0;
-				}
-				&.tile-football {
-					grid-column: 1;
-					grid-row: 3;
-				}
-				&.tile-travel {
-					grid-column: 2;
-					grid-row: 3;
-					margin-top: 0;
-				}
+				position: relative;
+				top: auto !important;
+				height: 380px;
+				margin-bottom: 28px;
 			}
 		}
 

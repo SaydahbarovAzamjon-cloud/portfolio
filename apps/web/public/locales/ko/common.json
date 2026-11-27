@@ -241,7 +241,7 @@
 			"languagesTitle": "언어",
 			"languagesText": "우즈베크어가 모국어이며, 영어, 한국어, 러시아어를 구사합니다.",
 			"travelTitle": "여행 & 탐험",
-			"travelText": "새로운 장소와 문화, 관점을 발견합니다.",
+			"travelText": "우즈베키스탄에서 한국, 그리고 그 너머까지, 새로운 장소와 문화, 관점을 발견합니다.",
 			"chip_fitness": "피트니스",
 			"chip_football": "축구",
 			"chip_martial": "무술",
@@ -257,7 +257,15 @@
 			"quote1": "운동, 배움, 여행, 다양한 문화 경험으로 균형 잡힌 삶이 저를",
 			"quote2": "더 나은 엔지니어,",
 			"quote3": "그리고",
-			"quote4": "더 창의적인 문제 해결자로 만든다고 믿습니다."
+			"quote4": "더 창의적인 문제 해결자로 만든다고 믿습니다.",
+			"topic_business": "비즈니스",
+			"topic_finance": "재무",
+			"topic_technology": "기술",
+			"topic_growth": "자기계발",
+			"routeFrom": "우즈베키스탄",
+			"routeFromCity": "타슈켄트",
+			"routeTo": "대한민국",
+			"routeToCity": "김해 · 부산"
 		}
 	}
 }
