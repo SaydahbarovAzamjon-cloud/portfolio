@@ -2,40 +2,15 @@ import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next/pages';
 import { Box, Stack } from '@mui/material';
-import { motion, MotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll } from 'motion/react';
 import { LuArrowUpRight, LuBadgeCheck, LuLanguages, LuTrendingUp } from 'react-icons/lu';
+import RiseCard from '../common/RiseCard';
 import devexCertificate from '../../../public/img/about/cert-devex.webp';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 /** KIIP (사회통합프로그램) runs from stage 0 to stage 5; the current stage is 4. */
 const KIIP_LEVEL = 4;
 const KIIP_STAGES = [0, 1, 2, 3, 4, 5];
-
-interface RiseCardProps {
-	className: string;
-	index: number;
-	total: number;
-	progress: MotionValue<number>;
-	children: React.ReactNode;
-}
-
-/** Same as the university cards: each card rises on its own slice of the scroll, strictly one after another. */
-const RiseCard = (props: RiseCardProps) => {
-	const reduceMotion = useReducedMotion();
-	const range = reduceMotion ? 0 : 1;
-	const slice = 1 / props.total;
-	const start = props.index * slice;
-	const end = start + slice * 0.9;
-	const y = useTransform(props.progress, [start, end], [180 * range, 0]);
-	const opacity = useTransform(props.progress, [start, start + slice * 0.5], [reduceMotion ? 1 : 0, 1]);
-	const scale = useTransform(props.progress, [start, end], [1 - 0.06 * range, 1]);
-	const rotate = useTransform(props.progress, [start, end], [(props.index % 2 ? 3 : -3) * range, 0]);
-	return (
-		<motion.article className={props.className} style={{ y, opacity, scale, rotate }}>
-			{props.children}
-		</motion.article>
-	);
-};
 
 /** Certificates and language tests, shown inside the Education section. */
 const Certifications = () => {
