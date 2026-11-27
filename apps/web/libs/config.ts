@@ -22,6 +22,10 @@ export const sectionTotal = twoDigits(homeSections.length);
 export const sectionNumber = (key: HomeSection): string => twoDigits(homeSections.indexOf(key) + 1);
 export const sectionCount = (key: HomeSection): string => `${sectionNumber(key)} / ${sectionTotal}`;
 
+/** A page's place in the navbar, e.g. "02 / 07" for About. */
+export const pageCount = (key: string): string =>
+	`${twoDigits(navLinks.findIndex((link) => link.key === key) + 1)} / ${twoDigits(navLinks.length)}`;
+
 /** Which page type a route is, for visit tracking. */
 export const pageTypes: Record<string, PageType> = {
 	'/': PageType.HOME,

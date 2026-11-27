@@ -127,5 +127,25 @@
 		"en": "English",
 		"ko": "Korean (한국어)",
 		"empty": "The files will be available soon."
+	},
+	"about": {
+		"hero": {
+			"eyebrow": "About me",
+			"title1": "Turning Curiosity",
+			"title2": "into Real Impact.",
+			"text": "I'm Azamjon — a Full-Stack & AI Engineer based in South Korea. I build web services end to end and connect them with AI to solve real business problems.",
+			"journey": "View My Journey",
+			"download": "Download CV & Portfolio",
+			"school": "Inje University",
+			"degree": "Master's, Financial Management",
+			"expValue": "3+ Years",
+			"expLabel": "Development Experience",
+			"basedIn": "Based in",
+			"script": "South Korea",
+			"role1": "Master's Student",
+			"role2": "Full-Stack Engineer",
+			"role3": "AI Engineer",
+			"role4": "Problem Solver"
+		}
 	}
 }

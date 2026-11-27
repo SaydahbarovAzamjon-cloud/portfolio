@@ -115,6 +115,22 @@
 
 @media (max-width: $tablet) {
 	#pc-wrap {
+		.about-hero {
+			.about-hero-main {
+				grid-template-columns: 1fr;
+				padding-right: $side;
+			}
+			.hero-content {
+				padding-bottom: 32px;
+			}
+			.hero-visual {
+				min-height: 640px;
+			}
+			.about-hills {
+				width: 100%;
+			}
+		}
+
 		.container,
 		#top .navbar .navbar-main .container,
 		#footer .footer-container .container {
@@ -210,6 +226,55 @@
 				.stats {
 					flex-direction: column;
 					align-items: flex-start;
+				}
+			}
+		}
+
+		.about-hero {
+			.hero-content .title .title-line {
+				white-space: normal;
+			}
+			.hero-content .button,
+			.hero-content .download-menu {
+				width: 100%;
+				min-width: 0;
+			}
+			.hero-visual {
+				min-height: 520px;
+
+				.backdrop {
+					top: 45%;
+					scale: 0.7;
+				}
+				.portrait {
+					left: 6%;
+					right: 0;
+				}
+				.roles {
+					display: none;
+				}
+				.info-cards {
+					top: auto;
+					bottom: 3%;
+					left: 0;
+					right: 0;
+					flex-direction: row;
+					gap: 8px;
+				}
+				.info-card {
+					flex: 1;
+					width: auto;
+					gap: 10px;
+					padding: 10px;
+
+					.icon {
+						width: 36px;
+						height: 36px;
+						font-size: 18px;
+					}
+				}
+				.based-card {
+					display: none;
 				}
 			}
 		}

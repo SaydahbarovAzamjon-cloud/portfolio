@@ -199,3 +199,32 @@ export const GET_SKILLS = gql`
 		}
 	}
 `;
+
+/**************************
+ *        EDUCATION       *
+ *************************/
+
+export const GET_EDUCATIONS = gql`
+	query GetEducations {
+		getEducations {
+			_id
+			degree
+			institution {
+				en
+				ko
+			}
+			program {
+				en
+				ko
+			}
+			major {
+				en
+				ko
+			}
+			startDate
+			endDate
+			status
+			order
+		}
+	}
+`;
