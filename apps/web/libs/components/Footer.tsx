@@ -11,31 +11,12 @@ import { FaLinkedinIn, FaGithub, FaHeart } from 'react-icons/fa';
 import { SiNextdotjs, SiTypescript, SiReact, SiNodedotjs, SiPython } from 'react-icons/si';
 import { GET_PROFILE, GET_PROJECTS } from '../../apollo/user/query';
 import { navLinks } from '../config';
-import { localize } from '../utils';
+import { dunePath, localize } from '../utils';
 import { Profile } from '../types/profile/profile';
 import { Project } from '../types/project/project';
 import { SocialPlatform } from '../enums/profile.enum';
 
 const FEATURED_LIMIT = 3;
-
-/** One dune period is 2100 units wide (the footer's viewBox). */
-const DUNE_PERIOD = 2100;
-
-/**
- * Dune outline drawn twice side by side (0 → 4200), built from sine waves that repeat exactly
- * every 2100 units, so sliding it left by 2100 loops forever without a seam.
- */
-const dunePath = (base: number, waves: [amplitude: number, cycles: number, phase: number][]): string => {
-	const points: string[] = [];
-	for (let x = 0; x <= DUNE_PERIOD * 2; x += 20) {
-		const y = waves.reduce(
-			(sum, [amplitude, cycles, phase]) => sum + amplitude * Math.sin((2 * Math.PI * cycles * x) / DUNE_PERIOD + phase),
-			base,
-		);
-		points.push(`${x} ${y.toFixed(1)}`);
-	}
-	return `M${points.join(' L')} V 260 H 0 Z`;
-};
 
 const DUNE_FAR = dunePath(85, [
 	[28, 2, 0.4],
