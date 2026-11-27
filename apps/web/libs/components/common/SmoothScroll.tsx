@@ -12,7 +12,8 @@ const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 		if (router.pathname.startsWith('/_admin')) return;
 
-		const lenis = new Lenis({ autoRaf: true, lerp: 0.1, anchors: true });
+		// lower lerp = softer glide; wheelMultiplier < 1 = each wheel step travels less (slower, calmer pages)
+		const lenis = new Lenis({ autoRaf: true, lerp: 0.07, wheelMultiplier: 0.8, anchors: true });
 		return () => lenis.destroy();
 	}, [router.pathname]);
 
