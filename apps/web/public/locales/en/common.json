@@ -146,6 +146,26 @@
 			"role2": "Full-Stack Engineer",
 			"role3": "AI Engineer",
 			"role4": "Problem Solver"
+		},
+		"who": {
+			"eyebrow": "Who I am",
+			"title1": "Engineer by mindset.",
+			"title2": "Builder by heart.",
+			"story1": "I grew up in Uzbekistan and studied engineering. What pulled me in was never the theory, but the moment a real problem finally gets solved. Software turned out to be the fastest way to keep having that moment, so I started building, and I never stopped.",
+			"story2": "Today I work across full-stack development and AI. Alongside it, I'm doing a master's in finance, because I want to understand not only how products are built, but why they matter to the people and businesses using them.",
+			"howTitle": "How I work",
+			"principle1Title": "Problem first.",
+			"principle1Text": "I start from the real problem, not from the technology I'd like to use.",
+			"principle2Title": "Own it, end to end.",
+			"principle2Text": "From the first idea to the live server, I finish what I start.",
+			"principle3Title": "Simple wins.",
+			"principle3Text": "Clear solutions that others can read, use and build on.",
+			"principle4Title": "Always learning.",
+			"principle4Text": "Every project teaches me something, and I make sure to take it.",
+			"nextTitle": "What's next",
+			"nextText": "To keep growing as an engineer, and to build and take part in projects that make a real difference for people.",
+			"chip": "Engineer · Builder",
+			"photoAlt": "Azamjon smiling in a warmly lit café"
 		}
 	}
 }

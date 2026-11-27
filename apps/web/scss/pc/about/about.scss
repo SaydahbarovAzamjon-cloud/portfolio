@@ -487,6 +487,303 @@
 			}
 		}
 	}
+	/* who I am */
+	.who-i-am {
+		position: relative;
+		padding: clamp(72px, 7vw, 130px) $side;
+		background:
+			radial-gradient(40% 50% at 15% 20%, rgba(#ffb27a, 0.35) 0%, rgba(#ffb27a, 0) 70%),
+			radial-gradient(45% 55% at 95% 80%, rgba(#ff9a52, 0.25) 0%, rgba(#ff9a52, 0) 70%),
+			linear-gradient(180deg, #f6b083 0%, #fbd8bd 18%, #fde9da 60%, #fde3cf 100%);
+
+		.who-main {
+			display: grid;
+			grid-template-columns: 38% 1fr;
+			gap: clamp(40px, 5vw, 100px);
+			align-items: stretch;
+		}
+
+		// left column: the photo stretches to the height of the text column, what's next sits under it
+		.who-left {
+			gap: clamp(18px, 1.6vw, 28px);
+
+			.next {
+				display: flex;
+				align-items: center;
+				gap: clamp(18px, 2vw, 36px);
+				padding: clamp(18px, 1.5vw, 26px) clamp(20px, 1.8vw, 30px);
+				border-radius: 20px;
+				background: $black;
+				color: $white;
+
+				.next-label {
+					flex-shrink: 0;
+					display: inline-flex;
+					align-items: center;
+					gap: 10px;
+					font-size: clamp(12px, 0.8vw, 15px);
+					font-weight: 700;
+					letter-spacing: 0.12em;
+					text-transform: uppercase;
+					color: #ff8a3d;
+
+					svg {
+						animation: next-nudge 2s $ease infinite;
+					}
+				}
+				p {
+					font-size: clamp(14px, 1vw, 18px);
+					line-height: 1.5;
+					color: rgba($white, 0.88);
+				}
+			}
+		}
+
+		/* left: photo */
+		.who-visual {
+			position: relative;
+			flex: 1;
+			min-height: clamp(420px, 36vw, 720px);
+
+			// arch window: round top, soft bottom corners
+			.photo-frame {
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				border-radius: 999px 999px 36px 36px;
+				overflow: hidden;
+				// drop-shadow follows the arch (a box-shadow would be cut square by the reveal clip)
+				filter: drop-shadow(0 30px 50px rgba(#5a1d05, 0.3));
+			}
+			// a thin orange arch peeking out behind the photo, and a soft glow under it
+			.arch-outline {
+				position: absolute;
+				inset: 0;
+				z-index: 0;
+				border-radius: 999px 999px 36px 36px;
+				border: 1.5px solid rgba($accent, 0.55);
+				pointer-events: none;
+			}
+			.arch-glow {
+				position: absolute;
+				left: 10%;
+				right: -10%;
+				bottom: -8%;
+				height: 45%;
+				z-index: 0;
+				border-radius: 50%;
+				background: radial-gradient(closest-side, rgba(#ff7a2a, 0.45), rgba(#ff7a2a, 0));
+				filter: blur(20px);
+				pointer-events: none;
+			}
+			.photo {
+				position: absolute;
+				inset: 0;
+
+				img {
+					object-fit: cover;
+					object-position: center 30%;
+					// hover zoom uses 'scale' (the scroll zoom on the wrapper uses 'transform')
+					transition: scale 1.1s $ease;
+				}
+			}
+			.photo-frame:hover .photo img {
+				scale: 1.07;
+			}
+			// warm glow from the bottom so the dark photo meets the peach page
+			.photo-shade {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(180deg, rgba(#000, 0) 55%, rgba(#3a1607, 0.45) 100%);
+				pointer-events: none;
+			}
+
+			.photo-chip {
+				position: absolute;
+				z-index: 2;
+				right: -6%;
+				bottom: 10%;
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				padding: 12px 20px;
+				border-radius: $pill;
+				background: linear-gradient(160deg, rgba(#fff6ee, 0.9) 0%, rgba(#fde4d2, 0.75) 100%);
+				border: 1px solid rgba($white, 0.9);
+				box-shadow: 0 16px 34px rgba(#7a2a08, 0.2);
+				backdrop-filter: blur(10px);
+				font-size: clamp(13px, 0.9vw, 17px);
+				font-weight: 700;
+				color: $black;
+
+				.chip-dot {
+					width: 10px;
+					height: 10px;
+					border-radius: 50%;
+					background: $accent;
+					box-shadow: 0 0 0 4px rgba($accent, 0.18);
+					animation: pulse 2.4s ease-in-out infinite;
+				}
+			}
+		}
+
+		/* right: story */
+		.who-content {
+			max-width: 860px;
+
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 18px;
+				max-width: 30em;
+				font-size: clamp(12px, 0.85vw, 16px);
+				font-weight: 500;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: #3a302a;
+
+				.dot {
+					width: 14px;
+					height: 14px;
+					border-radius: 50%;
+					background: $accent;
+				}
+				.line {
+					flex: 1;
+					height: 1px;
+					background: rgba($black, 0.35);
+				}
+			}
+
+			.title {
+				display: flex;
+				flex-direction: column;
+				margin: clamp(20px, 2vw, 36px) 0 clamp(20px, 2vw, 34px);
+				font-size: clamp(38px, 3.6vw, 72px);
+				font-weight: 800;
+				line-height: 1.02;
+				letter-spacing: -0.03em;
+				color: $black;
+
+				.title-mask {
+					display: block;
+					overflow: hidden;
+					padding-bottom: 0.1em;
+					line-height: inherit;
+				}
+				.title-line {
+					display: block;
+					line-height: inherit;
+				}
+				.accent {
+					background: linear-gradient(90deg, #ff7a1a 0%, #ff3d00 100%);
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent;
+				}
+			}
+
+			// big, bold story text (it fills in letter by letter while scrolling)
+			.story {
+				max-width: 34em;
+				font-weight: 600;
+				font-size: clamp(18px, 1.45vw, 28px);
+				line-height: 1.45;
+				letter-spacing: -0.012em;
+				color: $black;
+
+				& + .story {
+					margin-top: 14px;
+				}
+				.reveal-word {
+					white-space: nowrap;
+				}
+			}
+
+			.sub-title {
+				display: block;
+				margin: clamp(30px, 2.8vw, 50px) 0 16px;
+				font-size: clamp(12px, 0.8vw, 15px);
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: $accent;
+			}
+
+			.principles {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: clamp(12px, 1vw, 18px);
+			}
+			.principle {
+				position: relative;
+				padding: clamp(18px, 1.5vw, 26px);
+				border-radius: 20px;
+				background: linear-gradient(160deg, rgba(#fff6ee, 0.85) 0%, rgba(#fde4d2, 0.55) 100%);
+				border: 1px solid rgba($white, 0.9);
+				box-shadow: 0 14px 34px rgba(#b54a12, 0.08);
+				overflow: hidden;
+				transition:
+					translate 0.5s $ease,
+					box-shadow 0.5s $ease,
+					border-color 0.5s $ease;
+
+				.number {
+					position: absolute;
+					top: 16px;
+					right: 20px;
+					font-size: clamp(26px, 2vw, 38px);
+					font-weight: 800;
+					color: rgba($accent, 0.14);
+					transition: color 0.5s $ease;
+				}
+				.icon {
+					width: 44px;
+					height: 44px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 12px;
+					background: rgba(#ff7a2a, 0.14);
+					color: $accent;
+					font-size: 21px;
+					transition:
+						background 0.45s $ease,
+						color 0.45s $ease,
+						rotate 0.45s $ease;
+				}
+				strong {
+					display: block;
+					margin-top: 16px;
+					font-size: clamp(16px, 1.1vw, 20px);
+					font-weight: 700;
+					color: $black;
+				}
+				p {
+					margin-top: 6px;
+					font-size: clamp(13px, 0.86vw, 16px);
+					line-height: 1.5;
+					color: #4a3d35;
+				}
+
+				&:hover {
+					translate: 0 -5px;
+					border-color: rgba($accent, 0.3);
+					box-shadow: 0 24px 48px rgba(#b54a12, 0.16);
+
+					.number {
+						color: rgba($accent, 0.4);
+					}
+					.icon {
+						background: $accent;
+						color: $white;
+						rotate: -8deg;
+					}
+				}
+			}
+
+		}
+	}
 }
 
 @keyframes card-float {
@@ -505,5 +802,11 @@
 		.based-card {
 			animation: none;
 		}
+	}
+}
+
+@keyframes next-nudge {
+	50% {
+		translate: 5px 0;
 	}
 }

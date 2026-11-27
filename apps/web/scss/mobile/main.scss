@@ -115,6 +115,23 @@
 
 @media (max-width: $tablet) {
 	#pc-wrap {
+		.who-i-am {
+			.who-main {
+				grid-template-columns: 1fr;
+			}
+			.who-visual {
+				width: 100%;
+				max-width: 520px;
+				min-height: 0;
+				aspect-ratio: 3 / 4;
+				margin: 0 auto;
+
+				.photo-chip {
+					right: 4%;
+				}
+			}
+		}
+
 		.about-hero {
 			.about-hero-main {
 				grid-template-columns: 1fr;
@@ -227,6 +244,17 @@
 					flex-direction: column;
 					align-items: flex-start;
 				}
+			}
+		}
+
+		.who-i-am {
+			.who-content .principles {
+				grid-template-columns: 1fr;
+			}
+			.who-left .next {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 10px;
 			}
 		}
 
