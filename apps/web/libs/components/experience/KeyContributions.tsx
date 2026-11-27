@@ -2,19 +2,21 @@ import React, { useRef } from 'react';
 import { useTranslation } from 'next-i18next/pages';
 import { Stack, Box } from '@mui/material';
 import { useScroll } from 'motion/react';
-import { LuBrainCircuit, LuCloudUpload, LuLaptop, LuServer, LuTarget } from 'react-icons/lu';
-import { IconType } from 'react-icons';
 import ScrollRise from '../common/ScrollRise';
 import ScrollRevealText from '../common/ScrollRevealText';
 import RiseCard from '../common/RiseCard';
+import ContributionArt, { ContributionArtKind } from './ContributionArt';
 
-/** Five areas of contribution (text in experience.contributions.<key>Title / <key>Text). */
-const AREAS: { key: string; icon: IconType }[] = [
-	{ key: 'fullstack', icon: LuLaptop },
-	{ key: 'ai', icon: LuBrainCircuit },
-	{ key: 'backend', icon: LuServer },
-	{ key: 'deploy', icon: LuCloudUpload },
-	{ key: 'problems', icon: LuTarget },
+/**
+ * Five areas of contribution (text in experience.contributions.<key>Title / <key>Text),
+ * each with the projects from the CV where that work was done.
+ */
+const AREAS: { key: ContributionArtKind; projects: string[] }[] = [
+	{ key: 'fullstack', projects: ['Fixora', 'GadgetStore'] },
+	{ key: 'ai', projects: ['CarVia', 'FoodAI', 'Fixora'] },
+	{ key: 'backend', projects: ['Fixora', 'GadgetStore'] },
+	{ key: 'deploy', projects: ['Fixora', 'CarVia', 'GadgetStore'] },
+	{ key: 'realtime', projects: ['Fixora', 'GadgetStore'] },
 ];
 
 const KeyContributions = () => {
@@ -43,28 +45,29 @@ const KeyContributions = () => {
 			</Stack>
 
 			<Box className={'contribution-grid'} ref={gridRef}>
-				{AREAS.map((area, index) => {
-					const Icon = area.icon;
-					return (
-						<RiseCard
-							key={area.key}
-							className={'contribution-card'}
-							index={index}
-							total={AREAS.length}
-							progress={scrollYProgress}
-						>
-							{/* a glossy 3D-looking tile: gradient block, top highlight and a soft base plate */}
-							<span className={'tile-3d'}>
-								<span className={'tile-base'} />
-								<span className={'tile-face'}>
-									<Icon />
+				{AREAS.map((area, index) => (
+					<RiseCard
+						key={area.key}
+						className={'contribution-card'}
+						index={index}
+						total={AREAS.length}
+						progress={scrollYProgress}
+					>
+						{/* a glossy 3D-style illustration standing on soft plates */}
+						<span className={'tile-3d'}>
+							<ContributionArt kind={area.key} />
+						</span>
+						<strong>{t(`experience.contributions.${area.key}Title`)}</strong>
+						<p>{t(`experience.contributions.${area.key}Text`)}</p>
+						<span className={'project-tags'}>
+							{area.projects.map((project) => (
+								<span key={project} className={'project-tag'}>
+									{project}
 								</span>
-							</span>
-							<strong>{t(`experience.contributions.${area.key}Title`)}</strong>
-							<p>{t(`experience.contributions.${area.key}Text`)}</p>
-						</RiseCard>
-					);
-				})}
+							))}
+						</span>
+					</RiseCard>
+				))}
 			</Box>
 		</Stack>
 	);

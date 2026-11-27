@@ -348,8 +348,8 @@
 			"backendText": "Designed maintainable APIs (GraphQL, REST) with auth and clean data models.",
 			"deployTitle": "Production Deployment",
 			"deployText": "Deployed and ran applications on VPS with Docker, NGINX, PM2 and SSL.",
-			"problemsTitle": "Real-World Problem Solving",
-			"problemsText": "Turned business requirements into practical, user-focused solutions."
+			"realtimeTitle": "Real-Time Features",
+			"realtimeText": "Built live chat, status updates and notifications with WebSocket and Socket.IO."
 		},
 		"achievements": {
 			"eyebrow": "Key achievements",

@@ -348,8 +348,8 @@
 			"backendText": "인증과 깔끔한 데이터 모델을 갖춘 유지보수하기 쉬운 API(GraphQL, REST)를 설계했습니다.",
 			"deployTitle": "프로덕션 배포",
 			"deployText": "Docker, NGINX, PM2, SSL로 VPS에 애플리케이션을 배포하고 운영했습니다.",
-			"problemsTitle": "실제 문제 해결",
-			"problemsText": "비즈니스 요구사항을 사용자 중심의 실용적인 솔루션으로 바꿨습니다."
+			"realtimeTitle": "실시간 기능",
+			"realtimeText": "WebSocket과 Socket.IO로 실시간 채팅, 상태 업데이트, 알림 기능을 구현했습니다."
 		},
 		"achievements": {
 			"eyebrow": "주요 성과",

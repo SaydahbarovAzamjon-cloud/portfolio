@@ -1002,47 +1002,56 @@
 				line-height: 1.5;
 				color: #3a302a;
 			}
-			&:hover .tile-face {
+			// the projects where this was done, pinned to the bottom of the card
+			.project-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+				margin-top: auto;
+				padding-top: 16px;
+			}
+			.project-tag {
+				padding: 5px 11px;
+				border-radius: $pill;
+				background: rgba($white, 0.8);
+				border: 1px solid rgba(#ff8a3d, 0.3);
+				font-size: clamp(11px, 0.75vw, 13px);
+				font-weight: 700;
+				color: $accent;
+			}
+			&:hover .art-object {
 				translate: 0 -8px;
-				rotate: -4deg;
 			}
 		}
-		// a glossy block standing on a soft plate
+		// the illustration floats gently above its plates
 		.tile-3d {
-			position: relative;
 			display: flex;
 			justify-content: center;
-			height: clamp(110px, 8vw, 150px);
 
-			.tile-base {
-				position: absolute;
-				left: 50%;
-				bottom: 4px;
-				width: 72%;
-				height: 26px;
-				translate: -50% 0;
-				border-radius: 50%;
-				background: radial-gradient(closest-side, rgba(#ff7a2a, 0.35), rgba(#ff7a2a, 0));
+			.contribution-art {
+				width: 100%;
+				max-width: 220px;
+				height: auto;
+				overflow: visible;
+				filter: drop-shadow(0 18px 22px rgba(#c4500f, 0.18));
 			}
-			.tile-face {
-				position: relative;
-				width: clamp(84px, 6vw, 112px);
-				height: clamp(84px, 6vw, 112px);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border-radius: 28px;
-				background: radial-gradient(circle at 32% 25%, #ffd2ae 0%, #ff8a3d 40%, $accent 100%);
-				box-shadow:
-					inset 0 8px 14px rgba($white, 0.5),
-					inset 0 -10px 18px rgba(#a83a06, 0.35),
-					0 22px 34px rgba($accent, 0.3);
-				font-size: clamp(38px, 2.8vw, 52px);
-				color: $white;
-				transition:
-					translate 0.5s $ease,
-					rotate 0.5s $ease;
+			.art-object {
+				animation: art-float 4.5s ease-in-out infinite;
+				transition: translate 0.5s $ease;
 			}
+		}
+		// typing dots in the chat bubble
+		.typing-dot {
+			animation: typing-dot 1.4s ease-in-out infinite;
+		}
+		.dot-1 {
+			animation-delay: 0.2s;
+		}
+		.dot-2 {
+			animation-delay: 0.4s;
+		}
+		.contribution-card:nth-child(2n) .art-object {
+			animation-delay: -2.2s;
 		}
 	}
 
@@ -1489,6 +1498,25 @@
 		translate: -50% -12px;
 	}
 }
+@keyframes typing-dot {
+	0%,
+	60%,
+	100% {
+		opacity: 1;
+	}
+	30% {
+		opacity: 0.35;
+	}
+}
+@keyframes art-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+}
 @keyframes art-bob {
 	0%,
 	100% {
@@ -1515,6 +1543,8 @@
 	.trail-card::after,
 	.road-card,
 	.card-art,
+	.art-object,
+	.typing-dot,
 	.journey-bg {
 		animation: none !important;
 	}
