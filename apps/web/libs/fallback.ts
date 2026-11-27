@@ -98,6 +98,7 @@ export const FALLBACK_EDUCATION: Education[] = [
 		degree: DegreeType.MASTER,
 		institution: { en: 'Inje University', ko: '인제대학교' },
 		institutionNative: '인제대학교',
+		program: { en: 'Global MBA', ko: '글로벌 MBA' },
 		major: { en: 'Financial Management', ko: '재무관리' },
 		location: { en: 'Gimhae, South Korea', ko: '대한민국 김해' },
 		startDate: '2025-03-01',

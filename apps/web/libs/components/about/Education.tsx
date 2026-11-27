@@ -120,6 +120,19 @@ const EduCard = (props: EduCardProps) => {
 
 				<h3 className={'school'}>{localize(item.institution, router.locale)}</h3>
 				{item.institutionNative && <span className={'school-native'}>{item.institutionNative}</span>}
+				{item.location && (
+					<span className={'location-pill'}>
+						<LuMapPin />
+						{localize(item.location, router.locale)}
+					</span>
+				)}
+				{/* the department / programme, when it differs from the major */}
+				{item.program && item.major && (
+					<span className={'department'}>
+						<small>{t('about.education.department')}</small>
+						<strong>{localize(item.program, router.locale)}</strong>
+					</span>
+				)}
 
 				<Box className={'edu-fields'}>
 					{fields.map((field) => {
@@ -135,13 +148,6 @@ const EduCard = (props: EduCardProps) => {
 						);
 					})}
 				</Box>
-
-				{item.location && (
-					<span className={'location-pill'}>
-						<LuMapPin />
-						{localize(item.location, router.locale)}
-					</span>
-				)}
 			</Stack>
 		</motion.article>
 	);

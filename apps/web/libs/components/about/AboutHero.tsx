@@ -12,7 +12,8 @@ import { dunePath, localize } from '../../utils';
 import { pageCount } from '../../config';
 import { Profile } from '../../types/profile/profile';
 import { Education } from '../../types/education/education';
-import { EducationStatus } from '../../enums/education.enum';
+import { DegreeType, EducationStatus } from '../../enums/education.enum';
+import { FALLBACK_EDUCATION } from '../../fallback';
 import DownloadMenu from '../common/DownloadMenu';
 import defaultPortrait from '../../../public/img/about/about-hero-portrait.webp';
 
@@ -50,11 +51,16 @@ const AboutHero = () => {
 		fetchPolicy: 'cache-first',
 	});
 	const profile = getProfileData?.getProfile;
-	const educations = getEducationsData?.getEducations ?? [];
+	const loadedEducations = getEducationsData?.getEducations ?? [];
+	const educations = loadedEducations.length ? loadedEducations : FALLBACK_EDUCATION;
 	// the degree in progress (the master's), otherwise the first one
 	const education = educations.find((item) => item.status === EducationStatus.IN_PROGRESS) ?? educations[0];
 	const school = education ? localize(education.institution, router.locale) : t('about.hero.school');
-	const degree = education ? localize(education.major ?? education.program, router.locale) : t('about.hero.degree');
+	const bachelor = educations.find((item) => item.degree === DegreeType.BACHELOR);
+	// "Master's, Financial Management" / "재무관리 석사"
+	const degree = education
+		? t('about.hero.masterOf', { major: localize(education.major ?? education.program, router.locale) })
+		: t('about.hero.degree');
 	const country = localize(profile?.location?.country, router.locale) || t('top.country');
 	const city = localize(profile?.location?.city, router.locale);
 	const stat = profile?.manualStats?.[0];
@@ -207,7 +213,22 @@ const AboutHero = () => {
 								<small>{degree}</small>
 							</span>
 						</motion.div>
-						<motion.div className={'info-card'} {...rise(1.12, 24)}>
+						{bachelor && (
+							<motion.div className={'info-card'} {...rise(1.12, 24)}>
+								<span className={'icon'}>
+									<LuGraduationCap />
+								</span>
+								<span className={'info-text'}>
+									<strong>{localize(bachelor.institution, router.locale)}</strong>
+									<small>{t('about.hero.bachelorDegree')}</small>
+								</span>
+							</motion.div>
+						)}
+					</motion.div>
+
+					{/* right side: experience and location (two cards on each side of the photo) */}
+					<motion.div className={'info-cards right'} style={{ y: cardsY }}>
+						<motion.div className={'info-card'} {...rise(1.24, 24)}>
 							<span className={'icon'}>
 								<LuCodeXml />
 							</span>
@@ -216,16 +237,15 @@ const AboutHero = () => {
 								<small>{stat ? localize(stat.label, router.locale) : t('about.hero.expLabel')}</small>
 							</span>
 						</motion.div>
-					</motion.div>
-
-					<motion.div className={'based-card'} {...rise(1.24, 24)}>
-						<span className={'icon'}>
-							<LuMapPin />
-						</span>
-						<span className={'info-text'}>
-							<small>{t('about.hero.basedIn')}</small>
-							<strong>{city ? `${city}, ${country}` : country}</strong>
-						</span>
+						<motion.div className={'based-card'} {...rise(1.36, 24)}>
+							<span className={'icon'}>
+								<LuMapPin />
+							</span>
+							<span className={'info-text'}>
+								<small>{t('about.hero.basedIn')}</small>
+								<strong>{city ? `${city}, ${country}` : country}</strong>
+							</span>
+						</motion.div>
 					</motion.div>
 				</Box>
 			</Stack>
