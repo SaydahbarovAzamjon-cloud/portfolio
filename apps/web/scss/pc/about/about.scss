@@ -499,52 +499,19 @@
 
 		.who-main {
 			display: grid;
-			grid-template-columns: 38% 1fr;
+			grid-template-columns: 32% 1fr;
 			gap: clamp(40px, 5vw, 100px);
-			align-items: stretch;
+			align-items: center;
 		}
 
-		// left column: the photo stretches to the height of the text column, what's next sits under it
-		.who-left {
-			gap: clamp(18px, 1.6vw, 28px);
-
-			.next {
-				display: flex;
-				align-items: center;
-				gap: clamp(18px, 2vw, 36px);
-				padding: clamp(18px, 1.5vw, 26px) clamp(20px, 1.8vw, 30px);
-				border-radius: 20px;
-				background: $black;
-				color: $white;
-
-				.next-label {
-					flex-shrink: 0;
-					display: inline-flex;
-					align-items: center;
-					gap: 10px;
-					font-size: clamp(12px, 0.8vw, 15px);
-					font-weight: 700;
-					letter-spacing: 0.12em;
-					text-transform: uppercase;
-					color: #ff8a3d;
-
-					svg {
-						animation: next-nudge 2s $ease infinite;
-					}
-				}
-				p {
-					font-size: clamp(14px, 1vw, 18px);
-					line-height: 1.5;
-					color: rgba($white, 0.88);
-				}
-			}
-		}
 
 		/* left: photo */
 		.who-visual {
 			position: relative;
-			flex: 1;
-			min-height: clamp(420px, 36vw, 720px);
+			width: 100%;
+			max-width: 520px;
+			margin: 0 auto;
+			aspect-ratio: 3 / 4;
 
 			// arch window: round top, soft bottom corners
 			.photo-frame {
@@ -656,6 +623,38 @@
 				}
 			}
 
+			.next {
+				margin-top: clamp(26px, 2.4vw, 44px);
+				display: flex;
+				align-items: center;
+				gap: clamp(18px, 2vw, 36px);
+				padding: clamp(18px, 1.5vw, 26px) clamp(20px, 1.8vw, 30px);
+				border-radius: 20px;
+				background: $black;
+				color: $white;
+
+				.next-label {
+					flex-shrink: 0;
+					display: inline-flex;
+					align-items: center;
+					gap: 10px;
+					font-size: clamp(12px, 0.8vw, 15px);
+					font-weight: 700;
+					letter-spacing: 0.12em;
+					text-transform: uppercase;
+					color: #ff8a3d;
+
+					svg {
+						animation: next-nudge 2s $ease infinite;
+					}
+				}
+				p {
+					font-size: clamp(14px, 1vw, 18px);
+					line-height: 1.5;
+					color: rgba($white, 0.88);
+				}
+			}
+
 			.title {
 				display: flex;
 				flex-direction: column;
@@ -693,92 +692,11 @@
 				letter-spacing: -0.012em;
 				color: $black;
 
-				& + .story {
-					margin-top: 14px;
-				}
+				// each paragraph sits in its own scroll wrapper, so space them from below
+				margin-bottom: 16px;
 			}
 
-			.sub-title {
-				display: block;
-				margin: clamp(30px, 2.8vw, 50px) 0 16px;
-				font-size: clamp(12px, 0.8vw, 15px);
-				font-weight: 700;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				color: $accent;
-			}
 
-			.principles {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: clamp(12px, 1vw, 18px);
-			}
-			.principle {
-				position: relative;
-				padding: clamp(18px, 1.5vw, 26px);
-				border-radius: 20px;
-				background: linear-gradient(160deg, rgba(#fff6ee, 0.85) 0%, rgba(#fde4d2, 0.55) 100%);
-				border: 1px solid rgba($white, 0.9);
-				box-shadow: 0 14px 34px rgba(#b54a12, 0.08);
-				overflow: hidden;
-				transition:
-					translate 0.5s $ease,
-					box-shadow 0.5s $ease,
-					border-color 0.5s $ease;
-
-				.number {
-					position: absolute;
-					top: 16px;
-					right: 20px;
-					font-size: clamp(26px, 2vw, 38px);
-					font-weight: 800;
-					color: rgba($accent, 0.14);
-					transition: color 0.5s $ease;
-				}
-				.icon {
-					width: 44px;
-					height: 44px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					border-radius: 12px;
-					background: rgba(#ff7a2a, 0.14);
-					color: $accent;
-					font-size: 21px;
-					transition:
-						background 0.45s $ease,
-						color 0.45s $ease,
-						rotate 0.45s $ease;
-				}
-				strong {
-					display: block;
-					margin-top: 16px;
-					font-size: clamp(16px, 1.1vw, 20px);
-					font-weight: 700;
-					color: $black;
-				}
-				p {
-					margin-top: 6px;
-					font-size: clamp(13px, 0.86vw, 16px);
-					line-height: 1.5;
-					color: #4a3d35;
-				}
-
-				&:hover {
-					translate: 0 -5px;
-					border-color: rgba($accent, 0.3);
-					box-shadow: 0 24px 48px rgba(#b54a12, 0.16);
-
-					.number {
-						color: rgba($accent, 0.4);
-					}
-					.icon {
-						background: $accent;
-						color: $white;
-						rotate: -8deg;
-					}
-				}
-			}
 
 		}
 	}
@@ -2150,6 +2068,265 @@
 			}
 			&.tile-travel .tile-photo {
 				background: linear-gradient(170deg, #ffb37a 0%, #ff8a5c 45%, #6f8fd0 100%);
+			}
+		}
+	}
+	/* philosophy: a process line that switches rows on as it fills */
+	.philosophy {
+		position: relative;
+		overflow: clip;
+		padding: clamp(64px, 6vw, 110px) $side clamp(70px, 6vw, 120px);
+		background:
+			radial-gradient(40% 35% at 100% 100%, rgba(#ff6a1a, 0.35) 0%, rgba(#ff6a1a, 0) 70%),
+			radial-gradient(35% 30% at 0% 0%, rgba(#fff3ea, 0.9) 0%, rgba(#fff3ea, 0) 70%),
+			linear-gradient(180deg, #fde3cf 0%, #fdeadd 50%, #fbd8bd 100%);
+
+		.philosophy-head {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: end;
+			gap: clamp(30px, 4vw, 80px);
+
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				font-size: clamp(12px, 0.85vw, 16px);
+				font-weight: 700;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: $black;
+
+				.dot {
+					width: 12px;
+					height: 12px;
+					border-radius: 50%;
+					background: $accent;
+				}
+				.line {
+					width: 120px;
+					height: 1px;
+					background: linear-gradient(90deg, $accent, transparent);
+				}
+			}
+			.title {
+				margin-top: 12px;
+				font-size: clamp(44px, 4.8vw, 96px);
+				font-weight: 800;
+				line-height: 1;
+				letter-spacing: -0.04em;
+				color: $black;
+
+				.accent {
+					background: linear-gradient(90deg, #ff7a1a 0%, #ff3d00 60%, #e8000f 100%);
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent;
+				}
+			}
+			.head-text {
+				max-width: 24em;
+				padding-left: clamp(18px, 1.8vw, 34px);
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(15px, 1.15vw, 22px);
+				line-height: 1.45;
+				color: $black;
+
+				em {
+					font-style: italic;
+					font-weight: 800;
+				}
+			}
+		}
+
+		/* the list with its centre line */
+		.philosophy-steps {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: clamp(10px, 1vw, 18px);
+			margin-top: clamp(40px, 4vw, 72px);
+		}
+		.centre-track {
+			position: absolute;
+			left: 50%;
+			top: 0;
+			bottom: 0;
+			width: 2px;
+			translate: -50% 0;
+			background: rgba($accent, 0.15);
+			border-radius: $pill;
+			z-index: 1;
+
+			.centre-fill {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				border-radius: inherit;
+				background: linear-gradient(180deg, #ffb27a 0%, #ff7a2a 50%, $accent 100%);
+				box-shadow: 0 0 12px rgba($accent, 0.45);
+			}
+		}
+
+		.step-row {
+			position: relative;
+			display: grid;
+			grid-template-columns: 1fr clamp(70px, 6vw, 110px) 1fr;
+			align-items: center;
+			min-height: clamp(170px, 12vw, 230px);
+		}
+		// the soft panel that appears behind a row once the line reaches it
+		.step-panel {
+			position: absolute;
+			inset: 0;
+			z-index: 0;
+			border-radius: clamp(36px, 3.6vw, 64px);
+			background: linear-gradient(160deg, rgba(#fff6ee, 0.92) 0%, rgba(#fde4d2, 0.7) 100%);
+			border: 1px solid rgba($white, 0.9);
+			box-shadow: 0 20px 50px rgba(#b54a12, 0.1);
+		}
+
+		.step-side {
+			position: relative;
+			z-index: 2;
+			padding: 0 clamp(24px, 3vw, 64px);
+		}
+		.step-icon-side {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 18px;
+		}
+		.step-row.flipped .step-icon-side {
+			justify-content: flex-start;
+		}
+		.step-text-side {
+			max-width: 34em;
+
+			h3 {
+				font-size: clamp(20px, 1.6vw, 30px);
+				font-weight: 800;
+				letter-spacing: -0.02em;
+				color: $black;
+			}
+			p {
+				margin-top: 8px;
+				font-size: clamp(14px, 1vw, 18px);
+				line-height: 1.5;
+				color: #3a302a;
+			}
+		}
+		.step-row.flipped .step-text-side {
+			justify-self: end;
+			text-align: right;
+		}
+
+		.step-tile {
+			position: relative;
+			width: clamp(72px, 5.6vw, 104px);
+			height: clamp(72px, 5.6vw, 104px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			border-radius: clamp(22px, 1.8vw, 30px);
+			background: rgba($white, 0.85);
+			box-shadow: 0 14px 30px rgba(#b54a12, 0.12);
+
+			.tile-fill {
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(circle at 35% 30%, #ffb27a 0%, #ff7a2a 45%, $accent 100%);
+			}
+			.tile-icon {
+				position: relative;
+				display: flex;
+				font-size: clamp(30px, 2.4vw, 44px);
+			}
+		}
+		.step-number {
+			padding: 8px 14px;
+			border-radius: 12px;
+			background: rgba($white, 0.9);
+			box-shadow: 0 6px 16px rgba(#b54a12, 0.08);
+			font-size: clamp(14px, 1vw, 18px);
+			font-weight: 700;
+			color: $black;
+		}
+
+		// the pin on the line: an empty square until the line reaches it, then it glows
+		.step-pin {
+			position: relative;
+			z-index: 2;
+			justify-self: center;
+			width: 38px;
+			height: 38px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 12px;
+			background: #fff8f2;
+			border: 2px solid rgba($accent, 0.25);
+
+			.pin-dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				background: rgba($accent, 0.25);
+			}
+			.pin-glow {
+				position: absolute;
+				inset: -4px;
+				border-radius: 14px;
+				background: linear-gradient(140deg, #ffd2ae 0%, #ff8a3d 50%, $accent 100%);
+				box-shadow:
+					0 0 0 6px rgba($accent, 0.12),
+					0 0 26px rgba($accent, 0.55);
+
+				// the dark centre of a switched-on pin
+				&::after {
+					content: '';
+					position: absolute;
+					inset: 50% auto auto 50%;
+					width: 14px;
+					height: 14px;
+					translate: -50% -50%;
+					border-radius: 50%;
+					background: $black;
+					box-shadow: 0 0 0 4px $white;
+				}
+			}
+		}
+
+		.philosophy-quote {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: clamp(16px, 1.6vw, 30px);
+			margin-top: clamp(40px, 3.6vw, 64px);
+
+			.quote-mark {
+				flex-shrink: 0;
+				font-size: clamp(44px, 3.4vw, 64px);
+				color: $accent;
+			}
+			p {
+				padding-left: clamp(16px, 1.6vw, 30px);
+				border-left: 2px solid rgba($accent, 0.6);
+				font-size: clamp(18px, 1.5vw, 30px);
+				font-style: italic;
+				font-weight: 500;
+				line-height: 1.35;
+				color: $black;
+
+				em {
+					font-weight: 800;
+					color: $accent;
+				}
+				.underlined {
+					background: linear-gradient(90deg, $accent, $accent) 0 100% / 100% 2px no-repeat;
+				}
 			}
 		}
 	}

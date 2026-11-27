@@ -115,6 +115,10 @@
 
 @media (max-width: $tablet) {
 	#pc-wrap {
+		.philosophy .philosophy-head {
+			grid-template-columns: 1fr;
+		}
+
 		.beyond-code {
 			.beyond-main {
 				grid-template-columns: 1fr;
@@ -164,8 +168,6 @@
 			.who-visual {
 				width: 100%;
 				max-width: 520px;
-				min-height: 0;
-				aspect-ratio: 3 / 4;
 				margin: 0 auto;
 
 				.photo-chip {
@@ -289,6 +291,42 @@
 			}
 		}
 
+		// philosophy: the line moves to the left edge, each row stacks icon above text
+		.philosophy {
+			.centre-track {
+				left: 24px;
+			}
+			.step-row {
+				grid-template-columns: 48px 1fr;
+				row-gap: 14px;
+				padding: 22px 0;
+			}
+			.step-pin {
+				grid-column: 1;
+				grid-row: 1 / 3;
+				align-self: start;
+				margin-top: 18px;
+			}
+			.step-side {
+				grid-column: 2;
+				padding: 0 18px 0 10px;
+			}
+			.step-icon-side,
+			.step-row.flipped .step-icon-side {
+				grid-row: 1;
+				justify-content: flex-start;
+			}
+			.step-text-side,
+			.step-row.flipped .step-text-side {
+				grid-row: 2;
+				justify-self: start;
+				text-align: left;
+			}
+			.philosophy-quote {
+				justify-content: flex-start;
+			}
+		}
+
 		.beyond-code {
 			.interests {
 				grid-template-columns: 1fr;
@@ -368,10 +406,7 @@
 		}
 
 		.who-i-am {
-			.who-content .principles {
-				grid-template-columns: 1fr;
-			}
-			.who-left .next {
+			.who-content .next {
 				flex-direction: column;
 				align-items: flex-start;
 				gap: 10px;

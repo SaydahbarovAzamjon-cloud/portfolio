@@ -4,6 +4,7 @@ import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslation
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import AboutHero from '../../libs/components/about/AboutHero';
 import WhoIAm from '../../libs/components/about/WhoIAm';
+import Philosophy from '../../libs/components/about/Philosophy';
 import Journey from '../../libs/components/about/Journey';
 import Education from '../../libs/components/about/Education';
 import BeyondCode from '../../libs/components/about/BeyondCode';
@@ -19,6 +20,7 @@ const About: NextPage = () => {
 		<Stack className={'about-page'}>
 			<AboutHero />
 			<WhoIAm />
+			<Philosophy />
 			<Journey />
 			<Education />
 			<BeyondCode />

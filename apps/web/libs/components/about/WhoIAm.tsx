@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next/pages';
-import { Stack, Box } from '@mui/material';
+import { Stack } from '@mui/material';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { LuArrowRight, LuBookOpen, LuFlag, LuSparkles, LuTarget } from 'react-icons/lu';
-import { IconType } from 'react-icons';
+import { LuArrowRight } from 'react-icons/lu';
 import ScrollRevealText from '../common/ScrollRevealText';
 import photo from '../../../public/img/about/who-i-am.webp';
 import ScrollRise from '../common/ScrollRise';
@@ -13,14 +12,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /** The photo is an arch (round top, soft bottom corners); the reveal clip keeps the same shape. */
 const ARCH_OPEN = 'inset(0% 0% 0% 0% round 999px 999px 36px 36px)';
 const ARCH_CLOSED = 'inset(100% 0% 0% 0% round 999px 999px 36px 36px)';
-
-/** How I work: four short principles (text lives in the locale files). */
-const PRINCIPLES: { key: string; icon: IconType }[] = [
-	{ key: 'principle1', icon: LuTarget },
-	{ key: 'principle2', icon: LuFlag },
-	{ key: 'principle3', icon: LuSparkles },
-	{ key: 'principle4', icon: LuBookOpen },
-];
 
 const WhoIAm = () => {
 	const { t } = useTranslation('common');
@@ -43,7 +34,7 @@ const WhoIAm = () => {
 	return (
 		<Stack component={'section'} ref={sectionRef} id={'who-i-am'} className={'who-i-am'}>
 			<Stack className={'who-main'}>
-				{/* left: photo, then what's next under it (same height as the text column) */}
+				{/* left: photo */}
 				<Stack className={'who-left'}>
 					{/* the wrapper watches the viewport: a fully clipped photo never counts as visible */}
 					<motion.div
@@ -84,16 +75,9 @@ const WhoIAm = () => {
 							{t('about.who.chip')}
 						</motion.div>
 					</motion.div>
-					<motion.div className={'next'} {...reveal(0.2, 24)}>
-						<span className={'next-label'}>
-							{t('about.who.nextTitle')}
-							<LuArrowRight />
-						</span>
-						<ScrollRevealText text={t('about.who.nextText')} dim={0.3} />
-					</motion.div>
 				</Stack>
 
-				{/* right: story and principles */}
+				{/* right: story and what's next */}
 				<Stack className={'who-content'}>
 					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
@@ -130,31 +114,13 @@ const WhoIAm = () => {
 						<ScrollRevealText className={'story'} text={t('about.who.story2')} />
 					</ScrollRise>
 
-					<motion.span className={'sub-title'} {...reveal(0.35, 16)}>
-						{t('about.who.howTitle')}
-					</motion.span>
-					<Box className={'principles'}>
-						{PRINCIPLES.map((principle, index) => {
-							const Icon = principle.icon;
-							return (
-								<motion.div
-									key={principle.key}
-									className={'principle'}
-									initial={{ opacity: 0, y: reduceMotion ? 0 : 40 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									viewport={{ once: true, amount: 0.4 }}
-									transition={{ duration: 0.8, ease: EASE, delay: 0.1 + index * 0.1 }}
-								>
-									<span className={'number'}>{String(index + 1).padStart(2, '0')}</span>
-									<span className={'icon'}>
-										<Icon />
-									</span>
-									<strong>{t(`about.who.${principle.key}Title`)}</strong>
-									<p>{t(`about.who.${principle.key}Text`)}</p>
-								</motion.div>
-							);
-						})}
-					</Box>
+					<motion.div className={'next'} {...reveal(0.2, 24)}>
+						<span className={'next-label'}>
+							{t('about.who.nextTitle')}
+							<LuArrowRight />
+						</span>
+						<ScrollRevealText text={t('about.who.nextText')} dim={0.3} />
+					</motion.div>
 				</Stack>
 			</Stack>
 		</Stack>

@@ -43,8 +43,10 @@ const toWords = (text: string): Word[] => {
 				// markers may stack: *_word_* or _*word*_
 				const core = raw.replace(/^[*_]+/, '');
 				const lead = raw.slice(0, raw.length - core.length);
-				const clean = core.replace(/[*_]+$/, '');
-				const trail = core.slice(clean.length);
+				// closing markers may be followed by punctuation: "engineer*," → text "engineer,", closes "*"
+				const closing = core.match(/^(.*?)([*_]+)([.,;:!?)'"]*)$/);
+				const clean = closing ? closing[1] + closing[3] : core;
+				const trail = closing ? closing[2] : '';
 				if (lead.includes('*')) em = true;
 				if (lead.includes('_')) underline = true;
 				words.push({ text: clean, em, underline, lineBreak: lineIndex > 0 && wordIndex === 0, start });
