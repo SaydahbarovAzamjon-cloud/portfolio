@@ -109,13 +109,63 @@
 				}
 			}
 		}
-
 	}
 }
 
 @media (max-width: $tablet) {
 	#pc-wrap {
 		.philosophy .philosophy-head {
+			grid-template-columns: 1fr;
+		}
+
+		// experience page (tablet)
+		.experience-hero .exp-hero-main {
+			grid-template-columns: 1fr;
+			padding-right: $side;
+		}
+		.experience-page .section-head {
+			grid-template-columns: 1fr;
+		}
+		.career-journey {
+			.journey-road {
+				height: auto;
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+			}
+			.road-line,
+			.road-pin {
+				display: none;
+			}
+			.road-card {
+				position: relative;
+				left: auto !important;
+				bottom: auto !important;
+				translate: none;
+				width: 100%;
+
+				&::after {
+					display: none;
+				}
+			}
+		}
+		.experience-details .details-grid {
+			grid-template-columns: 1fr;
+		}
+		.experience-details .role-body {
+			grid-template-columns: 1fr;
+
+			.role-photo {
+				aspect-ratio: 16 / 10;
+			}
+		}
+		.key-contributions .contribution-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.key-achievements .achievement-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.experience-connect .connect-main {
 			grid-template-columns: 1fr;
 		}
 
@@ -324,6 +374,59 @@
 			}
 			.philosophy-quote {
 				justify-content: flex-start;
+			}
+		}
+
+		// experience page (phone)
+		.experience-hero .exp-hero-content .title .title-line {
+			white-space: normal;
+		}
+		.experience-hero .exp-hero-content .hero-stat + .hero-stat {
+			padding-left: 0;
+			border-left: none;
+		}
+		// phone: the photo stays as a backdrop; the company cards would cover the text
+		.experience-hero .exp-hero-scene {
+			.trail-card {
+				display: none;
+			}
+			&::after {
+				background: linear-gradient(180deg, rgba(#fff3ea, 0.9) 0%, rgba(#fff3ea, 0.6) 55%, rgba(#fff3ea, 0) 85%);
+			}
+		}
+		.career-journey .journey-stats {
+			flex-wrap: wrap;
+			width: auto;
+
+			.journey-stat + .journey-stat {
+				padding-left: 0;
+				border-left: 0;
+			}
+		}
+		.career-journey .road-card {
+			grid-template-columns: auto 1fr;
+			animation: none;
+
+			.card-art {
+				display: none;
+			}
+		}
+		.experience-details .role-head {
+			grid-template-columns: auto 1fr;
+
+			.role-dates {
+				grid-column: 1 / -1;
+				justify-content: flex-start;
+			}
+		}
+		.key-contributions .contribution-grid,
+		.key-achievements .achievement-grid {
+			grid-template-columns: 1fr;
+		}
+		.experience-connect {
+			.connect-links,
+			.form-row {
+				grid-template-columns: 1fr;
 			}
 		}
 
