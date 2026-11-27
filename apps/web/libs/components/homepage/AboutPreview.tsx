@@ -24,6 +24,8 @@ import { localize } from '../../utils';
 import { Profile } from '../../types/profile/profile';
 import defaultPortrait from '../../../public/img/home/about-portrait.webp';
 import { sectionCount } from '../../config';
+import ScrollRise from '../common/ScrollRise';
+import ScrollRevealText from '../common/ScrollRevealText';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 // const MOMENT_SLOTS = 8; // moments strip (hidden for now)
@@ -148,37 +150,39 @@ const AboutPreview = () => {
 				</Box>
 
 				<Stack className={'about-content'}>
-					<motion.div className={'eyebrow'} {...reveal(0)}>
+					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.about.eyebrow')}</span>
 						<span className={'line'} />
 						<span className={'count'}>{sectionCount('about')}</span>
-					</motion.div>
+					</ScrollRise>
 
 					{/* the heading (not the masked lines) watches the viewport: clipped lines never count as visible */}
-					<motion.h2
-						className={'title'}
-						initial={'hidden'}
-						whileInView={'show'}
-						viewport={{ once: true, amount: 0.4 }}
-						transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-					>
-						{[t('home.about.title1'), t('home.about.title2')].map((line, index) => (
-							<span key={line} className={'title-mask'}>
-								<motion.span
-									className={`title-line ${index === 1 ? 'accent' : ''}`}
-									variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
-									transition={{ duration: 1, ease: EASE }}
-								>
-									{line}
-								</motion.span>
-							</span>
-						))}
-					</motion.h2>
+					<ScrollRise order={1}>
+						<motion.h2
+							className={'title'}
+							initial={'hidden'}
+							whileInView={'show'}
+							viewport={{ once: true, amount: 0.4 }}
+							transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+						>
+							{[t('home.about.title1'), t('home.about.title2')].map((line, index) => (
+								<span key={line} className={'title-mask'}>
+									<motion.span
+										className={`title-line ${index === 1 ? 'accent' : ''}`}
+										variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
+										transition={{ duration: 1, ease: EASE }}
+									>
+										{line}
+									</motion.span>
+								</span>
+							))}
+						</motion.h2>
+					</ScrollRise>
 
-					<motion.p className={'text'} {...reveal(0.35)}>
-						{text}
-					</motion.p>
+					<ScrollRise order={2}>
+						<ScrollRevealText className={'text'} text={text} />
+					</ScrollRise>
 
 					<Box className={'features'}>
 						{features.map((feature, index) => {

@@ -7,6 +7,7 @@ import { LuArrowRight, LuBookOpen, LuFlag, LuSparkles, LuTarget } from 'react-ic
 import { IconType } from 'react-icons';
 import ScrollRevealText from '../common/ScrollRevealText';
 import photo from '../../../public/img/about/who-i-am.webp';
+import ScrollRise from '../common/ScrollRise';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 /** The photo is an arch (round top, soft bottom corners); the reveal clip keeps the same shape. */
@@ -88,40 +89,46 @@ const WhoIAm = () => {
 							{t('about.who.nextTitle')}
 							<LuArrowRight />
 						</span>
-						<p>{t('about.who.nextText')}</p>
+						<ScrollRevealText text={t('about.who.nextText')} dim={0.3} />
 					</motion.div>
 				</Stack>
 
 				{/* right: story and principles */}
 				<Stack className={'who-content'}>
-					<motion.div className={'eyebrow'} {...reveal(0, 20)}>
+					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
 						<span className={'label'}>{t('about.who.eyebrow')}</span>
 						<span className={'line'} />
-					</motion.div>
+					</ScrollRise>
 
-					<motion.h2
-						className={'title'}
-						initial={'hidden'}
-						whileInView={'show'}
-						viewport={{ once: true, amount: 0.5 }}
-						transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-					>
-						{[t('about.who.title1'), t('about.who.title2')].map((line, index) => (
-							<span key={line} className={'title-mask'}>
-								<motion.span
-									className={`title-line ${index === 1 ? 'accent' : ''}`}
-									variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
-									transition={{ duration: 1, ease: EASE }}
-								>
-									{line}
-								</motion.span>
-							</span>
-						))}
-					</motion.h2>
+					<ScrollRise order={1}>
+						<motion.h2
+							className={'title'}
+							initial={'hidden'}
+							whileInView={'show'}
+							viewport={{ once: true, amount: 0.5 }}
+							transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+						>
+							{[t('about.who.title1'), t('about.who.title2')].map((line, index) => (
+								<span key={line} className={'title-mask'}>
+									<motion.span
+										className={`title-line ${index === 1 ? 'accent' : ''}`}
+										variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
+										transition={{ duration: 1, ease: EASE }}
+									>
+										{line}
+									</motion.span>
+								</span>
+							))}
+						</motion.h2>
+					</ScrollRise>
 
-					<ScrollRevealText className={'story'} text={t('about.who.story1')} />
-					<ScrollRevealText className={'story'} text={t('about.who.story2')} />
+					<ScrollRise order={2}>
+						<ScrollRevealText className={'story'} text={t('about.who.story1')} />
+					</ScrollRise>
+					<ScrollRise order={3}>
+						<ScrollRevealText className={'story'} text={t('about.who.story2')} />
+					</ScrollRise>
 
 					<motion.span className={'sub-title'} {...reveal(0.35, 16)}>
 						{t('about.who.howTitle')}

@@ -689,3 +689,8 @@
 		transform: translateY(3px);
 	}
 }
+
+/** SCROLL REVEAL TEXT: words never break in the middle while their letters fill in **/
+#pc-wrap .reveal-word {
+	white-space: nowrap;
+}

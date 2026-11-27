@@ -16,6 +16,8 @@ import { FALLBACK_PROJECTS } from '../../fallback';
 import fixoraHome from '../../../public/img/projects/fixora-home.webp';
 import carviaHome from '../../../public/img/projects/carvia-home.webp';
 import gadgetStoreHome from '../../../public/img/projects/gadget-store-home.webp';
+import ScrollRise from '../common/ScrollRise';
+import ScrollRevealText from '../common/ScrollRevealText';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CARD_LIMIT = 4;
@@ -237,50 +239,38 @@ const SelectedWork = () => {
 
 			<Stack className={'work-main'}>
 				<Stack className={'work-intro'}>
-					<motion.div
-						className={'eyebrow'}
-						initial={{ opacity: 0, y: reduceMotion ? 0 : 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true, amount: 0.5 }}
-						transition={{ duration: 0.8, ease: EASE }}
-					>
+					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.work.eyebrow')}</span>
 						<span className={'sep'}>·</span>
 						<span className={'years'}>{t('home.work.years')}</span>
-					</motion.div>
+					</ScrollRise>
 
-					<motion.h2
-						className={'title'}
-						initial={'hidden'}
-						whileInView={'show'}
-						viewport={{ once: true, amount: 0.4 }}
-						transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-					>
-						{[t('home.work.title1'), t('home.work.title2')].map((line, index) => (
-							<span key={line} className={'title-mask'}>
-								<motion.span
-									className={`title-line ${index === 1 ? 'accent' : ''}`}
-									variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
-									transition={{ duration: 1, ease: EASE }}
-								>
-									{line}
-								</motion.span>
-							</span>
-						))}
-					</motion.h2>
+					<ScrollRise order={1}>
+						<motion.h2
+							className={'title'}
+							initial={'hidden'}
+							whileInView={'show'}
+							viewport={{ once: true, amount: 0.4 }}
+							transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+						>
+							{[t('home.work.title1'), t('home.work.title2')].map((line, index) => (
+								<span key={line} className={'title-mask'}>
+									<motion.span
+										className={`title-line ${index === 1 ? 'accent' : ''}`}
+										variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
+										transition={{ duration: 1, ease: EASE }}
+									>
+										{line}
+									</motion.span>
+								</span>
+							))}
+						</motion.h2>
+					</ScrollRise>
 
-					<motion.p
-						className={'text'}
-						initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true, amount: 0.5 }}
-						transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
-					>
-						{t('home.work.text1')}
-						<br />
-						{t('home.work.text2')}
-					</motion.p>
+					<ScrollRise order={2}>
+						<ScrollRevealText className={'text'} text={`${t('home.work.text1')}\n${t('home.work.text2')}`} />
+					</ScrollRise>
 
 					<motion.div
 						initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.6 }}

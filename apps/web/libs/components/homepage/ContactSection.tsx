@@ -26,6 +26,8 @@ import DownloadMenu from '../common/DownloadMenu';
 import defaultPortrait from '../../../public/img/home/hero-portrait.webp';
 import sceneImage from '../../../public/img/home/contact-bg.webp';
 import { sectionCount } from '../../config';
+import ScrollRise from '../common/ScrollRise';
+import ScrollRevealText from '../common/ScrollRevealText';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -111,36 +113,38 @@ const ContactSection = () => {
 
 				{/* left: heading + buttons */}
 				<Stack className={'cta-content'}>
-					<motion.div className={'eyebrow'} {...reveal(0, 20)}>
+					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.contact.eyebrow')}</span>
 						<span className={'line'} />
 						<span className={'count'}>{sectionCount('contact')}</span>
-					</motion.div>
+					</ScrollRise>
 
-					<motion.h2
-						className={'title'}
-						initial={'hidden'}
-						whileInView={'show'}
-						viewport={{ once: true, amount: 0.4 }}
-						transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-					>
-						{[t('home.contact.title1'), t('home.contact.title2')].map((line, index) => (
-							<span key={line} className={'title-mask'}>
-								<motion.span
-									className={`title-line ${index === 1 ? 'accent' : ''}`}
-									variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
-									transition={{ duration: 1, ease: EASE }}
-								>
-									{line}
-								</motion.span>
-							</span>
-						))}
-					</motion.h2>
+					<ScrollRise order={1}>
+						<motion.h2
+							className={'title'}
+							initial={'hidden'}
+							whileInView={'show'}
+							viewport={{ once: true, amount: 0.4 }}
+							transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+						>
+							{[t('home.contact.title1'), t('home.contact.title2')].map((line, index) => (
+								<span key={line} className={'title-mask'}>
+									<motion.span
+										className={`title-line ${index === 1 ? 'accent' : ''}`}
+										variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
+										transition={{ duration: 1, ease: EASE }}
+									>
+										{line}
+									</motion.span>
+								</span>
+							))}
+						</motion.h2>
+					</ScrollRise>
 
-					<motion.p className={'text'} {...reveal(0.3)}>
-						{t('home.contact.text')}
-					</motion.p>
+					<ScrollRise order={2}>
+						<ScrollRevealText className={'text'} text={t('home.contact.text')} />
+					</ScrollRise>
 
 					<motion.div className={'buttons'} {...reveal(0.45, 20)}>
 						<Link href={'/contact'} className={'button button-dark'}>

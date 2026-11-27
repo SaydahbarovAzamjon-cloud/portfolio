@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next/pages';
 import { useQuery } from '@apollo/client';
 import { Stack, Box } from '@mui/material';
-import { animate, motion, useInView, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import {
 	LuArrowRight,
 	LuArrowUpRight,
@@ -25,6 +25,9 @@ import { localize } from '../../utils';
 import { getSkillBrand } from '../../skillIcons';
 import { Skill, SkillCategory } from '../../types/skill/skill';
 import { sectionCount } from '../../config';
+import CountUp from '../common/CountUp';
+import ScrollRise from '../common/ScrollRise';
+import ScrollRevealText from '../common/ScrollRevealText';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CARD_LIMIT = 4;
@@ -181,32 +184,6 @@ const highlight = (line: string) =>
 		);
 	});
 
-/** Counts up from 0 the first time it is on screen. */
-const CountUp = (props: { value: number; suffix?: string }) => {
-	const ref = useRef<HTMLSpanElement>(null);
-	const inView = useInView(ref, { once: true, amount: 0.6 });
-	const reduceMotion = useReducedMotion();
-	const [shown, setShown] = useState<number>(0);
-
-	/** LIFECYCLES **/
-	useEffect(() => {
-		if (!inView) return;
-		const controls = animate(0, props.value, {
-			duration: reduceMotion ? 0 : 1.4,
-			ease: EASE,
-			onUpdate: (latest) => setShown(Math.round(latest)),
-		});
-		return () => controls.stop();
-	}, [inView, reduceMotion, props.value]);
-
-	return (
-		<span ref={ref}>
-			{shown}
-			{props.suffix}
-		</span>
-	);
-};
-
 const SkillsPreview = () => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
@@ -251,36 +228,38 @@ const SkillsPreview = () => {
 			<Stack className={'skills-main'}>
 				{/* left: heading */}
 				<Stack className={'skills-intro'}>
-					<motion.div className={'eyebrow'} {...reveal(0, 20)}>
+					<ScrollRise className={'eyebrow'} order={0}>
 						<span className={'dot'} />
 						<span className={'label'}>{t('home.skills.eyebrow')}</span>
 						<span className={'line'} />
 						<span className={'count'}>{sectionCount('skills')}</span>
-					</motion.div>
+					</ScrollRise>
 
-					<motion.h2
-						className={'title'}
-						initial={'hidden'}
-						whileInView={'show'}
-						viewport={{ once: true, amount: 0.4 }}
-						transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
-					>
-						{[t('home.skills.title1'), t('home.skills.title2')].map((line, index) => (
-							<span key={line} className={'title-mask'}>
-								<motion.span
-									className={`title-line ${index === 1 ? 'accent' : ''}`}
-									variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
-									transition={{ duration: 1, ease: EASE }}
-								>
-									{line}
-								</motion.span>
-							</span>
-						))}
-					</motion.h2>
+					<ScrollRise order={1}>
+						<motion.h2
+							className={'title'}
+							initial={'hidden'}
+							whileInView={'show'}
+							viewport={{ once: true, amount: 0.4 }}
+							transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+						>
+							{[t('home.skills.title1'), t('home.skills.title2')].map((line, index) => (
+								<span key={line} className={'title-mask'}>
+									<motion.span
+										className={`title-line ${index === 1 ? 'accent' : ''}`}
+										variants={{ hidden: { y: reduceMotion ? '0%' : '105%' }, show: { y: '0%' } }}
+										transition={{ duration: 1, ease: EASE }}
+									>
+										{line}
+									</motion.span>
+								</span>
+							))}
+						</motion.h2>
+					</ScrollRise>
 
-					<motion.p className={'text'} {...reveal(0.3)}>
-						{t('home.skills.text')}
-					</motion.p>
+					<ScrollRise order={2}>
+						<ScrollRevealText className={'text'} text={t('home.skills.text')} />
+					</ScrollRise>
 
 					<motion.div {...reveal(0.45, 20)}>
 						<Link href={'/skills'} className={'explore-button'}>
