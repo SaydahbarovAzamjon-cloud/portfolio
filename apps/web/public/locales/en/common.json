@@ -228,6 +228,36 @@
 			"quote2": "foundation to advanced financial management,",
 			"quote3": "building a multidisciplinary perspective for",
 			"quote4": "greater impact."
+		},
+		"beyond": {
+			"eyebrow": "Beyond coding",
+			"title1": "Beyond the",
+			"title2": "Code.",
+			"intro": "A glimpse into my life beyond programming: the habits, interests and experiences that keep me balanced, curious and growing.",
+			"sportsTitle": "Sports",
+			"sportsText": "I enjoy all kinds of sport, especially fitness, football and martial arts.",
+			"readingTitle": "Reading",
+			"readingText": "Exploring new ideas in business, finance, technology and self-development.",
+			"languagesTitle": "Languages",
+			"languagesText": "Uzbek is my native language; I also speak English, Korean and Russian.",
+			"travelTitle": "Travel & Explore",
+			"travelText": "Discovering new places, cultures and perspectives.",
+			"chip_fitness": "Fitness",
+			"chip_football": "Football",
+			"chip_martial": "Martial Arts",
+			"chip_uz": "Native",
+			"chip_en": "C1",
+			"chip_ko": "C1",
+			"chip_ru": "C1",
+			"photo_korea": "Life in South Korea",
+			"photo_learning": "Learning & Reading",
+			"photo_fitness": "Fitness",
+			"photo_football": "Football",
+			"photo_travel": "Travel",
+			"quote1": "I believe a well-rounded life, with sports, learning, travel and cultural experiences, makes me",
+			"quote2": "a better engineer",
+			"quote3": "and a",
+			"quote4": "more creative problem solver."
 		}
 	}
 }

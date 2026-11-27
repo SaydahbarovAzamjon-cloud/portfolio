@@ -228,6 +228,36 @@
 			"quote2": "기반에서 재무관리까지,",
 			"quote3": "더 큰 가치를 위한",
 			"quote4": "다학제적 시각을 키우고 있습니다."
+		},
+		"beyond": {
+			"eyebrow": "코딩 너머",
+			"title1": "코드",
+			"title2": "너머.",
+			"intro": "프로그래밍 밖의 제 모습입니다. 균형을 지키고, 호기심을 잃지 않으며, 계속 성장하게 해 주는 습관과 관심사, 경험들입니다.",
+			"sportsTitle": "스포츠",
+			"sportsText": "모든 운동을 좋아하며, 특히 피트니스, 축구, 무술을 즐깁니다.",
+			"readingTitle": "독서",
+			"readingText": "비즈니스, 재무, 기술, 자기계발 분야의 새로운 아이디어를 탐구합니다.",
+			"languagesTitle": "언어",
+			"languagesText": "우즈베크어가 모국어이며, 영어, 한국어, 러시아어를 구사합니다.",
+			"travelTitle": "여행 & 탐험",
+			"travelText": "새로운 장소와 문화, 관점을 발견합니다.",
+			"chip_fitness": "피트니스",
+			"chip_football": "축구",
+			"chip_martial": "무술",
+			"chip_uz": "모국어",
+			"chip_en": "C1",
+			"chip_ko": "C1",
+			"chip_ru": "C1",
+			"photo_korea": "Life in South Korea",
+			"photo_learning": "Learning & Reading",
+			"photo_fitness": "Fitness",
+			"photo_football": "Football",
+			"photo_travel": "Travel",
+			"quote1": "운동, 배움, 여행, 다양한 문화 경험으로 균형 잡힌 삶이 저를",
+			"quote2": "더 나은 엔지니어,",
+			"quote3": "그리고",
+			"quote4": "더 창의적인 문제 해결자로 만든다고 믿습니다."
 		}
 	}
 }
