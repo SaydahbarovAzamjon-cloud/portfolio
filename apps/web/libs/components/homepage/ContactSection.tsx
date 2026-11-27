@@ -21,15 +21,13 @@ import { GET_PROFILE } from '../../../apollo/user/query';
 import { localize } from '../../utils';
 import { Profile } from '../../types/profile/profile';
 import { SocialPlatform } from '../../enums/profile.enum';
+import { FALLBACK_CONTACT } from '../../fallback';
 import DownloadMenu from '../common/DownloadMenu';
 import defaultPortrait from '../../../public/img/home/hero-portrait.webp';
 import sceneImage from '../../../public/img/home/contact-bg.webp';
 import { sectionCount } from '../../config';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const FALLBACK_EMAIL = 'saydahbarovazamjon@gmail.com';
-const FALLBACK_GITHUB = 'https://github.com/SaydahbarovAzamjon-cloud';
-const FALLBACK_LINKEDIN = 'https://www.linkedin.com/in/azamjon-saydahbarov';
 
 const FEATURES = [
 	{ key: 'career', icon: LuBriefcaseBusiness },
@@ -53,11 +51,11 @@ const ContactSection = () => {
 	const portrait = profile?.images?.contactPortrait;
 	const country = localize(profile?.location?.country, router.locale) || t('top.country');
 	const city = localize(profile?.location?.city, router.locale);
-	const email = profile?.contactEmail || FALLBACK_EMAIL;
+	const email = profile?.contactEmail || FALLBACK_CONTACT.email;
 	const github = profile?.socials?.find((social) => social.platform === SocialPlatform.GITHUB);
 	const linkedin = profile?.socials?.find((social) => social.platform === SocialPlatform.LINKEDIN);
-	const githubUrl = github?.url ?? FALLBACK_GITHUB;
-	const linkedinUrl = linkedin?.url ?? FALLBACK_LINKEDIN;
+	const githubUrl = github?.url ?? FALLBACK_CONTACT.github;
+	const linkedinUrl = linkedin?.url ?? FALLBACK_CONTACT.linkedin;
 
 	/** SCROLL MOTION: the portrait rises, the city behind drifts slower (depth), the chip floats faster **/
 	const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });

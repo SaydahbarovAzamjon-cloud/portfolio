@@ -15,6 +15,7 @@ import { dunePath, localize } from '../utils';
 import { Profile } from '../types/profile/profile';
 import { Project } from '../types/project/project';
 import { SocialPlatform } from '../enums/profile.enum';
+import { FALLBACK_CONTACT, FALLBACK_PROJECTS } from '../fallback';
 
 const FEATURED_LIMIT = 3;
 
@@ -45,27 +46,36 @@ const Footer = () => {
 	});
 
 	const profile = getProfileData?.getProfile;
-	const projects = (getProjectsData?.getProjects ?? []).slice(0, FEATURED_LIMIT);
-	const linkedin = profile?.socials?.find((social) => social.platform === SocialPlatform.LINKEDIN);
-	const github = profile?.socials?.find((social) => social.platform === SocialPlatform.GITHUB);
+	const loaded = getProjectsData?.getProjects ?? [];
+	// an empty database still shows the CV projects and contacts
+	const projects = (loaded.length ? loaded : FALLBACK_PROJECTS).slice(0, FEATURED_LIMIT);
+	const email = profile?.contactEmail || FALLBACK_CONTACT.email;
+	const linkedin = profile?.socials?.find((social) => social.platform === SocialPlatform.LINKEDIN) ?? {
+		url: FALLBACK_CONTACT.linkedin,
+		handle: null,
+	};
+	const github = profile?.socials?.find((social) => social.platform === SocialPlatform.GITHUB) ?? {
+		url: FALLBACK_CONTACT.github,
+		handle: null,
+	};
 
 	const connects = [
-		profile?.contactEmail && {
+		{
 			key: 'email',
 			icon: <HiOutlineMail />,
 			label: t('footer.email'),
-			value: profile.contactEmail,
+			value: email,
 			// opens a Gmail "new message" tab (a mailto: link fails when no mail app is set up)
-			href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(profile.contactEmail)}`,
+			href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`,
 		},
-		linkedin && {
+		{
 			key: 'linkedin',
 			icon: <FaLinkedinIn />,
 			label: 'LinkedIn',
 			value: linkedin.handle ?? linkedin.url.replace(/^https?:\/\/(www\.)?/, ''),
 			href: linkedin.url,
 		},
-		github && {
+		{
 			key: 'github',
 			icon: <FaGithub />,
 			label: 'GitHub',
