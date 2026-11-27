@@ -1,6 +1,7 @@
 import { Project } from './types/project/project';
 import { ProjectCategory, ProjectStatus } from './enums/project.enum';
 import { Education } from './types/education/education';
+import { Experience } from './types/experience/experience';
 import { DegreeType, EducationStatus } from './enums/education.enum';
 
 /**
@@ -119,5 +120,103 @@ export const FALLBACK_EDUCATION: Education[] = [
 		startDate: '2020-09-01',
 		endDate: '2024-06-14',
 		status: EducationStatus.COMPLETED,
+	},
+];
+
+/** Work experience, newest first: every bullet and every stack item is taken from the CV. */
+export const FALLBACK_EXPERIENCE: Experience[] = [
+	{
+		_id: 'ngroup',
+		company: 'NGroup',
+		role: { en: 'Remote Full-Stack & AI Developer', ko: '원격 풀스택 & AI 개발자' },
+		startDate: '2025-01-01',
+		endDate: '2026-07-31',
+		responsibilities: [
+			{
+				en: 'Built full-stack web apps: Next.js, React and TypeScript frontends with NestJS and GraphQL backends.',
+				ko: 'Next.js·React·TypeScript 프론트엔드와 NestJS·GraphQL 백엔드로 풀스택 웹 앱을 개발했습니다.',
+			},
+			{
+				en: 'Implemented JWT authentication, role-based access control and separate user and admin interfaces.',
+				ko: 'JWT 인증, 역할 기반 접근 제어, 사용자·관리자 화면 분리를 구현했습니다.',
+			},
+			{
+				en: 'Designed MongoDB schemas and data-processing logic exposed through GraphQL.',
+				ko: 'MongoDB 스키마와 GraphQL로 제공되는 데이터 처리 로직을 설계했습니다.',
+			},
+			{ en: 'Built real-time features with WebSocket.', ko: 'WebSocket으로 실시간 기능을 구현했습니다.' },
+			{
+				en: 'Fine-tuned pretrained models (PyTorch, torchvision) for image classification and evaluated them.',
+				ko: '사전 학습 모델(PyTorch, torchvision)을 이미지 분류용으로 파인튜닝하고 평가했습니다.',
+			},
+			{
+				en: 'Connected the models to the backend through FastAPI inference APIs and integrated the Gemini API for AI analysis and classification.',
+				ko: 'FastAPI 추론 API로 모델을 백엔드에 연결하고, AI 분석·분류를 위해 Gemini API를 연동했습니다.',
+			},
+			{
+				en: 'Set up Docker environments and deployed web and AI services on Ubuntu with NGINX.',
+				ko: 'Docker 환경을 구성하고 NGINX로 Ubuntu에 웹·AI 서비스를 배포했습니다.',
+			},
+		],
+		skills: [
+			'Next.js',
+			'TypeScript',
+			'NestJS',
+			'GraphQL',
+			'MongoDB',
+			'Python',
+			'PyTorch',
+			'torchvision',
+			'OpenCV',
+			'FastAPI',
+			'Gemini API',
+			'Docker',
+			'Ubuntu',
+			'NGINX',
+		].map(skill),
+	},
+	{
+		_id: 'itc',
+		company: 'ITC Global',
+		role: { en: 'Remote Full-Stack Developer', ko: '원격 풀스택 개발자' },
+		startDate: '2023-06-01',
+		endDate: '2024-12-31',
+		responsibilities: [
+			{
+				en: 'Built Next.js and TypeScript frontends with NestJS backends.',
+				ko: 'Next.js·TypeScript 프론트엔드와 NestJS 백엔드를 개발했습니다.',
+			},
+			{
+				en: 'Designed and implemented REST and GraphQL APIs and integrated them with the frontends.',
+				ko: 'REST·GraphQL API를 설계·구현하고 프론트엔드와 연동했습니다.',
+			},
+			{
+				en: 'Implemented JWT authentication and authorization, and Mongoose data models.',
+				ko: 'JWT 인증·인가와 Mongoose 데이터 모델을 구현했습니다.',
+			},
+			{
+				en: 'Analyzed frontend–backend API and data issues and improved response structures and data handling for consistency.',
+				ko: '프론트엔드–백엔드 간 API·데이터 문제를 분석하고, 일관성을 위해 응답 구조와 데이터 처리를 개선했습니다.',
+			},
+			{
+				en: 'Managed processes with PM2, set up an NGINX reverse proxy and wrote deployment scripts on Linux VPS.',
+				ko: 'PM2로 프로세스를 관리하고 NGINX 리버스 프록시와 Linux VPS 배포 스크립트를 구성했습니다.',
+			},
+		],
+		skills: [
+			'React',
+			'Next.js',
+			'TypeScript',
+			'Node.js',
+			'NestJS',
+			'Express.js',
+			'GraphQL',
+			'MongoDB',
+			'Mongoose',
+			'EJS',
+			'JWT',
+			'PM2',
+			'NGINX',
+		].map(skill),
 	},
 ];

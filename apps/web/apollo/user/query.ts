@@ -241,3 +241,41 @@ export const GET_EDUCATIONS = gql`
 		}
 	}
 `;
+
+/**************************
+ *       EXPERIENCE       *
+ *************************/
+
+export const GET_EXPERIENCES = gql`
+	query GetExperiences {
+		getExperiences {
+			_id
+			company
+			role {
+				en
+				ko
+			}
+			location {
+				en
+				ko
+			}
+			startDate
+			endDate
+			summary {
+				en
+				ko
+			}
+			responsibilities {
+				en
+				ko
+			}
+			skills {
+				_id
+				name
+				slug
+				icon
+			}
+			order
+		}
+	}
+`;

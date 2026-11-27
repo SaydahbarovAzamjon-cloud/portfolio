@@ -30,3 +30,17 @@ export const dunePath = (
 	}
 	return `M${points.join(' L')} V ${bottom} H 0 Z`;
 };
+
+/** Whole months between two dates, counting both the first and the last month (Jun 2023 – Dec 2024 = 19). */
+export const monthsBetween = (start: string, end?: string | null): number => {
+	const from = new Date(start);
+	const to = end ? new Date(end) : new Date();
+	return (to.getUTCFullYear() - from.getUTCFullYear()) * 12 + to.getUTCMonth() - from.getUTCMonth() + 1;
+};
+
+/** "Jun 2023" / "2023.06" (UTC, so the server and the browser print the same). */
+export const formatMonth = (date: string, locale: string | undefined): string => {
+	const value = new Date(date);
+	if (locale === 'ko') return `${value.getUTCFullYear()}.${String(value.getUTCMonth() + 1).padStart(2, '0')}`;
+	return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(value);
+};
