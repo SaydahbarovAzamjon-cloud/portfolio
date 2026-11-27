@@ -162,8 +162,14 @@
 		.key-contributions .contribution-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
-		.key-achievements .achievement-grid {
-			grid-template-columns: repeat(2, 1fr);
+		.key-achievements {
+			.achievement-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			.achievements-bg {
+				width: 100%;
+				height: 40%;
+			}
 		}
 		.experience-connect .connect-main {
 			grid-template-columns: 1fr;

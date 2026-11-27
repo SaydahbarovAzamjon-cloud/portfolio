@@ -1,6 +1,6 @@
 import React, { useId } from 'react';
 
-export type ContributionArtKind = 'fullstack' | 'ai' | 'backend' | 'deploy' | 'realtime';
+export type ContributionArtKind = 'fullstack' | 'ai' | 'backend' | 'deploy' | 'realtime' | 'plates';
 
 /**
  * Glossy orange 3D-style illustrations (laptop, AI chip, server, cloud, live chat),

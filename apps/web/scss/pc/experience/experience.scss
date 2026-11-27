@@ -1057,80 +1057,275 @@
 
 	/* 5. key achievements */
 	.key-achievements {
-		padding: clamp(64px, 6vw, 110px) $side;
+		position: relative;
+		overflow: clip;
+		padding: clamp(64px, 6vw, 110px) $side clamp(80px, 7vw, 130px);
 		background:
-			radial-gradient(45% 40% at 95% 0%, rgba(#ffb27a, 0.5) 0%, rgba(#ffb27a, 0) 70%),
+			radial-gradient(60% 30% at 50% 100%, rgba(#ffb27a, 0.45) 0%, rgba(#ffb27a, 0) 70%),
 			linear-gradient(180deg, #fdeadd 0%, #fde3cf 100%);
 
+		> .section-head,
+		.achievement-grid {
+			position: relative;
+			z-index: 1;
+		}
+		// the misty peak in the top-right corner, faded into the page on the left and bottom
+		.achievements-bg {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 58%;
+			height: 62%;
+			z-index: 0;
+			opacity: 0.85;
+			pointer-events: none;
+			mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 45%, transparent 100%);
+			mask-composite: intersect;
+			animation: journey-drift 30s ease-in-out infinite alternate;
+
+			img {
+				object-fit: cover;
+				object-position: 85% 45%;
+			}
+		}
+
+		// the shadow sits on the outer card so it follows the masked silhouette
+		.achievement-card {
+			filter: drop-shadow(0 22px 30px rgba(#b54a12, 0.18));
+			transition: filter 0.5s ease;
+
+			&:hover {
+				filter: drop-shadow(0 30px 40px rgba(#b54a12, 0.28));
+			}
+		}
+		.achievement-card:nth-child(2) .achievement-inner {
+			animation-delay: -1.5s;
+		}
+		.achievement-card:nth-child(3) .achievement-inner {
+			animation-delay: -3s;
+		}
+		.achievement-card:nth-child(4) .achievement-inner {
+			animation-delay: -4.5s;
+		}
+		.card-rim {
+			position: absolute;
+			inset: 0;
+			z-index: 3;
+			width: 100%;
+			height: 100%;
+			overflow: visible;
+			pointer-events: none;
+
+			path {
+				fill: none;
+				stroke: rgba($white, 0.9);
+				stroke-width: 2.5;
+				vector-effect: non-scaling-stroke;
+			}
+		}
+		.dark .card-rim path {
+			stroke: rgba(#ffb070, 0.4);
+		}
 		.achievement-grid {
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
 			gap: clamp(14px, 1.4vw, 26px);
 			margin-top: clamp(30px, 3vw, 56px);
 		}
-		.achievement-card {
+		// outer: rises on scroll (RiseCard); gives the inner panel its 3D space
+
+		// inner: the visible card, turned toward the middle and swaying slowly in that direction
+		.achievement-inner {
 			position: relative;
 			display: flex;
 			flex-direction: column;
-			min-height: clamp(220px, 15vw, 280px);
+			height: clamp(220px, 14vw, 270px);
 			padding: clamp(20px, 1.8vw, 32px);
 			overflow: hidden;
-			border-radius: 28px;
-			background: linear-gradient(160deg, rgba(#fff6ee, 0.95) 0%, rgba(#fde4d2, 0.7) 100%);
-			border: 1px solid rgba($white, 0.9);
-			box-shadow: 0 24px 56px rgba(#b54a12, 0.12);
+			padding-top: clamp(28px, 2.4vw, 42px);
+			// a light, endless sway left ↔ right (each card a little out of step with the next)
+			animation: card-drift 6s ease-in-out infinite;
+			// the curled-sheet silhouette (same path as the rim drawn in the component)
+			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 220' preserveAspectRatio='none'%3E%3Cpath d='M%200%2042%20Q%200%2010%2034%2010%20L%20270%209%20C%20310%208%2C%20340%207%2C%20364%206%20Q%20400%205%20400%2038%20L%20400%20186%20Q%20400%20218%20366%20217%20L%2036%20212%20Q%200%20211%200%20178%20Z'/%3E%3C/svg%3E");
+			mask-size: 100% 100%;
+			mask-repeat: no-repeat;
+			background: linear-gradient(160deg, rgba(#fff6ee, 0.95) 0%, rgba(#fde4d2, 0.75) 100%);
 			color: $black;
 
 			&.dark {
 				background:
-					radial-gradient(80% 70% at 100% 100%, rgba(#ff6a1a, 0.45) 0%, rgba(#ff6a1a, 0) 70%),
+					radial-gradient(80% 70% at 100% 100%, rgba(#ff6a1a, 0.4) 0%, rgba(#ff6a1a, 0) 70%),
 					linear-gradient(160deg, #3b2519 0%, #1f120b 100%);
-				border-color: rgba(#ff8a3d, 0.3);
 				color: $white;
 
 				.achievement-label {
-					color: rgba($white, 0.9);
+					color: rgba($white, 0.92);
 				}
 				.achievement-note {
 					color: rgba($white, 0.6);
 				}
-				.achievement-icon {
-					background: rgba($white, 0.12);
-					border-color: rgba($white, 0.25);
+			}
+		}
+		.achievement-text {
+			position: relative;
+			z-index: 2;
+			display: flex;
+			flex-direction: column;
+			max-width: 62%;
+		}
+		.achievement-value {
+			font-size: clamp(46px, 3.8vw, 76px);
+			font-weight: 800;
+			line-height: 1;
+			letter-spacing: -0.04em;
+			white-space: nowrap;
+		}
+		.achievement-label {
+			margin-top: 10px;
+			font-size: clamp(16px, 1.2vw, 22px);
+			font-weight: 600;
+			line-height: 1.25;
+		}
+		.achievement-note {
+			margin-top: auto;
+			padding-top: 8px;
+			font-size: clamp(11px, 0.8vw, 14px);
+			color: #5c5048;
+		}
+		.achievement-text {
+			height: 100%;
+		}
+		// glass icon tile, top-right: identical on every card (frosted glass, warm glowing icon)
+		.achievement-icon {
+			position: absolute;
+			top: clamp(26px, 2.2vw, 40px);
+			right: clamp(18px, 1.5vw, 26px);
+			z-index: 2;
+			width: clamp(54px, 3.8vw, 70px);
+			height: clamp(54px, 3.8vw, 70px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 18px;
+			background: linear-gradient(150deg, rgba(#ffffff, 0.3) 0%, rgba(#2a160c, 0.35) 100%);
+			border: 1px solid rgba($white, 0.55);
+			box-shadow:
+				inset 0 1px 0 rgba($white, 0.7),
+				0 10px 24px rgba(#7a2a08, 0.18);
+			backdrop-filter: blur(10px);
+			font-size: clamp(24px, 1.8vw, 32px);
+			color: #ffc56b;
+
+			svg {
+				stroke-width: 2.4;
+				filter: drop-shadow(0 0 8px rgba(#ff8a3d, 0.9));
+			}
+		}
+		// on the light cards the same tile reads as warm frosted glass
+		.achievement-inner:not(.dark) .achievement-icon {
+			background: linear-gradient(150deg, rgba($white, 0.95) 0%, rgba(#ffe4cf, 0.7) 100%);
+			border-color: rgba($white, 0.95);
+			color: #ff6a1a;
+
+			svg {
+				filter: drop-shadow(0 0 5px rgba(#ff8a3d, 0.45));
+			}
+		}
+
+		// card 1: the delivered projects' screenshots, changing under a dark wash
+		.achievement-photo {
+			position: absolute;
+			inset: 0;
+			z-index: 0;
+			overflow: hidden;
+			transition: scale 0.8s $ease;
+
+			.project-slideshow {
+				position: absolute;
+				inset: 0;
+			}
+			.slide {
+				position: absolute;
+				inset: 0;
+
+				img {
+					object-fit: cover;
+					object-position: center top;
 				}
 			}
-			.achievement-icon {
+			// small glass label with the project's name, bottom-right
+			.slide-name {
 				position: absolute;
-				top: clamp(18px, 1.5vw, 26px);
-				right: clamp(18px, 1.5vw, 26px);
-				width: clamp(48px, 3.4vw, 62px);
-				height: clamp(48px, 3.4vw, 62px);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				border-radius: 16px;
-				background: rgba(#ff7a2a, 0.12);
-				border: 1px solid rgba($accent, 0.2);
-				font-size: clamp(22px, 1.6vw, 28px);
-				color: #ff8a3d;
-			}
-			.achievement-value {
-				margin-top: auto;
-				font-size: clamp(48px, 4vw, 80px);
-				font-weight: 800;
-				line-height: 1;
-				letter-spacing: -0.04em;
-			}
-			.achievement-label {
-				margin-top: 10px;
-				font-size: clamp(16px, 1.2vw, 22px);
+				right: clamp(14px, 1.2vw, 22px);
+				bottom: clamp(14px, 1.2vw, 22px);
+				z-index: 2;
+				padding: 5px 12px;
+				border-radius: $pill;
+				background: rgba(#1f120b, 0.45);
+				border: 1px solid rgba($white, 0.3);
+				backdrop-filter: blur(8px);
+				font-size: clamp(11px, 0.75vw, 13px);
 				font-weight: 700;
+				color: $white;
 			}
-			.achievement-note {
-				margin-top: 6px;
-				font-size: clamp(12px, 0.85vw, 15px);
-				color: #5c5048;
+			&::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+				background:
+					linear-gradient(180deg, rgba(#1f120b, 0) 0%, rgba(#1f120b, 0.55) 100%),
+					linear-gradient(100deg, rgba(#1f120b, 0.5) 0%, rgba(#1f120b, 0) 55%);
 			}
+		}
+		.achievement-inner:hover .achievement-photo {
+			scale: 1.05;
+		}
+		// card 2 and 4: an illustration in the bottom-right corner
+		.achievement-art {
+			position: absolute;
+			right: -4%;
+			bottom: -6%;
+			z-index: 1;
+			width: 52%;
+
+			.contribution-art {
+				width: 100%;
+				height: auto;
+				overflow: visible;
+				filter: drop-shadow(0 16px 20px rgba(#c4500f, 0.2));
+			}
+			.art-object {
+				animation: art-float 4.5s ease-in-out infinite;
+			}
+			&.plates {
+				right: -6%;
+				bottom: -8%;
+				width: 58%;
+			}
+		}
+		.visual-chip::after {
+			// a soft orange wave under the chip
+			content: '';
+			position: absolute;
+			left: 20%;
+			right: -20%;
+			bottom: -40%;
+			height: 70%;
+			border-radius: 50%;
+			background: radial-gradient(closest-side, rgba(#ffb27a, 0.55), rgba(#ffb27a, 0));
+			z-index: 0;
+		}
+		// card 3: a glowing dotted globe rising from the corner
+		.achievement-globe {
+			position: absolute;
+			right: -10%;
+			bottom: -42%;
+			z-index: 1;
+			width: 62%;
+			fill: #ff8a3d;
+			filter: drop-shadow(0 0 10px rgba(#ff6a1a, 0.55));
+			animation: globe-glow 5s ease-in-out infinite;
 		}
 	}
 
@@ -1498,6 +1693,26 @@
 		translate: -50% -12px;
 	}
 }
+@keyframes card-drift {
+	0%,
+	100% {
+		translate: -6px 0;
+	}
+	50% {
+		translate: 6px 0;
+	}
+}
+@keyframes globe-glow {
+	0%,
+	100% {
+		opacity: 0.85;
+		translate: 0 0;
+	}
+	50% {
+		opacity: 1;
+		translate: 0 -6px;
+	}
+}
 @keyframes typing-dot {
 	0%,
 	60%,
@@ -1544,6 +1759,9 @@
 	.road-card,
 	.card-art,
 	.art-object,
+	.achievement-inner,
+	.achievement-globe,
+	.achievements-bg,
 	.typing-dot,
 	.journey-bg {
 		animation: none !important;
