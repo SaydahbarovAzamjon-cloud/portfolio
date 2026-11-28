@@ -83,6 +83,8 @@ export const SKILL_ICONS: Record<string, SkillBrand> = {
 	vpsdeployment: { icon: LuServer, color: '#ff6a00' },
 	ssl: { icon: LuLock, color: '#2e7d32' },
 	oauth: { icon: LuKeyRound, color: '#ff6a00' },
+	refreshtokens: { icon: LuKeyRound, color: '#ff6a00' },
+	bcrypt: { icon: LuLock, color: '#ff6a00' },
 	'2fa': { icon: LuShieldCheck, color: '#2e7d32' },
 	restapis: { icon: LuServer, color: '#ff6a00' },
 	rag: { icon: LuDatabaseZap, color: '#ff6a00' },

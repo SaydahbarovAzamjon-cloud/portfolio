@@ -36,7 +36,7 @@ const CAPABILITIES: { key: string; icon: IconType; art: ContributionArtKind; too
 	{ key: 'fullstack', icon: LuCodeXml, art: 'fullstack', tools: ['Next.js', 'NestJS', 'GraphQL', 'MongoDB'] },
 	{ key: 'ai', icon: LuBrainCircuit, art: 'ai', tools: ['PyTorch', 'FastAPI', 'OpenCV', 'Gemini API'] },
 	{ key: 'devops', icon: LuCloudUpload, art: 'deploy', tools: ['Docker', 'NGINX', 'PM2', 'Ubuntu VPS'] },
-	{ key: 'realtime', icon: LuZap, art: 'realtime', tools: ['WebSocket', 'Socket.IO', 'JWT', 'RBAC'] },
+	{ key: 'realtime', icon: LuZap, art: 'realtime', tools: ['WebSocket', 'Socket.IO', 'OAuth', 'JWT', '2FA'] },
 ];
 
 /** The core stack, scrolling in the dark bar (icon keys from skillIcons). */
@@ -146,7 +146,7 @@ const SkillsHero = () => {
 					<motion.div className={'proof'} {...rise(0.7, 16)}>
 						<span>
 							<LuRocket />
-							{t('skills.hero.proofLive')}
+							{t('skills.hero.proofSolo')}
 						</span>
 						<span>
 							<LuTarget />

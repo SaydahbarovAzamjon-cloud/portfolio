@@ -889,6 +889,558 @@
 			background: linear-gradient(90deg, rgba($accent, 0.8), rgba(#ffb347, 0.8)) 0 95% / 100% 2px no-repeat;
 		}
 	}
+
+	/* 3. engineering & workflow */
+	.skills-workflow {
+		position: relative;
+		padding: clamp(70px, 6vw, 120px) $side clamp(120px, 10vw, 200px);
+		overflow: clip;
+		background:
+			radial-gradient(50% 45% at 50% 55%, rgba(#ffb27a, 0.35) 0%, rgba(#ffb27a, 0) 70%),
+			linear-gradient(180deg, #fbd7bb 0%, #fde6d4 45%, #fbd2b0 100%);
+
+		> :not(.workflow-peaks):not(.workflow-ridges) {
+			position: relative;
+			z-index: 1;
+		}
+	}
+	.workflow-peaks {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 0;
+		width: 55%;
+		height: 50%;
+		opacity: 0.8;
+		pointer-events: none;
+		mask-image: linear-gradient(90deg, transparent 0%, #000 45%), linear-gradient(180deg, #000 45%, transparent 100%);
+		mask-composite: intersect;
+
+		img {
+			object-fit: cover;
+			object-position: 85% 40%;
+		}
+	}
+	.workflow-ridges {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 0;
+		height: 30%;
+		opacity: 0.7;
+		pointer-events: none;
+		mask-image: linear-gradient(180deg, transparent 0%, #000 65%);
+
+		img {
+			object-fit: cover;
+			object-position: 70% 100%;
+		}
+	}
+
+	.workflow-head {
+		.eyebrow {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: clamp(12px, 0.85vw, 15px);
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: $black;
+
+			.number {
+				color: $accent;
+			}
+			.line {
+				width: 60px;
+				height: 1px;
+				margin-left: 6px;
+				background: rgba($black, 0.3);
+			}
+		}
+		.title {
+			margin: clamp(14px, 1.4vw, 24px) 0 clamp(12px, 1vw, 18px);
+			font-size: clamp(40px, 4vw, 80px);
+			font-weight: 800;
+			line-height: 1.05;
+			letter-spacing: -0.04em;
+			color: #2a140b;
+
+			.accent {
+				background: linear-gradient(90deg, #ff3d00 0%, #ff7a1a 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+		}
+		.intro-text {
+			max-width: 34em;
+			font-size: clamp(16px, 1.2vw, 22px);
+			line-height: 1.5;
+			color: #4a3d35;
+
+			em {
+				font-style: normal;
+				font-weight: 800;
+				background: linear-gradient(90deg, #c81e00 0%, #ff3d00 50%, #ff7a1a 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			.underlined {
+				font-weight: 600;
+				color: $black;
+				background: linear-gradient(90deg, rgba($accent, 0.85), rgba(#ffb347, 0.85)) 0 92% / 100% 3px no-repeat;
+			}
+		}
+	}
+
+	// five steps on an arc, linked by a glowing wave
+	.workflow-row {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: clamp(14px, 1.6vw, 30px);
+		margin-top: clamp(50px, 5vw, 100px);
+		padding-bottom: 70px;
+	}
+	.workflow-wave {
+		position: absolute;
+		left: -2%;
+		top: 10%;
+		width: 104%;
+		height: 90%;
+		overflow: visible;
+		pointer-events: none;
+
+		path {
+			fill: none;
+			vector-effect: non-scaling-stroke;
+			stroke-linecap: round;
+		}
+		.wave-base {
+			stroke: rgba($white, 0.7);
+			stroke-width: 6;
+		}
+		.wave-glow {
+			stroke: #ffb070;
+			stroke-width: 2.5;
+			filter: drop-shadow(0 0 6px rgba(#ff6a1a, 0.8));
+		}
+	}
+	.workflow-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-height: clamp(250px, 17vw, 320px);
+		padding: clamp(22px, 1.8vw, 34px) clamp(16px, 1.4vw, 26px) clamp(18px, 1.4vw, 26px);
+		text-align: center;
+		border-radius: 34px;
+		background: linear-gradient(165deg, rgba(#fff6ee, 0.78) 0%, rgba(#fde4d2, 0.45) 100%);
+		border: 1px solid rgba($white, 0.9);
+		backdrop-filter: blur(14px);
+		box-shadow: 0 24px 54px rgba(#b54a12, 0.14);
+		// the arc: each card is turned and lifted by its own amount
+		rotate: var(--tilt);
+		translate: 0 var(--lift);
+		cursor: default;
+		transition:
+			translate 0.6s $ease,
+			background 0.6s $ease,
+			box-shadow 0.6s $ease,
+			color 0.6s $ease;
+
+		strong {
+			margin-top: clamp(10px, 0.9vw, 16px);
+			font-size: clamp(19px, 1.45vw, 27px);
+			font-weight: 800;
+			line-height: 1.15;
+			color: $black;
+			transition: color 0.6s $ease;
+		}
+		.workflow-icon {
+			display: flex;
+			font-size: clamp(34px, 2.6vw, 50px);
+			color: $accent;
+			transition:
+				color 0.6s $ease,
+				scale 0.6s $ease;
+		}
+		.workflow-number {
+			margin-top: auto;
+			padding-top: 14px;
+			font-size: clamp(20px, 1.5vw, 28px);
+			font-weight: 700;
+			color: rgba(#b0806a, 0.6);
+			transition: color 0.6s $ease;
+		}
+
+		// the highlighted step: warm glowing glass, lifted a little more
+		&.active {
+			translate: 0 calc(var(--lift) - 18px);
+			background: linear-gradient(165deg, rgba(#ffb27a, 0.95) 0%, rgba(#ff6a1a, 0.92) 100%);
+			border-color: rgba(#ffe0c6, 0.9);
+			box-shadow:
+				0 30px 70px rgba(#ff5a10, 0.4),
+				inset 0 1px 0 rgba($white, 0.6);
+
+			strong,
+			.workflow-icon,
+			.workflow-text,
+			.workflow-text em {
+				color: $white;
+			}
+			.workflow-icon {
+				scale: 1.08;
+			}
+			.workflow-number {
+				color: rgba($white, 0.85);
+			}
+			.workflow-text .underlined {
+				background-image: linear-gradient(90deg, rgba($white, 0.9), rgba($white, 0.9));
+			}
+		}
+	}
+	.workflow-text {
+		margin-top: 10px;
+		font-size: clamp(13px, 0.9vw, 16px);
+		line-height: 1.45;
+		color: #4a3d35;
+		transition: color 0.6s $ease;
+
+		em {
+			font-style: normal;
+			font-weight: 800;
+			color: $black;
+		}
+		.underlined {
+			font-weight: 600;
+			background: linear-gradient(90deg, rgba($accent, 0.8), rgba(#ffb347, 0.8)) 0 95% / 100% 2px no-repeat;
+		}
+	}
+
+	// tools I use: one glass pill
+	.tools-bar {
+		display: flex;
+		align-items: center;
+		gap: clamp(18px, 2vw, 36px);
+		width: fit-content;
+		max-width: 100%;
+		margin: clamp(20px, 2vw, 36px) auto 0;
+		padding: clamp(14px, 1.2vw, 20px) clamp(22px, 2.4vw, 44px);
+		border-radius: $pill;
+		background: linear-gradient(160deg, rgba(#fff6ee, 0.85) 0%, rgba(#fde4d2, 0.6) 100%);
+		border: 1px solid rgba($white, 0.9);
+		backdrop-filter: blur(14px);
+		box-shadow: 0 24px 54px rgba(#b54a12, 0.14);
+	}
+	.tools-title {
+		flex: none;
+		padding-right: clamp(18px, 2vw, 36px);
+		border-right: 1px solid rgba($black, 0.15);
+		font-size: clamp(18px, 1.35vw, 25px);
+		font-weight: 800;
+		color: $black;
+	}
+	.tools-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(10px, 1vw, 18px);
+	}
+	.tool-chip {
+		position: relative;
+		width: clamp(48px, 3.4vw, 62px);
+		height: clamp(48px, 3.4vw, 62px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 16px;
+		background: rgba($white, 0.95);
+		box-shadow: 0 8px 18px rgba(#b54a12, 0.12);
+		font-size: clamp(24px, 1.8vw, 32px);
+		transition: translate 0.3s ease;
+
+		// the tool's name shows above it on hover
+		small {
+			position: absolute;
+			bottom: calc(100% + 8px);
+			left: 50%;
+			translate: -50% 4px;
+			padding: 3px 9px;
+			border-radius: $pill;
+			background: $black;
+			font-size: 11px;
+			font-weight: 700;
+			white-space: nowrap;
+			color: $white;
+			opacity: 0;
+			pointer-events: none;
+			transition:
+				opacity 0.25s ease,
+				translate 0.25s ease;
+		}
+		&:hover {
+			translate: 0 -4px;
+
+			small {
+				opacity: 1;
+				translate: -50% 0;
+			}
+		}
+	}
+
+	/* 4. currently exploring */
+	.skills-exploring {
+		position: relative;
+		padding: clamp(70px, 6vw, 120px) $side clamp(80px, 7vw, 130px);
+		overflow: clip;
+		background:
+			radial-gradient(45% 50% at 85% 20%, rgba(#ff7a2a, 0.22) 0%, rgba(#ff7a2a, 0) 70%),
+			linear-gradient(180deg, #fbd2b0 0%, #fde6d4 40%, #fdeadd 100%);
+	}
+	.exploring-head {
+		display: grid;
+		grid-template-columns: 1fr minmax(0, 36em);
+		align-items: end;
+		gap: clamp(20px, 3vw, 60px);
+
+		.eyebrow {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: clamp(12px, 0.85vw, 15px);
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: $black;
+
+			.number {
+				color: $accent;
+			}
+			.line {
+				width: 60px;
+				height: 1px;
+				margin-left: 6px;
+				background: rgba($black, 0.3);
+			}
+		}
+		.title {
+			margin-top: clamp(14px, 1.4vw, 24px);
+			font-size: clamp(40px, 4vw, 80px);
+			font-weight: 800;
+			line-height: 1.05;
+			letter-spacing: -0.04em;
+			color: #2a140b;
+
+			.accent {
+				background: linear-gradient(90deg, #ff3d00 0%, #ff7a1a 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+		}
+		.intro-text {
+			font-size: clamp(16px, 1.2vw, 22px);
+			line-height: 1.5;
+			color: #4a3d35;
+
+			em {
+				font-style: normal;
+				font-weight: 800;
+				background: linear-gradient(90deg, #c81e00 0%, #ff3d00 50%, #ff7a1a 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			.underlined {
+				font-weight: 600;
+				color: $black;
+				background: linear-gradient(90deg, rgba($accent, 0.85), rgba(#ffb347, 0.85)) 0 92% / 100% 3px no-repeat;
+			}
+		}
+	}
+
+	.exploring-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: clamp(14px, 1.6vw, 30px);
+		margin-top: clamp(36px, 3.6vw, 70px);
+	}
+	.exploring-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: clamp(22px, 1.9vw, 36px);
+		border-radius: 30px;
+		overflow: hidden;
+		background: linear-gradient(165deg, rgba(#fff6ee, 0.85) 0%, rgba(#fde4d2, 0.5) 100%);
+		border: 1px solid rgba($white, 0.9);
+		backdrop-filter: blur(12px);
+		box-shadow: 0 22px 50px rgba(#b54a12, 0.12);
+		transition: box-shadow 0.5s $ease;
+
+		// a soft glow in the corner, warmer the closer the topic is to "done"
+		&::before {
+			content: '';
+			position: absolute;
+			right: -30%;
+			top: -40%;
+			width: 80%;
+			aspect-ratio: 1;
+			border-radius: 50%;
+			background: radial-gradient(closest-side, rgba(#ff7a2a, 0.28), rgba(#ff7a2a, 0));
+			pointer-events: none;
+			transition: scale 0.8s $ease;
+		}
+		&:hover {
+			box-shadow: 0 30px 66px rgba(#b54a12, 0.2);
+
+			&::before {
+				scale: 1.3;
+			}
+		}
+
+		strong {
+			margin-top: clamp(18px, 1.6vw, 28px);
+			font-size: clamp(20px, 1.5vw, 28px);
+			font-weight: 800;
+			line-height: 1.15;
+			color: $black;
+		}
+	}
+	.exploring-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.exploring-icon {
+		width: clamp(50px, 3.6vw, 64px);
+		height: clamp(50px, 3.6vw, 64px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 18px;
+		background: radial-gradient(circle at 35% 30%, #ffb27a 0%, #ff7a2a 45%, $accent 100%);
+		box-shadow:
+			inset 0 4px 10px rgba($white, 0.4),
+			0 12px 24px rgba($accent, 0.3);
+		font-size: clamp(24px, 1.8vw, 30px);
+		color: $white;
+	}
+	// status pill: building (pulsing green), learning (orange), next (soft outline)
+	.exploring-status {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 13px;
+		border-radius: $pill;
+		background: rgba($white, 0.8);
+		font-size: clamp(11px, 0.78vw, 13px);
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: $black;
+
+		i {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: #22c55e;
+			animation: live-pulse 2s ease-out infinite;
+		}
+	}
+	.status-learning .exploring-status i {
+		background: #ff8a3d;
+		animation: none;
+		box-shadow: 0 0 0 3px rgba(#ff8a3d, 0.25);
+	}
+	.status-next .exploring-status {
+		background: transparent;
+		border: 1px dashed rgba($black, 0.3);
+
+		i {
+			background: transparent;
+			border: 1.5px solid rgba($black, 0.45);
+			animation: none;
+		}
+	}
+	.exploring-text {
+		margin-top: 10px;
+		font-size: clamp(14px, 0.95vw, 17px);
+		line-height: 1.5;
+		color: #4a3d35;
+
+		em {
+			font-style: normal;
+			font-weight: 800;
+			color: $black;
+		}
+		.underlined {
+			font-weight: 600;
+			color: $black;
+			background: linear-gradient(90deg, rgba($accent, 0.8), rgba(#ffb347, 0.8)) 0 95% / 100% 2px no-repeat;
+		}
+	}
+	// the next concrete step
+	.exploring-next {
+		margin-top: clamp(14px, 1.2vw, 22px);
+		padding: 12px 14px;
+		border-radius: 16px;
+		background: rgba($white, 0.6);
+		border-left: 3px solid $accent;
+		font-size: clamp(13px, 0.85vw, 15px);
+		line-height: 1.45;
+		color: #3a302a;
+
+		b {
+			display: block;
+			margin-bottom: 2px;
+			font-size: 11px;
+			font-weight: 800;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: $accent;
+		}
+	}
+	.exploring-tools {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-top: auto;
+		padding-top: clamp(16px, 1.4vw, 24px);
+
+		span {
+			padding: 4px 11px;
+			border-radius: $pill;
+			background: rgba($white, 0.85);
+			border: 1px solid rgba(#ff8a3d, 0.25);
+			font-size: clamp(11px, 0.75vw, 13px);
+			font-weight: 700;
+			color: $accent;
+		}
+	}
+	.exploring-quote {
+		display: block;
+		max-width: 40em;
+		margin: clamp(40px, 4vw, 72px) auto 0;
+		text-align: center;
+		font-size: clamp(18px, 1.5vw, 28px);
+		font-weight: 500;
+		font-style: italic;
+		line-height: 1.45;
+		color: #2a140b;
+
+		em {
+			font-style: italic;
+			font-weight: 800;
+			color: $accent;
+		}
+		.underlined {
+			background: linear-gradient(90deg, rgba($accent, 0.85), rgba(#ffb347, 0.85)) 0 92% / 100% 3px no-repeat;
+		}
+	}
 }
 
 @keyframes skills-drift {

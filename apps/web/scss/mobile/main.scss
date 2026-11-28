@@ -133,6 +133,28 @@
 			.skills-expertise {
 				grid-template-columns: 1fr 1fr;
 			}
+			.exploring-head {
+				grid-template-columns: 1fr;
+			}
+			.exploring-grid {
+				grid-template-columns: 1fr 1fr;
+			}
+			// tablet: flatten the arc into a 3 + 2 grid
+			.workflow-row {
+				grid-template-columns: repeat(3, 1fr);
+				padding-bottom: 0;
+			}
+			.workflow-wave {
+				display: none;
+			}
+			.workflow-card {
+				rotate: 0deg;
+				translate: 0 0;
+
+				&.active {
+					translate: 0 -8px;
+				}
+			}
 			.expertise-intro {
 				grid-column: 1 / -1;
 			}
@@ -363,6 +385,26 @@
 			}
 			.skills-expertise {
 				grid-template-columns: 1fr;
+			}
+			.workflow-row {
+				grid-template-columns: 1fr;
+			}
+			.exploring-grid {
+				grid-template-columns: 1fr;
+			}
+			.workflow-card {
+				min-height: 0;
+			}
+			.tools-bar {
+				flex-direction: column;
+				border-radius: 28px;
+			}
+			.tools-title {
+				padding-right: 0;
+				border-right: 0;
+			}
+			.tools-list {
+				justify-content: center;
 			}
 			// phone: cards first (tap one), then its stack
 			.expertise-list {
