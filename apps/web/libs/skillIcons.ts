@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { LuBrain, LuCode, LuZap } from 'react-icons/lu';
+import { LuBrain, LuCode, LuDatabaseZap, LuKeyRound, LuLock, LuServer, LuShieldCheck, LuZap } from 'react-icons/lu';
 import {
 	SiApollographql,
 	SiDocker,
@@ -79,6 +79,13 @@ export const SKILL_ICONS: Record<string, SkillBrand> = {
 	geminiapi: { icon: SiGooglegemini, color: '#8e75b2' },
 	gemini: { icon: SiGooglegemini, color: '#8e75b2' },
 	docker: { icon: SiDocker, color: '#2496ed' },
+	dockercompose: { icon: SiDocker, color: '#2496ed' },
+	vpsdeployment: { icon: LuServer, color: '#ff6a00' },
+	ssl: { icon: LuLock, color: '#2e7d32' },
+	oauth: { icon: LuKeyRound, color: '#ff6a00' },
+	'2fa': { icon: LuShieldCheck, color: '#2e7d32' },
+	restapis: { icon: LuServer, color: '#ff6a00' },
+	rag: { icon: LuDatabaseZap, color: '#ff6a00' },
 	nginx: { icon: SiNginx, color: '#009639' },
 	ubuntu: { icon: SiUbuntu, color: '#e95420' },
 	ubuntulinux: { icon: SiUbuntu, color: '#e95420' },
