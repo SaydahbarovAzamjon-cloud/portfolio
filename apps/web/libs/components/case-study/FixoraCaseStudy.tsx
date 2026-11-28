@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from 'motion/react';
 import { IconType } from 'react-icons';
 import {
 	LuArrowRight,
-	LuArrowUpRight,
 	LuBadgeCheck,
 	LuBell,
 	LuBookOpenCheck,
@@ -45,6 +44,7 @@ import {
 } from 'react-icons/lu';
 import ScrollRise from '../common/ScrollRise';
 import RichText from '../common/RichText';
+import { CodeLink, Heading, useCaseList } from './shared';
 import searchShot from '../../../public/img/projects/fixora/search.webp';
 import chatShot from '../../../public/img/projects/fixora/chat.webp';
 import signinShot from '../../../public/img/projects/fixora/signin.webp';
@@ -68,34 +68,6 @@ const CODE = {
 	runbook: `${REPO}/blob/develop/docs/DEPLOY_RUNBOOK.md`,
 };
 const DECISION_CODE = [CODE.schema, CODE.fallback, CODE.deposit, CODE.gateway];
-
-/** A small "view the code" link with the file name. */
-const CodeLink = ({ href, label }: { href: string; label: string }) => (
-	<a href={href} target={'_blank'} rel={'noreferrer'} className={'code-link'}>
-		<LuCodeXml />
-		{label}
-		<LuArrowUpRight />
-	</a>
-);
-
-/** Texts that come as lists in the locale file. */
-const useList = () => {
-	const { t } = useTranslation('common');
-	return (key: string): string[] => {
-		const value = t(`${K}.${key}`, { returnObjects: true });
-		return Array.isArray(value) ? (value as string[]) : [];
-	};
-};
-
-/** A section title with an icon, shared by every block. */
-const Heading = ({ icon: Icon, text }: { icon: IconType; text: string }) => (
-	<h2 className={'case-heading'}>
-		<span className={'heading-icon'}>
-			<Icon />
-		</span>
-		{text}
-	</h2>
-);
 
 const TLDR_ICONS: IconType[] = [LuTarget, LuCircleUser, LuLayers, LuServer];
 const ROLE_ICONS: IconType[] = [LuUser, LuWrench, LuShieldCheck];
@@ -131,7 +103,7 @@ const FEATURE_ICONS: IconType[] = [LuMapPin, LuSearch, LuMessagesSquare, LuRadio
 
 const FixoraCaseStudy = () => {
 	const { t } = useTranslation('common');
-	const list = useList();
+	const list = useCaseList(K);
 	const reduceMotion = useReducedMotion();
 	const tldr = list('tldr');
 	const roles = list('roles');
