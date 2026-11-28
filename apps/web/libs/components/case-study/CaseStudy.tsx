@@ -15,6 +15,7 @@ import useProjects from '../../hooks/useProjects';
 import RichText from '../common/RichText';
 import ScrollRise from '../common/ScrollRise';
 import FixoraCaseStudy from './FixoraCaseStudy';
+import CarviaCaseStudy from './CarviaCaseStudy';
 import peaks from '../../../public/img/experience-hero-bg.webp';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -22,6 +23,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /** Projects with a full write-up; the others get the short version (hero, summary, screens, stack). */
 const FULL_STUDIES: Record<string, () => React.ReactElement> = {
 	fixora: () => <FixoraCaseStudy />,
+	carvia: () => <CarviaCaseStudy />,
 };
 
 const CaseStudy = ({ slug }: { slug: string }) => {

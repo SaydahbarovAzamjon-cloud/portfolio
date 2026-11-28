@@ -666,6 +666,113 @@
 				"Reviews & ratings|Only after a *completed* booking, one review per booking, so ratings stay honest.",
 				"Articles & stories|Verified technicians publish articles and *24-hour stories* to build trust."
 			]
+		},
+		"carvia": {
+			"badges": ["Live product", "Computer vision", "37 classes", "Built solo"],
+			"tldr": [
+				"What|Upload a car photo → model, confidence, *Top-5 alternatives*, specs and a visual explanation.",
+				"My role|Built *solo*: data, training, evaluation, API, UI and deployment.",
+				"Stack|PyTorch, ConvNeXt-Tiny, FastAPI, Next.js, Docker, NGINX.",
+				"Result|*88.3%* Top-5 accuracy on 855 unseen test images, *~250 ms* per image."
+			],
+			"problemTitle": "Problem",
+			"problem": "Identifying a car model from a photo is *harder than it looks*.",
+			"problems": [
+				"Real-world variability: angles, lighting, distance",
+				"Visually similar models",
+				"Manual identification is slow",
+				"No accessible API"
+			],
+			"solutionTitle": "Solution",
+			"solutionLead": "A fine-tuned vision model behind a simple API and web UI.",
+			"solution": "From a *single photo* it returns the car model, a confidence score, Top-5 alternatives and key specifications, and says _Uncertain_ instead of guessing.",
+			"howTitle": "How It Works",
+			"steps": [
+				"Image input|Upload a photo or take one with the phone camera.",
+				"Preprocessing|Resize, normalize and convert to a tensor.",
+				"Model inference|ConvNeXt-Tiny scores all 37 classes.",
+				"Confidence & margin gate|Confidence ≥ 45% and margin ≥ 8%.",
+				"Decision|Accept the prediction, or return “Uncertain”.",
+				"Response|Prediction, confidence, Top-5 and processing time (~250 ms)."
+			],
+			"resultAlt": "CarVia result page: Porsche 911 with 72.7% confidence and specifications",
+			"dataTitle": "Data",
+			"dataLead": "*5,466* images · *37* classes · *11* brands of the Korean market.",
+			"split_train": "Train",
+			"split_val": "Validation",
+			"split_test": "Test",
+			"dataChecks": ["0 duplicate images across splits", "0 corrupt files"],
+			"dataCaption": "Every image was audited before training, so the test score is honest.",
+			"resultsTitle": "Results",
+			"result_top1": "Top-1",
+			"result_top3": "Top-3",
+			"result_top5": "Top-5",
+			"result_f1": "Macro F1",
+			"resultsNote": "Measured on the 855-image test set the model never saw.",
+			"hardPairs": "Hardest pairs: *Mercedes C / E / S-Class* and *BMW X3 / X5 / 5 Series*.",
+			"gateTitle": "The Calibration Gate (the key decision)",
+			"gaugeLabel": "Confidence threshold",
+			"thresholdConfidence": "confidence",
+			"thresholdMargin": "margin over the next class",
+			"gateHead": ["Setting", "Confidence", "Margin", "Accepted accuracy", "Coverage"],
+			"gateRows": ["Max-utility setting|35%|0%|82.3%|78.8%", "Chosen setting|45%|8%|87.5%|67.7%"],
+			"gateResult": "*87.5%* of accepted answers are correct, with *67.7%* of photos accepted (validation set).",
+			"gateQuote": "I traded a little coverage for answers people can trust: below the gate the app says _Uncertain_.",
+			"tempTitle": "Temperature scaling (T = 0.89)",
+			"tempText": "Fitted on validation data so the confidence *means something*: average confidence when the model is",
+			"tempRight": "right",
+			"tempWrong": "wrong",
+			"explainTitle": "Explainability & UX",
+			"explain": [
+				"Grad-CAM heatmap|Shows *which part of the car* the model looked at.",
+				"Spec catalog|Body type, fuel, transmission, drivetrain, seats and a *short AI overview*.",
+				"Phone camera capture|Take a photo straight from the *rear camera* on mobile."
+			],
+			"devicesAlt": "CarVia upload screen on a laptop and a phone",
+			"challengesTitle": "Challenges → Solutions",
+			"challenges": [
+				"Model confusion|Curated *37-class* dataset and a fine-tuned ConvNeXt-Tiny.",
+				"Dataset quality|Audit and curation: *no duplicates across splits*, no corrupt files.",
+				"Over-confident wrong answers|*Calibrated gate* (≥ 45% and ≥ 8%) plus temperature scaling.",
+				"Production serving|Dockerized FastAPI service with a */health* check.",
+				"Real-world variation|Augmentation tuned for *phone photos*: angles, light and crops."
+			],
+			"archTitle": "Architecture & Deployment",
+			"arch": [
+				"User|Browser, HTTPS",
+				"NGINX|Reverse proxy, SSL",
+				"Next.js + FastAPI|UI · /predict · /health",
+				"PyTorch|ConvNeXt-Tiny, 37 classes",
+				"Response|JSON"
+			],
+			"archInfra": "Docker · Docker Compose · Let’s Encrypt SSL · Ubuntu VPS · ~250 ms per image",
+			"archTraining": "Trained locally on a GTX 1650 with mixed precision (FP16).",
+			"decisionsTitle": "Engineering Decisions",
+			"decisions": [
+				"Why ConvNeXt-Tiny?|Strong accuracy that still runs *fast on a CPU VPS*.",
+				"Why a calibrated gate?|A wrong *confident* answer hurts trust more than “Uncertain”.",
+				"Why audit the dataset?|*No leakage* between splits means the test score is honest.",
+				"Why a separate FastAPI service?|The model stays *isolated* from the web app and scales on its own."
+			],
+			"qualityTitle": "Quality",
+			"quality": [
+				"Dataset audit report",
+				"Saved test & uncertainty reports",
+				"Health check endpoint",
+				"Reproducible Docker setup"
+			],
+			"classesTitle": "Where the Model Struggles",
+			"classesLead": "Per-class F1 on the test set: the *five strongest* and the *five hardest* classes. Hover a bar for precision, recall and the number of test images.",
+			"classes_best": "Strongest classes",
+			"classes_hardest": "Hardest classes",
+			"tipPrecision": "Precision",
+			"tipRecall": "Recall",
+			"tipImages_one": "{{count}} test image",
+			"tipImages_other": "{{count}} test images",
+			"confusionsTitle": "Most common mix-ups",
+			"confusionTimes_one": "{{count}}×",
+			"confusionTimes_other": "{{count}}×",
+			"classesNote": "Three of the hardest classes have only *4–7 test images*, and most mistakes are *siblings of the same brand*. More data for those models is the next lever."
 		}
 	}
 }

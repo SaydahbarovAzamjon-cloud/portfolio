@@ -666,6 +666,108 @@
 				"리뷰 & 평점|*완료된* 예약에만, 예약당 한 번만 작성해 평점의 신뢰도를 지킵니다.",
 				"아티클 & 스토리|검증된 수리기사가 아티클과 *24시간 스토리*로 신뢰를 쌓습니다."
 			]
+		},
+		"carvia": {
+			"badges": ["운영 중", "컴퓨터 비전", "37개 클래스", "1인 개발"],
+			"tldr": [
+				"무엇|차량 사진을 올리면 → 모델, 신뢰도, *Top-5 후보*, 제원과 시각적 설명.",
+				"역할|데이터, 학습, 평가, API, UI, 배포까지 *혼자* 구축.",
+				"스택|PyTorch, ConvNeXt-Tiny, FastAPI, Next.js, Docker, NGINX.",
+				"결과|처음 보는 테스트 이미지 855장에서 Top-5 정확도 *88.3%*, 이미지당 *약 250ms*."
+			],
+			"problemTitle": "문제",
+			"problem": "사진으로 차량 모델을 알아내는 일은 *생각보다 어렵습니다*.",
+			"problems": ["현실의 다양성: 각도, 조명, 거리", "서로 비슷한 모델", "수작업 식별은 느림", "쓸 수 있는 API 부재"],
+			"solutionTitle": "해결",
+			"solutionLead": "간단한 API와 웹 UI 뒤의 파인튜닝된 비전 모델.",
+			"solution": "*사진 한 장*으로 차량 모델, 신뢰도, Top-5 후보, 주요 제원을 알려주고, 확실하지 않으면 추측 대신 _“불확실”_을 반환합니다.",
+			"howTitle": "동작 방식",
+			"steps": [
+				"이미지 입력|사진을 업로드하거나 휴대폰 카메라로 촬영합니다.",
+				"전처리|크기 조정, 정규화, 텐서 변환.",
+				"모델 추론|ConvNeXt-Tiny가 37개 클래스를 모두 평가합니다.",
+				"신뢰도 & 마진 게이트|신뢰도 ≥ 45%, 마진 ≥ 8%.",
+				"결정|예측을 채택하거나 “불확실”을 반환합니다.",
+				"응답|예측, 신뢰도, Top-5, 처리 시간(약 250ms)."
+			],
+			"resultAlt": "신뢰도 72.7%의 Porsche 911과 제원이 표시된 CarVia 결과 화면",
+			"dataTitle": "데이터",
+			"dataLead": "이미지 *5,466*장 · *37*개 클래스 · 국내 시장 *11*개 브랜드.",
+			"split_train": "학습",
+			"split_val": "검증",
+			"split_test": "테스트",
+			"dataChecks": ["분할 간 중복 이미지 0장", "손상 파일 0개"],
+			"dataCaption": "학습 전에 모든 이미지를 점검했기 때문에 테스트 점수를 신뢰할 수 있습니다.",
+			"resultsTitle": "결과",
+			"result_top1": "Top-1",
+			"result_top3": "Top-3",
+			"result_top5": "Top-5",
+			"result_f1": "Macro F1",
+			"resultsNote": "모델이 한 번도 보지 않은 855장의 테스트 세트로 측정했습니다.",
+			"hardPairs": "가장 어려운 쌍: *Mercedes C / E / S-Class*와 *BMW X3 / X5 / 5 시리즈*.",
+			"gateTitle": "보정 게이트 (핵심 결정)",
+			"gaugeLabel": "신뢰도 기준",
+			"thresholdConfidence": "신뢰도",
+			"thresholdMargin": "다음 후보와의 차이",
+			"gateHead": ["설정", "신뢰도", "마진", "채택 정확도", "커버리지"],
+			"gateRows": ["최대 효용 설정|35%|0%|82.3%|78.8%", "선택한 설정|45%|8%|87.5%|67.7%"],
+			"gateResult": "채택된 답변의 *87.5%*가 정답이며, 사진의 *67.7%*를 채택합니다 (검증 세트).",
+			"gateQuote": "커버리지를 조금 줄이는 대신 믿을 수 있는 답을 택했습니다. 기준 아래에서는 _“불확실”_이라고 답합니다.",
+			"tempTitle": "온도 스케일링 (T = 0.89)",
+			"tempText": "검증 데이터로 보정해 신뢰도가 *의미를 갖도록* 했습니다. 모델의 평균 신뢰도:",
+			"tempRight": "정답일 때",
+			"tempWrong": "오답일 때",
+			"explainTitle": "설명 가능성 & UX",
+			"explain": [
+				"Grad-CAM 히트맵|모델이 *차의 어느 부분*을 보았는지 보여줍니다.",
+				"제원 카탈로그|차체, 연료, 변속기, 구동 방식, 좌석과 *짧은 AI 개요*.",
+				"휴대폰 카메라 촬영|모바일에서 *후면 카메라*로 바로 촬영합니다."
+			],
+			"devicesAlt": "노트북과 휴대폰의 CarVia 업로드 화면",
+			"challengesTitle": "어려움 → 해결",
+			"challenges": [
+				"모델 혼동|엄선한 *37개 클래스* 데이터셋과 파인튜닝한 ConvNeXt-Tiny.",
+				"데이터 품질|점검과 정제: *분할 간 중복 없음*, 손상 파일 없음.",
+				"자신만만한 오답|*보정 게이트*(≥ 45%, ≥ 8%)와 온도 스케일링.",
+				"운영 서빙|*/health* 점검이 있는 Docker 기반 FastAPI 서비스.",
+				"현실 변화|*휴대폰 사진*에 맞춘 증강: 각도, 조명, 잘림."
+			],
+			"archTitle": "아키텍처 & 배포",
+			"arch": [
+				"사용자|브라우저, HTTPS",
+				"NGINX|리버스 프록시, SSL",
+				"Next.js + FastAPI|UI · /predict · /health",
+				"PyTorch|ConvNeXt-Tiny, 37개 클래스",
+				"응답|JSON"
+			],
+			"archInfra": "Docker · Docker Compose · Let’s Encrypt SSL · Ubuntu VPS · 이미지당 약 250ms",
+			"archTraining": "GTX 1650에서 혼합 정밀도(FP16)로 로컬 학습했습니다.",
+			"decisionsTitle": "엔지니어링 결정",
+			"decisions": [
+				"왜 ConvNeXt-Tiny?|정확도가 높으면서도 *CPU VPS에서 빠르게* 동작합니다.",
+				"왜 보정 게이트?|*자신만만한 오답*은 “불확실”보다 신뢰를 더 해칩니다.",
+				"왜 데이터셋 점검?|분할 간 *누수가 없어야* 테스트 점수가 정직합니다.",
+				"왜 별도의 FastAPI 서비스?|모델이 웹 앱과 *분리되어* 독립적으로 확장됩니다."
+			],
+			"qualityTitle": "품질",
+			"quality": [
+				"데이터셋 점검 보고서",
+				"테스트·불확실성 보고서 저장",
+				"헬스 체크 엔드포인트",
+				"재현 가능한 Docker 구성"
+			],
+			"classesTitle": "모델이 어려워하는 부분",
+			"classesLead": "테스트 세트의 클래스별 F1: *가장 강한 5개*와 *가장 어려운 5개* 클래스. 막대에 마우스를 올리면 정밀도, 재현율, 테스트 이미지 수가 보입니다.",
+			"classes_best": "가장 강한 클래스",
+			"classes_hardest": "가장 어려운 클래스",
+			"tipPrecision": "정밀도",
+			"tipRecall": "재현율",
+			"tipImages_one": "테스트 이미지 {{count}}장",
+			"tipImages_other": "테스트 이미지 {{count}}장",
+			"confusionsTitle": "가장 많이 헷갈린 쌍",
+			"confusionTimes_one": "{{count}}회",
+			"confusionTimes_other": "{{count}}회",
+			"classesNote": "가장 어려운 클래스 중 3개는 테스트 이미지가 *4–7장*뿐이고, 대부분의 오류는 *같은 브랜드의 형제 모델* 사이에서 생깁니다. 다음 개선 방향은 이 모델들의 데이터 보강입니다."
 		}
 	}
 }

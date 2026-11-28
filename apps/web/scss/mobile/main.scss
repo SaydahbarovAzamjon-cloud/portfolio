@@ -127,8 +127,20 @@
 				grid-template-columns: 1fr;
 			}
 			.case-tldr,
-			.decision-grid {
+			.decision-grid,
+			.explain-grid,
+			.problem-chips {
 				grid-template-columns: 1fr 1fr;
+			}
+			.pipeline-steps {
+				flex-wrap: wrap;
+
+				> .flow-arrow {
+					display: none;
+				}
+			}
+			.pipeline-step {
+				flex: 1 1 30%;
 			}
 			.tldr-item + .tldr-item {
 				padding-left: 0;
@@ -137,7 +149,10 @@
 			.ai-grid,
 			.role-grid,
 			.dashboard-grid,
-			.case-model {
+			.case-model,
+			.pipeline-row,
+			.gate-grid,
+			.classes-grid {
 				grid-template-columns: 1fr;
 			}
 		}
@@ -405,6 +420,8 @@
 	#pc-wrap {
 		.case-page {
 			.feature-grid,
+			.explain-grid,
+			.result-tiles,
 			.case-tldr,
 			.decision-grid,
 			.auth-grid,
@@ -419,6 +436,25 @@
 			}
 			.status-row.branches {
 				padding-left: 0;
+			}
+			.pipeline-step {
+				flex: 1 1 100%;
+			}
+			.solve-list li {
+				grid-template-columns: 1fr;
+				gap: 4px;
+
+				.flow-arrow {
+					display: none;
+				}
+			}
+			.gate-table {
+				font-size: 12px;
+
+				th,
+				td {
+					padding: 8px 6px;
+				}
 			}
 		}
 		.projects-page {
