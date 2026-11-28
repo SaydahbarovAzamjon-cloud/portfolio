@@ -477,5 +477,58 @@
 		"carvia": "Vehicle image classification",
 		"gadgetstore": "Full-stack e-commerce",
 		"foodai": "Food image classification"
+	},
+	"projects": {
+		"hero": {
+			"eyebrow": "Projects",
+			"title1": "Selected",
+			"title2": "Work.",
+			"text": "*Real products*, built and shipped _end to end_: from the first screen to the server it runs on.",
+			"projects_one": "{{count}} project",
+			"projects_other": "{{count}} projects",
+			"live_one": "{{count}} live",
+			"live_other": "{{count}} live",
+			"shotAlt": "Fixora on a laptop and a phone",
+			"float_ai": "Gemini AI matching",
+			"float_realtime": "Real-time chat",
+			"float_auth": "OAuth + 2FA"
+		},
+		"flagship": {
+			"badge": "Flagship · built solo",
+			"text": "Connects customers with *verified technicians* across Korea for iPhone, MacBook, iPad and Apple Watch repairs, with bookings, live chat and _AI issue analysis_.",
+			"fact_roles": "3 roles: customer, technician, admin",
+			"fact_realtime": "Real-time chat and live status",
+			"fact_ai": "Gemini AI issue classification",
+			"fact_auth": "Google, Apple and Kakao sign-in",
+			"stack": "Tech Stack"
+		},
+		"filter": {
+			"all": "All",
+			"FULL_STACK": "Full-Stack",
+			"AI_ML": "AI / ML",
+			"live": "Live",
+			"progress": "In progress",
+			"empty": "No projects match these filters yet."
+		},
+		"metric": {
+			"carvia": "top-5 accuracy · 37 classes",
+			"gadget-store": "REST API + EJS admin dashboard",
+			"foodai": "inference on CPU · MobileNetV2",
+			"lumora": "Computer vision + recommendations"
+		},
+		"card": {
+			"soon": "Screens coming soon"
+		},
+		"links": {
+			"live": "Live Site",
+			"github": "GitHub",
+			"case": "Case Study"
+		},
+		"cta": {
+			"title1": "Have a project",
+			"title2": "in mind?",
+			"text": "Let's build something real together.",
+			"button": "Get in Touch"
+		}
 	}
 }

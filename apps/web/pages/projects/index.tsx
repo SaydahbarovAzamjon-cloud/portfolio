@@ -2,7 +2,9 @@ import { NextPage } from 'next';
 import { Stack } from '@mui/material';
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
-import PagePlaceholder from '../../libs/components/common/PagePlaceholder';
+import ProjectsHero from '../../libs/components/projects/ProjectsHero';
+import FlagshipProject from '../../libs/components/projects/FlagshipProject';
+import ProjectsGrid from '../../libs/components/projects/ProjectsGrid';
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
 	props: {
@@ -13,7 +15,9 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
 const Projects: NextPage = () => {
 	return (
 		<Stack className={'projects-page'}>
-			<PagePlaceholder pageKey={'projects'} number={'03'} />
+			<ProjectsHero />
+			<FlagshipProject />
+			<ProjectsGrid />
 		</Stack>
 	);
 };

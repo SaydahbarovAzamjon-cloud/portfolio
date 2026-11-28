@@ -118,6 +118,20 @@
 			grid-template-columns: 1fr;
 		}
 
+		// projects page (tablet)
+		.projects-page {
+			.projects-hero,
+			.flagship {
+				grid-template-columns: 1fr;
+			}
+			.projects-hero-visual {
+				max-width: 680px;
+			}
+			.projects-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
 		// skills page (tablet): pitch on top, cards below, bar stacked
 		.skills-page {
 			.skills-hero-main {
@@ -361,6 +375,25 @@
 
 @media (max-width: $mobile) {
 	#pc-wrap {
+		.projects-page {
+			.hero-float {
+				display: none;
+			}
+			.project-card {
+				grid-template-columns: 1fr;
+			}
+			.project-shot {
+				aspect-ratio: 16 / 10;
+				min-height: 0;
+			}
+			.flagship-facts {
+				grid-template-columns: 1fr;
+			}
+			.projects-cta {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
 		.skills-page {
 			.capability-grid {
 				grid-template-columns: 1fr;
