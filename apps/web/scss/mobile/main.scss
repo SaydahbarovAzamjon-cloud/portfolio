@@ -130,6 +130,12 @@
 				padding-left: 0;
 				border-left: 0;
 			}
+			.skills-expertise {
+				grid-template-columns: 1fr 1fr;
+			}
+			.expertise-intro {
+				grid-column: 1 / -1;
+			}
 		}
 
 		// experience page (tablet)
@@ -354,6 +360,27 @@
 			}
 			.skills-orbit {
 				display: none;
+			}
+			.skills-expertise {
+				grid-template-columns: 1fr;
+			}
+			// phone: cards first (tap one), then its stack
+			.expertise-list {
+				order: 2;
+			}
+			.stack-panel-col {
+				order: 3;
+			}
+			.stack-panel {
+				min-height: 0;
+			}
+			.tool-list li {
+				grid-template-columns: auto 1fr;
+
+				.tool-places {
+					grid-column: 2;
+					justify-content: flex-start;
+				}
 			}
 		}
 		#top .navbar .navbar-main .local-time {

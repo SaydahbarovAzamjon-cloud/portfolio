@@ -412,6 +412,33 @@
 			"yearsValue": "3년+",
 			"yearsLabel": "실무 경험",
 			"techLabel": "기술 스택"
+		},
+		"expertise": {
+			"eyebrow": "핵심 역량",
+			"title1": "나의 핵심",
+			"title2": "역량.",
+			"intro": "직접 *만들고 배포하고 책임지는* 네 가지 분야: 타입 기반 웹 앱부터 _실서비스에서 동작하는 AI 모델까지._",
+			"explore": "작업 보기",
+			"frontendTitle": "프론트엔드 개발",
+			"frontendText": "*Next.js·React·TypeScript*로 반응형 인터페이스를 만들고, Redux Toolkit과 Apollo Client로 상태를 관리합니다.",
+			"backendTitle": "백엔드 개발",
+			"backendText": "MongoDB 기반 *NestJS·GraphQL* API, JWT 인증과 역할 기반 접근 제어, _실시간_ 기능.",
+			"aiTitle": "AI & 머신러닝",
+			"aiText": "파인튜닝한 *PyTorch 이미지 분류 모델*을 FastAPI로 서빙하고, Gemini 분석을 _실제 제품_에 연결했습니다.",
+			"devopsTitle": "인프라 & DevOps",
+			"devopsText": "*Docker* 환경과 NGINX 뒤의 *Ubuntu VPS* 배포, PM2와 SSL로 안정적으로 운영합니다.",
+			"tools": "개 기술",
+			"projects": "개 프로젝트",
+			"legendProject": "프로젝트",
+			"legendCompany": "회사",
+			"hint": "분야를 선택하면 전체 기술 스택을 볼 수 있습니다"
 		}
+	},
+	"live": {
+		"button": "라이브로 보기",
+		"fixora": "Apple 기기 수리 마켓플레이스",
+		"carvia": "AI 차량 이미지 분류",
+		"gadgetstore": "풀스택 이커머스",
+		"foodai": "음식 이미지 분류"
 	}
 }

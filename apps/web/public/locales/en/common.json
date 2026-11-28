@@ -412,6 +412,33 @@
 			"yearsValue": "3+ Years",
 			"yearsLabel": "Hands-on Experience",
 			"techLabel": "Technologies"
+		},
+		"expertise": {
+			"eyebrow": "Core expertise",
+			"title1": "My Core",
+			"title2": "Expertise.",
+			"intro": "Four areas where I *build, ship and own* the work: from typed web apps to _AI models running in production_.",
+			"explore": "Explore My Work",
+			"frontendTitle": "Frontend Development",
+			"frontendText": "Responsive, typed interfaces with *Next.js, React and TypeScript*, with state in Redux Toolkit and Apollo Client.",
+			"backendTitle": "Backend Development",
+			"backendText": "*NestJS and GraphQL* APIs on MongoDB, with JWT auth, role-based access and _real-time_ features.",
+			"aiTitle": "AI & Machine Learning",
+			"aiText": "Fine-tuned *PyTorch image classifiers* served through FastAPI, and Gemini analysis inside _real products_.",
+			"devopsTitle": "Infrastructure & DevOps",
+			"devopsText": "*Docker* environments and *Ubuntu VPS* deployments behind NGINX, kept running with PM2 and SSL.",
+			"tools": "tools",
+			"projects": "projects",
+			"legendProject": "Project",
+			"legendCompany": "Company",
+			"hint": "Hover or tap an area to see its full stack"
 		}
+	},
+	"live": {
+		"button": "See It Live",
+		"fixora": "Apple repair marketplace",
+		"carvia": "Vehicle image classification",
+		"gadgetstore": "Full-stack e-commerce",
+		"foodai": "Food image classification"
 	}
 }
