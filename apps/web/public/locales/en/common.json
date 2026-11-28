@@ -480,18 +480,21 @@
 	},
 	"projects": {
 		"hero": {
-			"eyebrow": "Projects",
+			"eyebrow": "03 / Projects",
 			"title1": "Selected",
-			"title2": "Work.",
-			"text": "*Real products*, built and shipped _end to end_: from the first screen to the server it runs on.",
-			"projects_one": "{{count}} project",
-			"projects_other": "{{count}} projects",
-			"live_one": "{{count}} live",
-			"live_other": "{{count}} live",
-			"shotAlt": "Fixora on a laptop and a phone",
-			"float_ai": "Gemini AI matching",
-			"float_realtime": "Real-time chat",
-			"float_auth": "OAuth + 2FA"
+			"title2": "Works.",
+			"text": "A collection of *full-stack applications* and *AI-powered* systems built for real problems: from a _repair marketplace_ to computer vision.",
+			"statProjects": "Projects",
+			"statFullstack": "Full-Stack",
+			"statFullstackLabel": "Development",
+			"statAi": "AI & ML",
+			"statAiLabel": "Engineering",
+			"explore": "Explore Projects",
+			"cases": "View Case Studies",
+			"scroll": "Scroll to explore",
+			"label_carvia": "AI vehicle recognition",
+			"label_fixora": "Apple repair marketplace",
+			"label_gadget-store": "Full-stack e-commerce"
 		},
 		"flagship": {
 			"badge": "Flagship · built solo",

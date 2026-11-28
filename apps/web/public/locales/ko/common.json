@@ -480,18 +480,21 @@
 	},
 	"projects": {
 		"hero": {
-			"eyebrow": "프로젝트",
+			"eyebrow": "03 / 프로젝트",
 			"title1": "선별한",
-			"title2": "작업.",
-			"text": "첫 화면부터 서버까지 _처음부터 끝까지_ 직접 만들고 배포한 *실제 제품들입니다.*",
-			"projects_one": "프로젝트 {{count}}개",
-			"projects_other": "프로젝트 {{count}}개",
-			"live_one": "운영 중 {{count}}개",
-			"live_other": "운영 중 {{count}}개",
-			"shotAlt": "노트북과 휴대폰 화면의 Fixora",
-			"float_ai": "Gemini AI 매칭",
-			"float_realtime": "실시간 채팅",
-			"float_auth": "OAuth + 2단계 인증"
+			"title2": "작업들.",
+			"text": "실제 문제를 위해 만든 *풀스택 애플리케이션*과 *AI 기반* 시스템: _수리 마켓플레이스_부터 컴퓨터 비전까지.",
+			"statProjects": "프로젝트",
+			"statFullstack": "풀스택",
+			"statFullstackLabel": "개발",
+			"statAi": "AI & ML",
+			"statAiLabel": "엔지니어링",
+			"explore": "프로젝트 보기",
+			"cases": "케이스 스터디 보기",
+			"scroll": "스크롤해서 보기",
+			"label_carvia": "AI 차량 인식",
+			"label_fixora": "Apple 수리 마켓플레이스",
+			"label_gadget-store": "풀스택 이커머스"
 		},
 		"flagship": {
 			"badge": "대표작 · 1인 개발",

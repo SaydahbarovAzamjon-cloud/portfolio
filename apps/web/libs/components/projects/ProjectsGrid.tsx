@@ -26,18 +26,24 @@ const ProjectsGrid = () => {
 	const router = useRouter();
 	const { t } = useTranslation('common');
 	const reduceMotion = useReducedMotion();
-	const projects = useProjects().filter((project) => project.slug !== FLAGSHIP_SLUG);
+	const allProjects = useProjects();
 	const [category, setCategory] = useState<CategoryFilter>('all');
 	// a status tab toggles: click it again to show every status
 	const [status, setStatus] = useState<StatusFilter>('all');
 
-	// finished work first, things still being built last
+	// with no filter the flagship has its own block above; with a filter it joins the grid
+	const filtering = category !== 'all' || status !== 'all';
+	const projects = filtering ? allProjects : allProjects.filter((project) => project.slug !== FLAGSHIP_SLUG);
+	// flagship first, finished work next, things still being built last
+	const rank = (slug: string, inProgress: boolean) => (slug === FLAGSHIP_SLUG ? -1 : Number(inProgress));
 	const ordered = [...projects].sort(
-		(a, b) => Number(a.status === ProjectStatus.IN_PROGRESS) - Number(b.status === ProjectStatus.IN_PROGRESS),
+		(a, b) =>
+			rank(a.slug, a.status === ProjectStatus.IN_PROGRESS) - rank(b.slug, b.status === ProjectStatus.IN_PROGRESS),
 	);
 	const visible = ordered.filter((project) => {
 		const inProgress = project.status === ProjectStatus.IN_PROGRESS;
-		if (category !== 'all' && project.category !== category) return false;
+		const tags = PROJECT_EXTRAS[project.slug]?.tags ?? [project.category];
+		if (category !== 'all' && !tags.includes(category)) return false;
 		if (status === 'live' && inProgress) return false;
 		if (status === 'progress' && !inProgress) return false;
 		return true;
