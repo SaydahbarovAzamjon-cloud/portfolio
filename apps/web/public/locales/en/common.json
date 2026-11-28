@@ -387,5 +387,31 @@
 			"sent": "Thank you! Your message has been sent.",
 			"failed": "Something went wrong. Please try again."
 		}
+	},
+	"skills": {
+		"hero": {
+			"eyebrow": "Skills",
+			"title1": "What I Bring to",
+			"title2": "the Table.",
+			"text": "*Full-stack and AI* in one engineer: I build web products _end to end_ with Next.js, NestJS and GraphQL, and put AI models to work _inside them in production_.",
+			"proofLive": "4 products live",
+			"proofAccuracy": "88.3% top-5 model accuracy",
+			"proofCert": "Devex certified: Full-Stack, DevOps & AI",
+			"projects": "View My Projects",
+			"download": "Download Resume",
+			"fullstackTitle": "Full-Stack Development",
+			"fullstackText": "Web apps from the first screen to the database: *typed frontends*, *GraphQL APIs* and clean data models.",
+			"aiTitle": "AI & Machine Learning",
+			"aiText": "*Fine-tuned image classifiers* served through FastAPI, and Gemini analysis wired into _real products_.",
+			"devopsTitle": "DevOps & Deployment",
+			"devopsText": "*Docker* environments and *Linux VPS* deployments behind NGINX, with PM2 and SSL.",
+			"realtimeTitle": "Real-Time & Security",
+			"realtimeText": "*Live chat* and status updates over WebSocket, with *JWT auth* and role-based access.",
+			"liveValue": "4+",
+			"liveLabel": "Live Products",
+			"yearsValue": "3+ Years",
+			"yearsLabel": "Hands-on Experience",
+			"techLabel": "Technologies"
+		}
 	}
 }

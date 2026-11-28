@@ -118,6 +118,20 @@
 			grid-template-columns: 1fr;
 		}
 
+		// skills page (tablet): pitch on top, cards below, bar stacked
+		.skills-page {
+			.skills-hero-main {
+				grid-template-columns: 1fr;
+			}
+			.skills-bar {
+				grid-template-columns: 1fr;
+			}
+			.bar-marquee {
+				padding-left: 0;
+				border-left: 0;
+			}
+		}
+
 		// experience page (tablet)
 		.experience-hero .exp-hero-main {
 			grid-template-columns: 1fr;
@@ -319,6 +333,29 @@
 
 @media (max-width: $mobile) {
 	#pc-wrap {
+		.skills-page {
+			.capability-grid {
+				grid-template-columns: 1fr;
+			}
+			.skills-hero-intro .title .title-line {
+				white-space: normal;
+			}
+			.bar-stats {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 14px;
+			}
+			.bar-stat {
+				padding: 0;
+
+				& + .bar-stat {
+					border-left: 0;
+				}
+			}
+			.skills-orbit {
+				display: none;
+			}
+		}
 		#top .navbar .navbar-main .local-time {
 			min-width: 0;
 			font-size: 13px;
