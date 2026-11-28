@@ -32,6 +32,7 @@ export const FALLBACK_PROJECTS: Project[] = [
 		category: ProjectCategory.FULL_STACK,
 		status: ProjectStatus.COMPLETED,
 		showOnHome: true,
+		links: { live: 'https://fixoranext.com', github: 'https://github.com/SaydahbarovAzamjon-cloud/Fixora' },
 		skills: [
 			'Next.js',
 			'NestJS',
@@ -57,6 +58,7 @@ export const FALLBACK_PROJECTS: Project[] = [
 		category: ProjectCategory.AI_ML,
 		status: ProjectStatus.COMPLETED,
 		showOnHome: true,
+		links: { live: 'https://carvia.ai', github: 'https://github.com/SaydahbarovAzamjon-cloud/carvia' },
 		skills: ['Python', 'PyTorch', 'torchvision', 'OpenCV', 'ConvNeXt-Tiny', 'FastAPI', 'Next.js'].map(skill),
 	},
 	{
@@ -71,6 +73,7 @@ export const FALLBACK_PROJECTS: Project[] = [
 		category: ProjectCategory.FULL_STACK,
 		status: ProjectStatus.COMPLETED,
 		showOnHome: true,
+		links: { live: 'https://gadjetstore.uz', github: 'https://github.com/SaydahbarovAzamjon-cloud/Gadjet-Store' },
 		skills: [
 			'React',
 			'TypeScript',
@@ -97,8 +100,24 @@ export const FALLBACK_PROJECTS: Project[] = [
 		category: ProjectCategory.AI_ML,
 		status: ProjectStatus.IN_PROGRESS,
 		showOnHome: true,
+		links: { github: 'https://github.com/SaydahbarovAzamjon-cloud/lumora-ai' },
 		theme: { accent: '#8b5cf6' },
 		skills: ['Next.js', 'FastAPI', 'OpenCV', 'PyTorch'].map(skill),
+	},
+	{
+		_id: 'foodai',
+		slug: 'foodai',
+		title: 'FoodAI',
+		subtitle: { en: 'Food image classification', ko: '음식 이미지 분류' },
+		summary: {
+			en: 'A MobileNetV2 transfer-learning classifier that tells whole food from processed food, served through a FastAPI inference API with a web dashboard.',
+			ko: 'MobileNetV2 전이학습으로 자연식과 가공식품을 구분하는 분류 모델을 FastAPI 추론 API와 웹 대시보드로 제공합니다.',
+		},
+		category: ProjectCategory.AI_ML,
+		status: ProjectStatus.COMPLETED,
+		showOnHome: false,
+		links: { live: 'https://foodtype.ai', github: 'https://github.com/SaydahbarovAzamjon-cloud/food-type-ai' },
+		skills: ['Python', 'PyTorch', 'torchvision', 'MobileNetV2', 'FastAPI'].map(skill),
 	},
 ];
 
